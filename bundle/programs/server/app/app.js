@@ -218,7 +218,7 @@ if (meteor_1.Meteor.isServer) {                                                 
      * This function validate if exist queues and creates the instances correspondly                                   //
      */                                                                                                                //
     meteor_1.Meteor.startup(function () {                                                                              //
-        var queues = queue_collection_1.Queues.collection.findOne({});                                                 //
+        var queues = queue_collection_1.Queues.findOne({});                                                            //
         if (queues) {                                                                                                  //
             queues.queues.forEach(function (element) {                                                                 //
                 meteor_1.Meteor.call('initProcessJobs', element);                                                      //
@@ -231,7 +231,7 @@ if (meteor_1.Meteor.isServer) {                                                 
          * @param { any } _data                                                                                        //
          */                                                                                                            //
         findQueueByRestaurant: function (_data) {                                                                      //
-            var restaurant = restaurant_collection_1.Restaurants.collection.findOne({ _id: _data.restaurants });       //
+            var restaurant = restaurant_collection_1.Restaurants.findOne({ _id: _data.restaurants });                  //
             var queue = restaurant.queue;                                                                              //
             var valEmpty = Number.isInteger(restaurant.queue.length);                                                  //
             var queueName = "";                                                                                        //
@@ -241,7 +241,6 @@ if (meteor_1.Meteor.isServer) {                                                 
                     queueName = "queue" + position;                                                                    //
                     meteor_1.Meteor.call("queueValidate", queueName, function (err, result) {                          //
                         if (err) {                                                                                     //
-                            console.log('Error : ' + err);                                                             //
                             throw new Error("Error on Queue validating");                                              //
                         }                                                                                              //
                         else {                                                                                         //
@@ -258,9 +257,9 @@ if (meteor_1.Meteor.isServer) {                                                 
         queueValidate: function (_queue) {                                                                             //
             var queueNew = { name: _queue };                                                                           //
             ;                                                                                                          //
-            var queues = queue_collection_1.Queues.collection.findOne({});                                             //
+            var queues = queue_collection_1.Queues.findOne({});                                                        //
             if (queues) {                                                                                              //
-                var doc = queue_collection_1.Queues.collection.findOne({ queues: { $elemMatch: { name: _queue } } });  //
+                var doc = queue_collection_1.Queues.findOne({ queues: { $elemMatch: { name: _queue } } });             //
                 if (!doc) {                                                                                            //
                     queue_collection_1.Queues.update({ _id: queues._id }, { $addToSet: { queues: queueNew }            //
                     });                                                                                                //
@@ -291,7 +290,7 @@ if (meteor_1.Meteor.isServer) {                                                 
             });                                                                                                        //
         }                                                                                                              //
     });                                                                                                                //
-}                                                                                                                      // 100
+}                                                                                                                      // 99
 //# sourceMappingURL=queues.methods.js.map                                                                             //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -316,7 +315,7 @@ var table_collection_1 = require("../../../collections/restaurant/table.collecti
 if (meteor_1.Meteor.isServer) {                                                                                        // 15
     meteor_1.Meteor.methods({                                                                                          //
         /**                                                                                                            //
-         * This Meteor Method add job in the Waiter call queue                                                         //
+         * This Meteor Method add a job in the Waiter call queue                                                       //
          * @param {boolean} _priorityHigh                                                                              //
          * @param {any} _data                                                                                          //
          */                                                                                                            //
@@ -325,8 +324,7 @@ if (meteor_1.Meteor.isServer) {                                                 
             var delay = 0;                                                                                             //
             var waiterCallDetail;                                                                                      //
             var job = new vsivsi_job_collection_1.Job(_queue, 'waiterCall', { data: '' });                             //
-            job                                                                                                        //
-                .priority(priority)                                                                                    //
+            job.priority(priority)                                                                                     //
                 .delay(delay)                                                                                          //
                 .save();                                                                                               //
             if (_priorityHigh) {                                                                                       //
@@ -353,48 +351,65 @@ if (meteor_1.Meteor.isServer) {                                                 
             return;                                                                                                    //
         },                                                                                                             //
         processJobs: function (job, callback, queueName) {                                                             //
-            var data_detail = waiter_call_detail_collection_1.WaiterCallDetails.collection.findOne({ job_id: job._doc._id });
-            var restaurant = restaurant_collection_1.Restaurants.collection.findOne({ _id: data_detail.restaurant_id });
-            var usr_id_enabled = meteor_1.Meteor.call('validateWaiterEnabled', data_detail.restaurant_id, restaurant.max_jobs, data_detail.table_id);
-            if (usr_id_enabled) {                                                                                      //
-                vsivsi_job_collection_1.Job.getJob(queueName, job._doc._id, function (err, job) {                      //
-                    job.done(function (err, result) { });                                                              //
-                    //Storage of turns the restaurants by date                                                         //
-                    var toDate = new Date().toLocaleDateString();                                                      //
-                    restaurant_collection_1.RestaurantTurns.update({ restaurant_id: data_detail.restaurant_id, creation_date: { $gte: new Date(toDate) } }, { $set: { last_waiter_id: usr_id_enabled.user_id, modification_user: 'SYSTEM', modification_date: new Date(), }
+            var data_detail = waiter_call_detail_collection_1.WaiterCallDetails.findOne({ job_id: job._doc._id });     //
+            if (data_detail) {                                                                                         //
+                var restaurant = restaurant_collection_1.Restaurants.findOne({ _id: data_detail.restaurant_id });      //
+                var usr_id_enabled = meteor_1.Meteor.call('validateWaiterEnabled', data_detail.restaurant_id, restaurant.max_jobs, data_detail.table_id);
+                if (usr_id_enabled) {                                                                                  //
+                    vsivsi_job_collection_1.Job.getJob(queueName, job._doc._id, function (err, job) {                  //
+                        job.done(function (err, result) { });                                                          //
+                        //Storage of turns the restaurants by date                                                     //
+                        var toDate = new Date().toLocaleDateString();                                                  //
+                        restaurant_collection_1.RestaurantTurns.update({ restaurant_id: data_detail.restaurant_id, creation_date: { $gte: new Date(toDate) } }, { $set: { last_waiter_id: usr_id_enabled.user_id, modification_user: 'SYSTEM', modification_date: new Date(), }
+                        });                                                                                            //
+                        //Waiter call detail update in completed state                                                 //
+                        waiter_call_detail_collection_1.WaiterCallDetails.update({ job_id: job._doc._id }, { $set: { "waiter_id": usr_id_enabled.user_id, "status": "completed" }
+                        });                                                                                            //
                     });                                                                                                //
-                    //Waiter call detail update in completed state                                                     //
-                    waiter_call_detail_collection_1.WaiterCallDetails.update({ job_id: job._doc._id }, { $set: { "waiter_id": usr_id_enabled.user_id, "status": "completed" }
-                    });                                                                                                //
-                });                                                                                                    //
-                //Waiter update of current jobs and state                                                              //
-                var usr_jobs = usr_id_enabled.jobs + 1;                                                                //
-                if (usr_jobs < restaurant.max_jobs) {                                                                  //
-                    user_detail_collection_1.UserDetails.update({ user_id: usr_id_enabled.user_id }, { $set: { "jobs": usr_jobs } });
+                    //Waiter update of current jobs and state                                                          //
+                    var usr_jobs = usr_id_enabled.jobs + 1;                                                            //
+                    if (usr_jobs < restaurant.max_jobs) {                                                              //
+                        user_detail_collection_1.UserDetails.update({ user_id: usr_id_enabled.user_id }, { $set: { "jobs": usr_jobs } });
+                    }                                                                                                  //
+                    else if (usr_jobs == restaurant.max_jobs) {                                                        //
+                        user_detail_collection_1.UserDetails.update({ user_id: usr_id_enabled.user_id }, { $set: { "enabled": false, "jobs": usr_jobs } });
+                    }                                                                                                  //
                 }                                                                                                      //
-                else if (usr_jobs == restaurant.max_jobs) {                                                            //
-                    user_detail_collection_1.UserDetails.update({ user_id: usr_id_enabled.user_id }, { $set: { "enabled": false, "jobs": usr_jobs } });
+                else {                                                                                                 //
+                    meteor_1.Meteor.call('jobRemove', queueName, job._doc._id, data_detail, usr_id_enabled);           //
                 }                                                                                                      //
             }                                                                                                          //
             else {                                                                                                     //
-                vsivsi_job_collection_1.Job.getJob(queueName, job._doc._id, function (err, job) {                      //
-                    job.cancel();                                                                                      //
-                    var data = {                                                                                       //
-                        job_id: job._doc._id,                                                                          //
-                        restaurants: data_detail.restaurant_id,                                                        //
-                        tables: data_detail.table_id,                                                                  //
-                        user: data_detail.user_id,                                                                     //
-                        waiter_id: usr_id_enabled,                                                                     //
-                        status: 'waiting'                                                                              //
-                    };                                                                                                 //
-                    job.remove(function (err, result) {                                                                //
-                        if (result) {                                                                                  //
-                            meteor_1.Meteor.call('waiterCall', queueName, true, data);                                 //
-                        }                                                                                              //
-                    });                                                                                                //
-                });                                                                                                    //
+                meteor_1.Meteor.call('jobRemove', queueName, job._doc._id, data_detail, usr_id_enabled);               //
+                console.log('200 (processJobs) - WaiterCallDetails is undefined');                                     //
+                //throw new Meteor.Error('200 (processJobs) - WaiterCallDetails is undefined');                        //
             }                                                                                                          //
             callback();                                                                                                //
+        },                                                                                                             //
+        /**                                                                                                            //
+         * Job remove                                                                                                  //
+         * @param pQueueName                                                                                           //
+         * @param pJobId                                                                                               //
+         * @param pDataDetail                                                                                          //
+         * @param pEnabled                                                                                             //
+         */                                                                                                            //
+        jobRemove: function (pQueueName, pJobId, pDataDetail, pEnabled) {                                              //
+            vsivsi_job_collection_1.Job.getJob(pQueueName, pJobId, function (err, job) {                               //
+                job.cancel();                                                                                          //
+                var data = {                                                                                           //
+                    job_id: job._doc._id,                                                                              //
+                    restaurants: pDataDetail.restaurant_id,                                                            //
+                    tables: pDataDetail.table_id,                                                                      //
+                    user: pDataDetail.user_id,                                                                         //
+                    waiter_id: pEnabled,                                                                               //
+                    status: 'waiting'                                                                                  //
+                };                                                                                                     //
+                job.remove(function (err, result) {                                                                    //
+                    if (result) {                                                                                      //
+                        meteor_1.Meteor.call('waiterCall', pQueueName, true, data);                                    //
+                    }                                                                                                  //
+                });                                                                                                    //
+            });                                                                                                        //
         },                                                                                                             //
         /**                                                                                                            //
          * This Meteor method allow get new turn to the client                                                         //
@@ -403,7 +418,7 @@ if (meteor_1.Meteor.isServer) {                                                 
         turnCreate: function (_data) {                                                                                 //
             var newTurn = 1;                                                                                           //
             var toDate = new Date().toLocaleDateString();                                                              //
-            var restaurantTurn = restaurant_collection_1.RestaurantTurns.collection.findOne({                          //
+            var restaurantTurn = restaurant_collection_1.RestaurantTurns.findOne({                                     //
                 restaurant_id: _data.restaurants,                                                                      //
                 creation_date: { $gte: new Date(toDate) }                                                              //
             });                                                                                                        //
@@ -433,10 +448,10 @@ if (meteor_1.Meteor.isServer) {                                                 
                 job.remove(function (err, result) {                                                                    //
                     waiter_call_detail_collection_1.WaiterCallDetails.update({ job_id: _jobDetail.job_id }, { $set: { "status": "closed", modification_user: _waiter_id, modification_date: new Date() }
                     });                                                                                                //
-                    var waiterDetail = waiter_call_detail_collection_1.WaiterCallDetails.collection.findOne({ job_id: _jobDetail.job_id });
+                    var waiterDetail = waiter_call_detail_collection_1.WaiterCallDetails.findOne({ job_id: _jobDetail.job_id });
                     if (waiterDetail.type === "SEND_ORDER" && waiterDetail.order_id !== null) {                        //
                         order_collection_1.Orders.update({ _id: waiterDetail.order_id }, { $set: { status: 'ORDER_STATUS.DELIVERED',
-                                modification_user: this._user,                                                         //
+                                modification_user: _waiter_id,                                                         //
                                 modification_date: new Date()                                                          //
                             }                                                                                          //
                         });                                                                                            //
@@ -446,7 +461,7 @@ if (meteor_1.Meteor.isServer) {                                                 
                             account_collection_1.Accounts.update({ _id: account._id }, { $set: { total_payment: (account.total_payment + order.totalPayment) } });
                         }                                                                                              //
                     }                                                                                                  //
-                    var usr_detail = user_detail_collection_1.UserDetails.collection.findOne({ user_id: _waiter_id });
+                    var usr_detail = user_detail_collection_1.UserDetails.findOne({ user_id: _waiter_id });            //
                     var jobs = usr_detail.jobs - 1;                                                                    //
                     user_detail_collection_1.UserDetails.update({ user_id: _waiter_id }, { $set: { "enabled": true, "jobs": jobs } });
                 });                                                                                                    //
@@ -466,11 +481,13 @@ if (meteor_1.Meteor.isServer) {                                                 
                 job.remove(function (err, result) {                                                                    //
                     waiter_call_detail_collection_1.WaiterCallDetails.update({ job_id: _jobDetail.job_id }, { $set: { "status": "cancel", modification_user: _userId, modification_date: new Date() }
                     });                                                                                                //
-                    var waiterDetail = waiter_call_detail_collection_1.WaiterCallDetails.collection.findOne({ job_id: _jobDetail.job_id });
-                    if (waiterDetail.type === "CALL_OF_CUSTOMER" && waiterDetail.waiter_id !== '') {                   //
-                        var usr_detail = user_detail_collection_1.UserDetails.collection.findOne({ user_id: waiterDetail.waiter_id });
-                        var jobs = usr_detail.jobs - 1;                                                                //
-                        user_detail_collection_1.UserDetails.update({ user_id: waiterDetail.waiter_id }, { $set: { "enabled": true, "jobs": jobs } });
+                    var waiterDetail = waiter_call_detail_collection_1.WaiterCallDetails.findOne({ job_id: _jobDetail.job_id });
+                    if (waiterDetail.type === "CALL_OF_CUSTOMER" && waiterDetail.waiter_id) {                          //
+                        var usr_detail = user_detail_collection_1.UserDetails.findOne({ user_id: waiterDetail.waiter_id });
+                        if (usr_detail) {                                                                              //
+                            var jobs = usr_detail.jobs - 1;                                                            //
+                            user_detail_collection_1.UserDetails.update({ user_id: waiterDetail.waiter_id }, { $set: { "enabled": true, "jobs": jobs } });
+                        }                                                                                              //
                     }                                                                                                  //
                 });                                                                                                    //
             });                                                                                                        //
@@ -486,6 +503,7 @@ if (meteor_1.Meteor.isServer) {                                                 
             var _randomLast;                                                                                           //
             var table = table_collection_1.Tables.findOne({ _id: _tableId });                                          //
             var waiterEnableds = user_detail_collection_1.UserDetails.collection.find({ restaurant_work: _restaurant,  //
+                is_active: true,                                                                                       //
                 enabled: true,                                                                                         //
                 role_id: "200",                                                                                        //
                 jobs: { $lt: _maxJobs },                                                                               //
@@ -493,7 +511,7 @@ if (meteor_1.Meteor.isServer) {                                                 
                 table_assignment_end: { $gte: table._number } });                                                      //
             var count = waiterEnableds.count();                                                                        //
             if (count > 0) {                                                                                           //
-                var restaurantTurn = restaurant_collection_1.RestaurantTurns.collection.findOne({ "restaurant_id": _restaurant }, {
+                var restaurantTurn = restaurant_collection_1.RestaurantTurns.findOne({ "restaurant_id": _restaurant }, {
                     sort: { "creation_date": -1 }                                                                      //
                 });                                                                                                    //
                 if (restaurantTurn) {                                                                                  //
@@ -517,7 +535,7 @@ if (meteor_1.Meteor.isServer) {                                                 
             return Math.floor(Math.random() * (max - min + 1)) + min;                                                  //
         }                                                                                                              //
     });                                                                                                                //
-}                                                                                                                      // 246
+}                                                                                                                      // 264
 //# sourceMappingURL=waiter-queue.methods.js.map                                                                       //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -988,7 +1006,7 @@ if (meteor_1.Meteor.isServer) {                                                 
 //# sourceMappingURL=payment.methods.js.map                                                                            //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-}],"restaurant.methods.js":["meteor/meteor","meteor/jalik:ufs","../../stores/restaurant/restaurant.store","./QR/codeGenerator","../../collections/restaurant/table.collection","../../collections/auth/user-detail.collection","../../collections/restaurant/account.collection","../../collections/restaurant/restaurant.collection",function(require,exports){
+}],"restaurant.methods.js":["meteor/meteor","meteor/jalik:ufs","../../stores/restaurant/restaurant.store","./QR/codeGenerator","../../collections/restaurant/table.collection","../../collections/auth/user-detail.collection","../../collections/restaurant/account.collection","../../collections/restaurant/restaurant.collection","../../collections/restaurant/order.collection","../../collections/restaurant/waiter-call-detail.collection","../../collections/general/parameter.collection","../../collections/auth/user-penalty.collection",function(require,exports){
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                                     //
@@ -1003,15 +1021,19 @@ var restaurant_store_1 = require("../../stores/restaurant/restaurant.store");   
 var codeGenerator_1 = require("./QR/codeGenerator");                                                                   // 4
 var table_collection_1 = require("../../collections/restaurant/table.collection");                                     // 6
 var user_detail_collection_1 = require("../../collections/auth/user-detail.collection");                               // 7
-var account_collection_1 = require("../../collections/restaurant/account.collection");                                 // 8
-var restaurant_collection_1 = require("../../collections/restaurant/restaurant.collection");                           // 10
-/**                                                                                                                    // 14
+var account_collection_1 = require("../../collections/restaurant/account.collection");                                 // 9
+var restaurant_collection_1 = require("../../collections/restaurant/restaurant.collection");                           // 11
+var order_collection_1 = require("../../collections/restaurant/order.collection");                                     // 13
+var waiter_call_detail_collection_1 = require("../../collections/restaurant/waiter-call-detail.collection");           // 15
+var parameter_collection_1 = require("../../collections/general/parameter.collection");                                // 17
+var user_penalty_collection_1 = require("../../collections/auth/user-penalty.collection");                             // 20
+/**                                                                                                                    // 24
  * Function allow upload restaurant images                                                                             //
  * @param {File} data                                                                                                  //
  * @param {string} user                                                                                                //
  * @return {Promise<any>} uploadRestaurantImage                                                                        //
  */                                                                                                                    //
-function uploadRestaurantImage(data, user, restaurantId) {                                                             // 20
+function uploadRestaurantImage(data, user, restaurantId) {                                                             // 30
     return new Promise(function (resolve, reject) {                                                                    //
         var file = {                                                                                                   //
             name: data.name,                                                                                           //
@@ -1029,106 +1051,214 @@ function uploadRestaurantImage(data, user, restaurantId) {                      
         });                                                                                                            //
         upload.start();                                                                                                //
     });                                                                                                                //
-}                                                                                                                      // 41
-exports.uploadRestaurantImage = uploadRestaurantImage;                                                                 // 20
-/**                                                                                                                    // 43
+}                                                                                                                      // 51
+exports.uploadRestaurantImage = uploadRestaurantImage;                                                                 // 30
+/**                                                                                                                    // 53
  * This function create random code with 9 length to restaurants                                                       //
  */                                                                                                                    //
-function createRestaurantCode() {                                                                                      // 46
+function createRestaurantCode() {                                                                                      // 56
     var _lText = '';                                                                                                   //
     var _lPossible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';                                                                     //
     for (var _i = 0; _i < 9; _i++) {                                                                                   //
         _lText += _lPossible.charAt(Math.floor(Math.random() * _lPossible.length));                                    //
     }                                                                                                                  //
     return _lText;                                                                                                     //
-}                                                                                                                      // 54
-exports.createRestaurantCode = createRestaurantCode;                                                                   // 46
-/**                                                                                                                    // 56
+}                                                                                                                      // 64
+exports.createRestaurantCode = createRestaurantCode;                                                                   // 56
+/**                                                                                                                    // 66
  * This function create random code with 5 length to restaurants                                                       //
  */                                                                                                                    //
-function createTableCode() {                                                                                           // 59
+function createTableCode() {                                                                                           // 69
     var _lText = '';                                                                                                   //
     var _lPossible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';                                                                     //
     for (var _i = 0; _i < 5; _i++) {                                                                                   //
         _lText += _lPossible.charAt(Math.floor(Math.random() * _lPossible.length));                                    //
     }                                                                                                                  //
     return _lText;                                                                                                     //
-}                                                                                                                      // 67
-exports.createTableCode = createTableCode;                                                                             // 59
-/**                                                                                                                    // 69
+}                                                                                                                      // 77
+exports.createTableCode = createTableCode;                                                                             // 69
+/**                                                                                                                    // 79
  * This function create QR Codes to restaurants                                                                        //
  * @param {string} _pRestaurantId                                                                                      //
  * @param {string} _pTableCode                                                                                         //
  * @param {string} _pStringToCode                                                                                      //
  * @return {Table} generateQRCode                                                                                      //
  */                                                                                                                    //
-function generateQRCode(_pStringToCode) {                                                                              // 76
+function generateQRCode(_pStringToCode) {                                                                              // 86
     var _lCodeGenerator = new codeGenerator_1.CodeGenerator(_pStringToCode);                                           //
     _lCodeGenerator.generateCode();                                                                                    //
     return _lCodeGenerator;                                                                                            //
-}                                                                                                                      // 80
-exports.generateQRCode = generateQRCode;                                                                               // 76
-meteor_1.Meteor.methods({                                                                                              // 82
-    /**                                                                                                                //
-     * This Meteor Method return restaurant object with QR Code condition                                              //
-     * @param {string} _qrcode                                                                                         //
-     * @param {string} _userId                                                                                         //
-     */                                                                                                                //
-    getRestaurantByQRCode: function (_qrcode, _userId) {                                                               //
-        var _table = table_collection_1.Tables.collection.findOne({ QR_code: _qrcode });                               //
-        var _restaurant;                                                                                               //
-        if (_table) {                                                                                                  //
-            _restaurant = restaurant_collection_1.Restaurants.collection.findOne({ _id: _table.restaurantId });        //
-            if (_restaurant.isActive) {                                                                                //
-                if (_table.status === 'BUSY') {                                                                        //
-                    user_detail_collection_1.UserDetails.collection.update({ user_id: _userId }, {                     //
-                        $set: {                                                                                        //
-                            current_table: _table._id,                                                                 //
-                            current_restaurant: _table.restaurantId                                                    //
-                        }                                                                                              //
-                    });                                                                                                //
-                    table_collection_1.Tables.collection.update({ QR_code: _qrcode }, { $set: { amount_people: (_table.amount_people + 1) } });
+}                                                                                                                      // 90
+exports.generateQRCode = generateQRCode;                                                                               // 86
+if (meteor_1.Meteor.isServer) {                                                                                        // 92
+    meteor_1.Meteor.methods({                                                                                          //
+        /**                                                                                                            //
+         * This Meteor Method return restaurant object with QR Code condition                                          //
+         * @param {string} _qrcode                                                                                     //
+         * @param {string} _userId                                                                                     //
+         */                                                                                                            //
+        getRestaurantByQRCode: function (_qrcode, _userId) {                                                           //
+            var _table = table_collection_1.Tables.collection.findOne({ QR_code: _qrcode });                           //
+            var _restaurant;                                                                                           //
+            var _lUserDetail = user_detail_collection_1.UserDetails.findOne({ user_id: _userId });                     //
+            if (_lUserDetail.penalties.length === 0) {                                                                 //
+                var _lUserPenalty = user_penalty_collection_1.UserPenalties.findOne({ user_id: _userId, is_active: true });
+                if (_lUserPenalty) {                                                                                   //
+                    var _lUserPenaltyDays = parameter_collection_1.Parameters.findOne({ name: 'penalty_days' });       //
+                    var _lCurrentDate = new Date();                                                                    //
+                    var _lDateToCompare = new Date(_lUserPenalty.last_date.setDate((_lUserPenalty.last_date.getDate() + Number(_lUserPenaltyDays.value))));
+                    if (_lDateToCompare.getTime() >= _lCurrentDate.getTime()) {                                        //
+                        var _lDay = _lDateToCompare.getDate();                                                         //
+                        var _lMonth = _lDateToCompare.getMonth() + 1;                                                  //
+                        var _lYear = _lDateToCompare.getFullYear();                                                    //
+                        throw new meteor_1.Meteor.Error('500', _lDay + '/' + _lMonth + '/' + _lYear);                  //
+                    }                                                                                                  //
+                    else {                                                                                             //
+                        user_penalty_collection_1.UserPenalties.update({ _id: _lUserPenalty._id }, { $set: { is_active: false } });
+                    }                                                                                                  //
                 }                                                                                                      //
-                else if (_table.status === 'FREE') {                                                                   //
-                    table_collection_1.Tables.collection.update({ QR_code: _qrcode }, { $set: { status: 'BUSY', amount_people: 1 } });
-                    account_collection_1.Accounts.collection.insert({                                                  //
-                        creation_date: new Date(),                                                                     //
-                        creation_user: _userId,                                                                        //
-                        restaurantId: _table.restaurantId,                                                             //
-                        tableId: _table._id,                                                                           //
-                        status: 'OPEN',                                                                                //
-                        total_payment: 0                                                                               //
-                    });                                                                                                //
-                    user_detail_collection_1.UserDetails.collection.update({ user_id: _userId }, {                     //
-                        $set: {                                                                                        //
-                            current_table: _table._id,                                                                 //
-                            current_restaurant: _table.restaurantId                                                    //
+            }                                                                                                          //
+            if (_table) {                                                                                              //
+                _restaurant = restaurant_collection_1.Restaurants.collection.findOne({ _id: _table.restaurantId });    //
+                if (_restaurant) {                                                                                     //
+                    if (_restaurant.isActive) {                                                                        //
+                        if (_table.status === 'BUSY') {                                                                //
+                            user_detail_collection_1.UserDetails.collection.update({ user_id: _userId }, {             //
+                                $set: {                                                                                //
+                                    current_table: _table._id,                                                         //
+                                    current_restaurant: _table.restaurantId                                            //
+                                }                                                                                      //
+                            });                                                                                        //
+                            table_collection_1.Tables.collection.update({ QR_code: _qrcode }, { $set: { amount_people: (_table.amount_people + 1) } });
                         }                                                                                              //
-                    });                                                                                                //
+                        else if (_table.status === 'FREE') {                                                           //
+                            table_collection_1.Tables.collection.update({ QR_code: _qrcode }, { $set: { status: 'BUSY', amount_people: 1 } });
+                            account_collection_1.Accounts.collection.insert({                                          //
+                                creation_date: new Date(),                                                             //
+                                creation_user: _userId,                                                                //
+                                restaurantId: _table.restaurantId,                                                     //
+                                tableId: _table._id,                                                                   //
+                                status: 'OPEN',                                                                        //
+                                total_payment: 0                                                                       //
+                            });                                                                                        //
+                            user_detail_collection_1.UserDetails.collection.update({ user_id: _userId }, {             //
+                                $set: {                                                                                //
+                                    current_table: _table._id,                                                         //
+                                    current_restaurant: _table.restaurantId                                            //
+                                }                                                                                      //
+                            });                                                                                        //
+                        }                                                                                              //
+                        return _restaurant;                                                                            //
+                    }                                                                                                  //
+                    else {                                                                                             //
+                        throw new meteor_1.Meteor.Error('200');                                                        //
+                    }                                                                                                  //
                 }                                                                                                      //
-                return _restaurant;                                                                                    //
+                else {                                                                                                 //
+                    throw new meteor_1.Meteor.Error('300');                                                            //
+                }                                                                                                      //
+            }                                                                                                          //
+            else {                                                                                                     //
+                throw new meteor_1.Meteor.Error('400');                                                                //
+            }                                                                                                          //
+        },                                                                                                             //
+        /**                                                                                                            //
+         * This method return restaurant if exist o null if not                                                        //
+         */                                                                                                            //
+        getCurrentRestaurantByUser: function (_restaurantId) {                                                         //
+            var restaurant = restaurant_collection_1.Restaurants.collection.findOne({ _id: _restaurantId });           //
+            if (typeof restaurant != "undefined" || restaurant != null) {                                              //
+                return restaurant;                                                                                     //
+            }                                                                                                          //
+            else {                                                                                                     //
+                return null;                                                                                           //
+            }                                                                                                          //
+        },                                                                                                             //
+        validateRestaurantIsActive: function () {                                                                      //
+            var userDetail = user_detail_collection_1.UserDetails.collection.findOne({ user_id: this.userId });        //
+            if (userDetail) {                                                                                          //
+                var restaurant = restaurant_collection_1.Restaurants.collection.findOne({ _id: userDetail.restaurant_work });
+                return restaurant.isActive;                                                                            //
+            }                                                                                                          //
+            else {                                                                                                     //
+                return false;                                                                                          //
+            }                                                                                                          //
+        },                                                                                                             //
+        restaurantExit: function (_pUserDetailId, _pCurrentRestaurant, _pCurrentTable) {                               //
+            var _lTableAmountPeople = table_collection_1.Tables.findOne({ _id: _pCurrentTable }).amount_people;        //
+            var _tablesUpdated = table_collection_1.Tables.collection.update({ _id: _pCurrentTable }, { $set: { amount_people: _lTableAmountPeople - 1 } });
+            if (_tablesUpdated === 1) {                                                                                //
+                var _lTableAux = table_collection_1.Tables.findOne({ _id: _pCurrentTable });                           //
+                if (_lTableAux.amount_people === 0 && _lTableAux.status === 'BUSY') {                                  //
+                    table_collection_1.Tables.update({ _id: _pCurrentTable }, { $set: { status: 'FREE' } });           //
+                    var _lAccountAux = account_collection_1.Accounts.findOne({ restaurantId: _pCurrentRestaurant, tableId: _pCurrentTable, status: 'OPEN' });
+                    account_collection_1.Accounts.update({ _id: _lAccountAux._id }, { $set: { status: 'CLOSED' } });   //
+                }                                                                                                      //
+            }                                                                                                          //
+            user_detail_collection_1.UserDetails.update({ _id: _pUserDetailId }, { $set: { current_restaurant: '', current_table: '' } });
+        },                                                                                                             //
+        restaurantExitWithRegisteredOrders: function (_pUserId, _pUserDetailId, _pCurrentRestaurant, _pCurrentTable) {
+            order_collection_1.Orders.find({                                                                           //
+                creation_user: _pUserId, restaurantId: _pCurrentRestaurant, tableId: _pCurrentTable,                   //
+                status: 'ORDER_STATUS.REGISTERED'                                                                      //
+            }).fetch().forEach(function (order) {                                                                      //
+                order_collection_1.Orders.update({ _id: order._id }, { $set: { status: 'ORDER_STATUS.CANCELED', modification_date: new Date() } });
+            });                                                                                                        //
+            var _lTableAmountPeople = table_collection_1.Tables.findOne({ _id: _pCurrentTable }).amount_people;        //
+            var _tablesUpdated = table_collection_1.Tables.collection.update({ _id: _pCurrentTable }, { $set: { amount_people: _lTableAmountPeople - 1 } });
+            if (_tablesUpdated === 1) {                                                                                //
+                var _lTableAux = table_collection_1.Tables.findOne({ _id: _pCurrentTable });                           //
+                if (_lTableAux.amount_people === 0 && _lTableAux.status === 'BUSY') {                                  //
+                    table_collection_1.Tables.update({ _id: _pCurrentTable }, { $set: { status: 'FREE' } });           //
+                    var _lAccountAux = account_collection_1.Accounts.findOne({ restaurantId: _pCurrentRestaurant, tableId: _pCurrentTable, status: 'OPEN' });
+                    account_collection_1.Accounts.update({ _id: _lAccountAux._id }, { $set: { status: 'CLOSED' } });   //
+                }                                                                                                      //
+            }                                                                                                          //
+            user_detail_collection_1.UserDetails.update({ _id: _pUserDetailId }, { $set: { current_restaurant: '', current_table: '' } });
+        },                                                                                                             //
+        restaurantExitWithOrdersInInvalidStatus: function (_pUserId, _pCurrentRestaurant, _pCurrentTable) {            //
+            order_collection_1.Orders.find({                                                                           //
+                creation_user: _pUserId, restaurantId: _pCurrentRestaurant, tableId: _pCurrentTable,                   //
+                status: { $in: ['ORDER_STATUS.IN_PROCESS', 'ORDER_STATUS.PREPARED'] }                                  //
+            }).fetch().forEach(function (order) {                                                                      //
+                order_collection_1.Orders.update({ _id: order._id }, { $set: { markedToCancel: true, modification_date: new Date() } });
+            });                                                                                                        //
+            var data = {                                                                                               //
+                restaurants: _pCurrentRestaurant,                                                                      //
+                tables: _pCurrentTable,                                                                                //
+                user: _pUserId,                                                                                        //
+                waiter_id: "",                                                                                         //
+                status: "waiting",                                                                                     //
+                type: 'USER_EXIT_TABLE',                                                                               //
+            };                                                                                                         //
+            var isWaiterCalls = waiter_call_detail_collection_1.WaiterCallDetails.find({                               //
+                restaurant_id: _pCurrentRestaurant, table_id: _pCurrentTable,                                          //
+                type: 'USER_EXIT_TABLE', status: { $in: ['waiting', 'completed'] }                                     //
+            }).fetch().length;                                                                                         //
+            if (isWaiterCalls === 0) {                                                                                 //
+                meteor_1.Meteor.call('findQueueByRestaurant', data);                                                   //
+            }                                                                                                          //
+        },                                                                                                             //
+        cancelOrderToRestaurantExit: function (_pOrder, _pCall, _pWaiterId) {                                          //
+            if (_pOrder.status === 'ORDER_STATUS.PREPARED' && _pOrder.markedToCancel === true) {                       //
+                order_collection_1.Orders.update({ _id: _pOrder._id }, { $set: { status: 'ORDER_STATUS.CANCELED', modification_date: new Date(), markedToCancel: false } });
+            }                                                                                                          //
+            else if (_pOrder.status === 'ORDER_STATUS.IN_PROCESS' && _pOrder.markedToCancel === true) {                //
+                order_collection_1.Orders.update({ _id: _pOrder._id }, { $set: { status: 'ORDER_STATUS.CANCELED', modification_date: new Date() } });
             }                                                                                                          //
             else {                                                                                                     //
                 throw new meteor_1.Meteor.Error('200');                                                                //
             }                                                                                                          //
+            var _lOrdersToCancel = order_collection_1.Orders.find({                                                    //
+                restaurantId: _pCall.restaurant_id, tableId: _pCall.table_id,                                          //
+                markedToCancel: { $in: [true, false] }, status: { $in: ['ORDER_STATUS.IN_PROCESS', 'ORDER_STATUS.PREPARED'] }
+            }).fetch().length;                                                                                         //
+            if (_lOrdersToCancel === 0) {                                                                              //
+                meteor_1.Meteor.call('closeCall', _pCall, _pWaiterId);                                                 //
+            }                                                                                                          //
         }                                                                                                              //
-        else {                                                                                                         //
-            throw new meteor_1.Meteor.Error('400');                                                                    //
-        }                                                                                                              //
-    },                                                                                                                 //
-    /**                                                                                                                //
-     * This method return restaurant if exist o null if not                                                            //
-     */                                                                                                                //
-    getCurrentRestaurantByUser: function (_restaurantId) {                                                             //
-        var restaurant = restaurant_collection_1.Restaurants.collection.findOne({ _id: _restaurantId });               //
-        if (typeof restaurant != "undefined" || restaurant != null) {                                                  //
-            return restaurant;                                                                                         //
-        }                                                                                                              //
-        else {                                                                                                         //
-            return null;                                                                                               //
-        }                                                                                                              //
-    }                                                                                                                  //
-});                                                                                                                    //
+    });                                                                                                                //
+}                                                                                                                      // 265
 //# sourceMappingURL=restaurant.methods.js.map                                                                         //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1158,7 +1288,7 @@ if (Meteor.isServer) {                                                          
 //# sourceMappingURL=schedule.methods.js.map                                                                           //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-},"table.method.js":["meteor/meteor","/both/collections/restaurant/table.collection",function(require,exports){
+},"table.method.js":["meteor/meteor","/both/collections/restaurant/table.collection","/both/collections/restaurant/order.collection","/both/collections/restaurant/waiter-call-detail.collection","/both/collections/restaurant/account.collection","/both/collections/auth/user-detail.collection",function(require,exports){
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                                     //
@@ -1169,26 +1299,124 @@ if (Meteor.isServer) {                                                          
 Object.defineProperty(exports, "__esModule", { value: true });                                                         //
 var meteor_1 = require("meteor/meteor");                                                                               // 1
 var table_collection_1 = require("/both/collections/restaurant/table.collection");                                     // 3
-meteor_1.Meteor.methods({                                                                                              // 5
-    getCurrentTableByUser: function (_idTable) {                                                                       //
-        var table = table_collection_1.Tables.collection.findOne({ _id: _idTable });                                   //
-        if (typeof table != "undefined" || table != null) {                                                            //
-            return table;                                                                                              //
+var order_collection_1 = require("/both/collections/restaurant/order.collection");                                     // 4
+var waiter_call_detail_collection_1 = require("/both/collections/restaurant/waiter-call-detail.collection");           // 5
+var account_collection_1 = require("/both/collections/restaurant/account.collection");                                 // 7
+var user_detail_collection_1 = require("/both/collections/auth/user-detail.collection");                               // 8
+if (meteor_1.Meteor.isServer) {                                                                                        // 10
+    meteor_1.Meteor.methods({                                                                                          //
+        getCurrentTableByUser: function (_idTable) {                                                                   //
+            var table = table_collection_1.Tables.collection.findOne({ _id: _idTable });                               //
+            if (typeof table != "undefined" || table != null) {                                                        //
+                return table;                                                                                          //
+            }                                                                                                          //
+            else {                                                                                                     //
+                return null;                                                                                           //
+            }                                                                                                          //
+        },                                                                                                             //
+        getIdTableByQr: function (_qrCode) {                                                                           //
+            var table = table_collection_1.Tables.collection.findOne({ QR_code: _qrCode, is_active: true });           //
+            if (typeof table != "undefined" || table != null) {                                                        //
+                return table;                                                                                          //
+            }                                                                                                          //
+            else {                                                                                                     //
+                return null;                                                                                           //
+            }                                                                                                          //
+        },                                                                                                             //
+        changeCurrentTable: function (_pUserId, _pRestaurantId, _pQRCodeCurrentTable, _pQRCodeDestinationTable) {      //
+            if (_pQRCodeCurrentTable === _pQRCodeDestinationTable) {                                                   //
+                throw new meteor_1.Meteor.Error('207');                                                                //
+            }                                                                                                          //
+            var _lCurrentTable = table_collection_1.Tables.findOne({ QR_code: _pQRCodeCurrentTable });                 //
+            var _lAccountCurrentTable = account_collection_1.Accounts.findOne({ restaurantId: _pRestaurantId, tableId: _lCurrentTable._id, status: 'OPEN' });
+            var _lDestinationTable = table_collection_1.Tables.findOne({ QR_code: _pQRCodeDestinationTable });         //
+            if (_lDestinationTable) {                                                                                  //
+                if (_lDestinationTable.is_active) {                                                                    //
+                    if (_lDestinationTable.restaurantId === _pRestaurantId) {                                          //
+                        var _lOrdersToConfirm = order_collection_1.Orders.find({ restaurantId: _pRestaurantId, tableId: _lCurrentTable._id, 'translateInfo.firstOrderOwner': _pUserId,
+                            'translateInfo.markedToTranslate': true, status: 'ORDER_STATUS.PENDING_CONFIRM', toPay: false }).fetch().length;
+                        var _lOrdersWithPendingConfirmation = order_collection_1.Orders.find({ restaurantId: _pRestaurantId, tableId: _lCurrentTable._id, 'translateInfo.lastOrderOwner': _pUserId,
+                            'translateInfo.markedToTranslate': true, status: 'ORDER_STATUS.PENDING_CONFIRM', toPay: false }).fetch().length;
+                        if (_lOrdersToConfirm <= 0 && _lOrdersWithPendingConfirmation <= 0) {                          //
+                            var _lOrdersMarkedToPay = order_collection_1.Orders.find({ creation_user: _pUserId, restaurantId: _pRestaurantId, tableId: _lCurrentTable._id,
+                                status: 'ORDER_STATUS.DELIVERED', toPay: true }).fetch().length;                       //
+                            if (_lOrdersMarkedToPay <= 0) {                                                            //
+                                var _lWaiterCalls = waiter_call_detail_collection_1.WaiterCallDetails.find({ restaurant_id: _pRestaurantId, table_id: _lCurrentTable._id, type: 'CALL_OF_CUSTOMER',
+                                    user_id: _pUserId, status: 'completed' }).fetch().length;                          //
+                                if (_lWaiterCalls <= 0) {                                                              //
+                                    var _ltotalPaymentOrdersDelivered_1 = 0;                                           //
+                                    order_collection_1.Orders.find({ creation_user: _pUserId, restaurantId: _pRestaurantId, tableId: _lCurrentTable._id,
+                                        status: 'ORDER_STATUS.DELIVERED', toPay: false }).fetch().forEach(function (order) {
+                                        _ltotalPaymentOrdersDelivered_1 += order.totalPayment;                         //
+                                    });                                                                                //
+                                    account_collection_1.Accounts.update({ _id: _lAccountCurrentTable._id }, { $set: { total_payment: _lAccountCurrentTable.total_payment - _ltotalPaymentOrdersDelivered_1 } });
+                                    var _lNewAmountPeople = _lCurrentTable.amount_people - 1;                          //
+                                    table_collection_1.Tables.update({ _id: _lCurrentTable._id }, { $set: { amount_people: _lNewAmountPeople } });
+                                    order_collection_1.Orders.find({ creation_user: _pUserId, restaurantId: _pRestaurantId, tableId: _lCurrentTable._id, accountId: _lAccountCurrentTable._id,
+                                        status: 'ORDER_STATUS.PREPARED' }).fetch().forEach(function (order) {          //
+                                        waiter_call_detail_collection_1.WaiterCallDetails.update({ restaurant_id: _pRestaurantId, table_id: _lCurrentTable._id, status: 'completed', order_id: order._id }, { $set: { table_id: _lDestinationTable._id } });
+                                    });                                                                                //
+                                    if (_lDestinationTable.status === 'BUSY') {                                        //
+                                        table_collection_1.Tables.update({ _id: _lDestinationTable._id }, { $set: { amount_people: _lDestinationTable.amount_people + 1 } });
+                                        var _lAccountDestinationTable_1 = account_collection_1.Accounts.findOne({ restaurantId: _pRestaurantId, tableId: _lDestinationTable._id, status: 'OPEN' });
+                                        account_collection_1.Accounts.update({ _id: _lAccountDestinationTable_1._id }, { $set: { total_payment: _lAccountDestinationTable_1.total_payment + _ltotalPaymentOrdersDelivered_1 } });
+                                        order_collection_1.Orders.find({ creation_user: _pUserId, restaurantId: _pRestaurantId, tableId: _lCurrentTable._id,
+                                            status: { $in: ['ORDER_STATUS.REGISTERED', 'ORDER_STATUS.IN_PROCESS', 'ORDER_STATUS.PREPARED', 'ORDER_STATUS.DELIVERED'] } }).fetch().forEach(function (order) {
+                                            order_collection_1.Orders.update({ _id: order._id }, { $set: { tableId: _lDestinationTable._id, accountId: _lAccountDestinationTable_1._id, modification_user: _pUserId, modification_date: new Date() } });
+                                        });                                                                            //
+                                    }                                                                                  //
+                                    else if (_lDestinationTable.status === 'FREE') {                                   //
+                                        table_collection_1.Tables.update({ _id: _lDestinationTable._id }, { $set: { status: 'BUSY', amount_people: 1 } });
+                                        var _lNewAccount_1 = account_collection_1.Accounts.collection.insert({         //
+                                            creation_date: new Date(),                                                 //
+                                            creation_user: _pUserId,                                                   //
+                                            restaurantId: _pRestaurantId,                                              //
+                                            tableId: _lDestinationTable._id,                                           //
+                                            status: 'OPEN',                                                            //
+                                            total_payment: _ltotalPaymentOrdersDelivered_1                             //
+                                        });                                                                            //
+                                        order_collection_1.Orders.find({ creation_user: _pUserId, restaurantId: _pRestaurantId, tableId: _lCurrentTable._id,
+                                            status: { $in: ['ORDER_STATUS.REGISTERED', 'ORDER_STATUS.IN_PROCESS', 'ORDER_STATUS.PREPARED', 'ORDER_STATUS.DELIVERED'] } }).fetch().forEach(function (order) {
+                                            order_collection_1.Orders.update({ _id: order._id }, { $set: { tableId: _lDestinationTable._id, accountId: _lNewAccount_1, modification_user: _pUserId, modification_date: new Date() } });
+                                        });                                                                            //
+                                    }                                                                                  //
+                                    else {                                                                             //
+                                        throw new meteor_1.Meteor.Error('206');                                        //
+                                    }                                                                                  //
+                                    var _lCurTableAux = table_collection_1.Tables.findOne({ QR_code: _pQRCodeCurrentTable });
+                                    if (_lCurTableAux.amount_people === 0 && _lCurTableAux.status === 'BUSY') {        //
+                                        table_collection_1.Tables.update({ _id: _lCurTableAux._id }, { $set: { status: 'FREE' } });
+                                        var _lAccountCurTable = account_collection_1.Accounts.findOne({ restaurantId: _pRestaurantId, tableId: _lCurTableAux._id, status: 'OPEN' });
+                                        account_collection_1.Accounts.update({ _id: _lAccountCurTable._id }, { $set: { status: 'CLOSED' } });
+                                    }                                                                                  //
+                                    user_detail_collection_1.UserDetails.update({ user_id: _pUserId }, { $set: { current_table: _lDestinationTable._id } });
+                                }                                                                                      //
+                                else {                                                                                 //
+                                    throw new meteor_1.Meteor.Error('205');                                            //
+                                }                                                                                      //
+                            }                                                                                          //
+                            else {                                                                                     //
+                                throw new meteor_1.Meteor.Error('204');                                                //
+                            }                                                                                          //
+                        }                                                                                              //
+                        else {                                                                                         //
+                            throw new meteor_1.Meteor.Error('203');                                                    //
+                        }                                                                                              //
+                    }                                                                                                  //
+                    else {                                                                                             //
+                        throw new meteor_1.Meteor.Error('202');                                                        //
+                    }                                                                                                  //
+                }                                                                                                      //
+                else {                                                                                                 //
+                    throw new meteor_1.Meteor.Error('201');                                                            //
+                }                                                                                                      //
+            }                                                                                                          //
+            else {                                                                                                     //
+                throw new meteor_1.Meteor.Error('200');                                                                //
+            }                                                                                                          //
         }                                                                                                              //
-        else {                                                                                                         //
-            return null;                                                                                               //
-        }                                                                                                              //
-    },                                                                                                                 //
-    getIdTableByQr: function (_qrCode) {                                                                               //
-        var table = table_collection_1.Tables.collection.findOne({ QR_code: _qrCode });                                //
-        if (typeof table != "undefined" || table != null) {                                                            //
-            return table._id;                                                                                          //
-        }                                                                                                              //
-        else {                                                                                                         //
-            return null;                                                                                               //
-        }                                                                                                              //
-    }                                                                                                                  //
-});                                                                                                                    //
+    });                                                                                                                //
+}                                                                                                                      // 122
 //# sourceMappingURL=table.method.js.map                                                                               //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1432,9 +1660,21 @@ if (meteor_1.Meteor.isServer) {                                                 
             var count;                                                                                                 //
             count = user_detail_collection_1.UserDetails.collection.find({ user_id: this.userId }).count();            //
             return count;                                                                                              //
+        },                                                                                                             //
+        /**                                                                                                            //
+         * Validate user is active                                                                                     //
+         */                                                                                                            //
+        validateUserIsActive: function () {                                                                            //
+            var userDetail = user_detail_collection_1.UserDetails.collection.findOne({ user_id: this.userId });        //
+            if (userDetail) {                                                                                          //
+                return userDetail.is_active;                                                                           //
+            }                                                                                                          //
+            else {                                                                                                     //
+                return false;                                                                                          //
+            }                                                                                                          //
         }                                                                                                              //
     });                                                                                                                //
-}                                                                                                                      // 79
+}                                                                                                                      // 90
 //# sourceMappingURL=user-detail.methods.js.map                                                                        //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1486,6 +1726,27 @@ if (meteor_1.Meteor.isServer) {                                                 
 //# sourceMappingURL=user-devices.methods.js.map                                                                       //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+}],"user-login.methods.js":["meteor/meteor","/both/collections/auth/user-login.collection",function(require,exports){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                     //
+// both/methods/auth/user-login.methods.js                                                                             //
+//                                                                                                                     //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                       //
+Object.defineProperty(exports, "__esModule", { value: true });                                                         //
+var meteor_1 = require("meteor/meteor");                                                                               // 1
+var user_login_collection_1 = require("/both/collections/auth/user-login.collection");                                 // 3
+if (meteor_1.Meteor.isServer) {                                                                                        // 5
+    meteor_1.Meteor.methods({                                                                                          //
+        insertUserLoginInfo: function (_pUserLogin) {                                                                  //
+            user_login_collection_1.UsersLogin.insert(_pUserLogin);                                                    //
+        }                                                                                                              //
+    });                                                                                                                //
+}                                                                                                                      // 11
+//# sourceMappingURL=user-login.methods.js.map                                                                         //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 }],"user-profile.methods.js":["meteor/jalik:ufs","../../stores/auth/user.store",function(require,exports){
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1525,6 +1786,110 @@ exports.uploadUserImage = uploadUserImage;                                      
 //# sourceMappingURL=user-profile.methods.js.map                                                                       //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+}],"user.methods.js":["meteor/meteor","../../collections/auth/user-detail.collection","../../collections/restaurant/account.collection","../../collections/restaurant/order.collection","../../collections/restaurant/payment.collection","../../collections/restaurant/waiter-call-detail.collection","../../collections/restaurant/table.collection","/both/collections/auth/user-penalty.collection","../../collections/general/parameter.collection",function(require,exports){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                     //
+// both/methods/auth/user.methods.js                                                                                   //
+//                                                                                                                     //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                       //
+Object.defineProperty(exports, "__esModule", { value: true });                                                         //
+var meteor_1 = require("meteor/meteor");                                                                               // 1
+var user_detail_collection_1 = require("../../collections/auth/user-detail.collection");                               // 4
+var account_collection_1 = require("../../collections/restaurant/account.collection");                                 // 6
+var order_collection_1 = require("../../collections/restaurant/order.collection");                                     // 8
+var payment_collection_1 = require("../../collections/restaurant/payment.collection");                                 // 9
+var waiter_call_detail_collection_1 = require("../../collections/restaurant/waiter-call-detail.collection");           // 10
+var table_collection_1 = require("../../collections/restaurant/table.collection");                                     // 12
+var user_penalty_collection_1 = require("/both/collections/auth/user-penalty.collection");                             // 13
+var parameter_collection_1 = require("../../collections/general/parameter.collection");                                // 14
+if (meteor_1.Meteor.isServer) {                                                                                        // 17
+    meteor_1.Meteor.methods({                                                                                          //
+        penalizeCustomer: function (_pCustomerUser) {                                                                  //
+            var _lUserDetail = user_detail_collection_1.UserDetails.findOne({ user_id: _pCustomerUser._id });          //
+            var _lCustomerRestaurant = _lUserDetail.current_restaurant;                                                //
+            var _lCustomerTable = _lUserDetail.current_table;                                                          //
+            var _lCustomerAccount = account_collection_1.Accounts.findOne({ restaurantId: _lCustomerRestaurant, tableId: _lCustomerTable, status: 'OPEN' });
+            if (_lCustomerAccount) {                                                                                   //
+                var _lUserOrders_1 = [];                                                                               //
+                order_collection_1.Orders.find({ creation_user: _pCustomerUser._id, restaurantId: _lCustomerRestaurant, tableId: _lCustomerTable, accountId: _lCustomerAccount._id }).fetch().forEach(function (order) {
+                    _lUserOrders_1.push(order._id);                                                                    //
+                });                                                                                                    //
+                order_collection_1.Orders.find({ creation_user: _pCustomerUser._id, restaurantId: _lCustomerRestaurant, tableId: _lCustomerTable, accountId: _lCustomerAccount._id,
+                    status: { $in: ['ORDER_STATUS.REGISTERED', 'ORDER_STATUS.PREPARED'] } }).fetch().forEach(function (order) {
+                    order_collection_1.Orders.update({ _id: order._id }, { $set: { status: 'ORDER_STATUS.CANCELED', modification_date: new Date(), canceled_by_penalization: true } });
+                });                                                                                                    //
+                order_collection_1.Orders.find({ creation_user: _pCustomerUser._id, restaurantId: _lCustomerRestaurant, tableId: _lCustomerTable, accountId: _lCustomerAccount._id,
+                    status: { $in: ['ORDER_STATUS.IN_PROCESS'] } }).fetch().forEach(function (order) {                 //
+                    order_collection_1.Orders.update({ _id: order._id }, { $set: { status: 'ORDER_STATUS.CANCELED', modification_date: new Date(), canceled_by_penalization: false } });
+                });                                                                                                    //
+                order_collection_1.Orders.find({ creation_user: _pCustomerUser._id, restaurantId: _lCustomerRestaurant, tableId: _lCustomerTable, accountId: _lCustomerAccount._id,
+                    status: { $in: ['ORDER_STATUS.DELIVERED'] } }).fetch().forEach(function (order) {                  //
+                    order_collection_1.Orders.update({ _id: order._id }, { $set: { status: 'ORDER_STATUS.CANCELED', modification_date: new Date(), canceled_by_penalization: true } });
+                    account_collection_1.Accounts.update({ _id: _lCustomerAccount._id }, { $set: { total_payment: _lCustomerAccount.total_payment - order.totalPayment } });
+                });                                                                                                    //
+                order_collection_1.Orders.find({ restaurantId: _lCustomerRestaurant, tableId: _lCustomerTable, accountId: _lCustomerAccount._id, 'translateInfo.firstOrderOwner': _pCustomerUser._id,
+                    'translateInfo.markedToTranslate': true, status: 'ORDER_STATUS.PENDING_CONFIRM', toPay: false }).fetch().forEach(function (order) {
+                    var _lOrderTranslate = { firstOrderOwner: order.translateInfo.firstOrderOwner, markedToTranslate: false,
+                        lastOrderOwner: '', confirmedToTranslate: false };                                             //
+                    order_collection_1.Orders.update({ _id: order._id }, { $set: { status: 'ORDER_STATUS.DELIVERED', modification_date: new Date(), translateInfo: _lOrderTranslate } });
+                });                                                                                                    //
+                order_collection_1.Orders.find({ restaurantId: _lCustomerRestaurant, tableId: _lCustomerTable, accountId: _lCustomerAccount._id, 'translateInfo.lastOrderOwner': _pCustomerUser._id,
+                    'translateInfo.markedToTranslate': true, status: 'ORDER_STATUS.PENDING_CONFIRM', toPay: false }).fetch().forEach(function (order) {
+                    var _lOrderTranslate = { firstOrderOwner: _pCustomerUser._id, markedToTranslate: false,            //
+                        lastOrderOwner: '', confirmedToTranslate: false };                                             //
+                    order_collection_1.Orders.update({ _id: order._id }, { $set: { status: 'ORDER_STATUS.CANCELED', modification_date: new Date(), translateInfo: _lOrderTranslate, canceled_by_penalization: true } });
+                });                                                                                                    //
+                waiter_call_detail_collection_1.WaiterCallDetails.find({ restaurant_id: _lCustomerRestaurant, table_id: _lCustomerTable, order_id: { $in: _lUserOrders_1 }, type: 'SEND_ORDER',
+                    status: { $in: ['waiting', 'completed'] } }).fetch().forEach(function (call) {                     //
+                    waiter_call_detail_collection_1.WaiterCallDetails.update({ _id: call._id }, { $set: { status: 'cancel', modification_date: new Date() } });
+                });                                                                                                    //
+                waiter_call_detail_collection_1.WaiterCallDetails.find({ restaurant_id: _lCustomerRestaurant, table_id: _lCustomerTable, user_id: _pCustomerUser._id, type: { $in: ['CALL_OF_CUSTOMER', 'USER_EXIT_TABLE', 'PAYMENT'] },
+                    status: { $in: ['waiting', 'completed'] } }).fetch().forEach(function (call) {                     //
+                    waiter_call_detail_collection_1.WaiterCallDetails.update({ _id: call._id }, { $set: { status: 'cancel', modification_date: new Date() } });
+                });                                                                                                    //
+                payment_collection_1.Payments.find({ creation_user: _pCustomerUser._id, restaurantId: _lCustomerRestaurant, accountId: _lCustomerAccount._id,
+                    tableId: _lCustomerTable, status: 'PAYMENT.NO_PAID', received: false }).fetch().forEach(function (pay) {
+                    payment_collection_1.Payments.update({ _id: pay._id }, { $set: { status: 'CANCELED', canceled_by_penalization: true } });
+                    account_collection_1.Accounts.update({ _id: _lCustomerAccount._id }, { $set: { total_payment: _lCustomerAccount.total_payment - pay.totalOrdersPrice } });
+                });                                                                                                    //
+                var _lTableAmountPeople = table_collection_1.Tables.findOne({ _id: _lCustomerTable }).amount_people;   //
+                var _tablesUpdated = table_collection_1.Tables.collection.update({ _id: _lCustomerTable }, { $set: { amount_people: _lTableAmountPeople - 1 } });
+                if (_tablesUpdated === 1) {                                                                            //
+                    var _lTableAux = table_collection_1.Tables.findOne({ _id: _lCustomerTable });                      //
+                    if (_lTableAux.amount_people === 0 && _lTableAux.status === 'BUSY') {                              //
+                        table_collection_1.Tables.update({ _id: _lCustomerTable }, { $set: { status: 'FREE' } });      //
+                        account_collection_1.Accounts.update({ _id: _lCustomerAccount._id }, { $set: { status: 'CLOSED' } });
+                    }                                                                                                  //
+                }                                                                                                      //
+                var _lUserDetailPenalty = { restaurant_id: _lCustomerRestaurant, date: new Date() };                   //
+                user_detail_collection_1.UserDetails.update({ _id: _lUserDetail._id }, { $push: { penalties: _lUserDetailPenalty } });
+                var _lUsersUpdated = user_detail_collection_1.UserDetails.collection.update({ _id: _lUserDetail._id }, { $set: { current_restaurant: '', current_table: '' } });
+                if (_lUsersUpdated === 1) {                                                                            //
+                    var _lUserDetailAux = user_detail_collection_1.UserDetails.findOne({ _id: _lUserDetail._id });     //
+                    var _lMaxUserPenalties = parameter_collection_1.Parameters.findOne({ name: 'max_user_penalties' });
+                    if (_lUserDetailAux.penalties.length >= Number(_lMaxUserPenalties.value)) {                        //
+                        var _lLast_date = new Date(Math.max.apply(null, _lUserDetailAux.penalties.map(function (p) { return new Date(p.date); })));
+                        user_penalty_collection_1.UserPenalties.insert({                                               //
+                            user_id: _pCustomerUser._id,                                                               //
+                            is_active: true,                                                                           //
+                            last_date: _lLast_date,                                                                    //
+                            penalties: _lUserDetailAux.penalties                                                       //
+                        });                                                                                            //
+                        user_detail_collection_1.UserDetails.update({ _id: _lUserDetail._id }, { $set: { penalties: [] } });
+                    }                                                                                                  //
+                }                                                                                                      //
+            }                                                                                                          //
+            else {                                                                                                     //
+                throw new meteor_1.Meteor.Error('200');                                                                //
+            }                                                                                                          //
+        }                                                                                                              //
+    });                                                                                                                //
+}                                                                                                                      // 108
+//# sourceMappingURL=user.methods.js.map                                                                               //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 }]},"general":{"cron.methods.js":["meteor/meteor","meteor/email","/both/collections/general/email-content.collection","/both/collections/restaurant/restaurant.collection","/both/collections/restaurant/table.collection","/both/collections/payment/payment-history.collection","/both/collections/auth/user.collection","/both/collections/general/parameter.collection","meteor/meteorhacks:ssr",function(require,exports){
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1558,7 +1923,12 @@ if (meteor_1.Meteor.isServer) {                                                 
          */                                                                                                            //
         sendEmailChargeSoon: function (_countryId) {                                                                   //
             var parameter = parameter_collection_1.Parameters.collection.findOne({ name: 'from_email' });              //
-            var currentDate = new Date(2017, 6, 28);                                                                   //
+            var iurest_url = parameter_collection_1.Parameters.collection.findOne({ name: 'iurest_url' });             //
+            var facebook = parameter_collection_1.Parameters.collection.findOne({ name: 'facebook_link' });            //
+            var twitter = parameter_collection_1.Parameters.collection.findOne({ name: 'twitter_link' });              //
+            var instagram = parameter_collection_1.Parameters.collection.findOne({ name: 'instagram_link' });          //
+            var iurestImgVar = parameter_collection_1.Parameters.collection.findOne({ name: 'iurest_img_url' });       //
+            var currentDate = new Date();                                                                              //
             var lastMonthDay = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);                     //
             var auxArray = [];                                                                                         //
             restaurant_collection_1.Restaurants.collection.find({ countryId: _countryId, isActive: true }).forEach(function (restaurant) {
@@ -1584,7 +1954,12 @@ if (meteor_1.Meteor.isServer) {                                                 
                     reminderMsgVar2: meteor_1.Meteor.call('getEmailContent', emailContent.lang_dictionary, 'reminderChargeSoonMsgVar2'),
                     dateVar: meteor_1.Meteor.call('convertDateToSimple', lastMonthDay),                                //
                     regardVar: meteor_1.Meteor.call('getEmailContent', emailContent.lang_dictionary, 'regardVar'),     //
-                    followMsgVar: meteor_1.Meteor.call('getEmailContent', emailContent.lang_dictionary, 'followMsgVar')
+                    followMsgVar: meteor_1.Meteor.call('getEmailContent', emailContent.lang_dictionary, 'followMsgVar'),
+                    iurestUrl: iurest_url.value,                                                                       //
+                    facebookLink: facebook.value,                                                                      //
+                    twitterLink: twitter.value,                                                                        //
+                    instagramLink: instagram.value,                                                                    //
+                    iurestImgVar: iurestImgVar.value                                                                   //
                 };                                                                                                     //
                 email_1.Email.send({                                                                                   //
                     to: user.emails[0].address,                                                                        //
@@ -1600,7 +1975,12 @@ if (meteor_1.Meteor.isServer) {                                                 
          */                                                                                                            //
         sendEmailExpireSoon: function (_countryId) {                                                                   //
             var parameter = parameter_collection_1.Parameters.collection.findOne({ name: 'from_email' });              //
-            var currentDate = new Date(2017, 6, 3);                                                                    //
+            var iurest_url = parameter_collection_1.Parameters.collection.findOne({ name: 'iurest_url' });             //
+            var facebook = parameter_collection_1.Parameters.collection.findOne({ name: 'facebook_link' });            //
+            var twitter = parameter_collection_1.Parameters.collection.findOne({ name: 'twitter_link' });              //
+            var instagram = parameter_collection_1.Parameters.collection.findOne({ name: 'instagram_link' });          //
+            var iurestImgVar = parameter_collection_1.Parameters.collection.findOne({ name: 'iurest_img_url' });       //
+            var currentDate = new Date();                                                                              //
             var firstMonthDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);                        //
             var maxPaymentDay = new Date(firstMonthDay);                                                               //
             var endDay = parameter_collection_1.Parameters.collection.findOne({ name: 'end_payment_day' });            //
@@ -1615,7 +1995,7 @@ if (meteor_1.Meteor.isServer) {                                                 
             });                                                                                                        //
             user_collection_1.Users.collection.find({ _id: { $in: auxArray } }).forEach(function (user) {              //
                 var auxRestaurants = [];                                                                               //
-                restaurant_collection_1.Restaurants.collection.find({ creation_user: user._id }, { fields: { _id: 0, name: 1 } }).forEach(function (name) {
+                restaurant_collection_1.Restaurants.collection.find({ creation_user: user._id, isActive: true, freeDays: false }, { fields: { _id: 0, name: 1 } }).forEach(function (name) {
                     auxRestaurants.push(name.name);                                                                    //
                 });                                                                                                    //
                 var emailContent = email_content_collection_1.EmailContents.collection.findOne({ language: user.profile.language_code });
@@ -1630,7 +2010,12 @@ if (meteor_1.Meteor.isServer) {                                                 
                     dateVar: meteor_1.Meteor.call('convertDateToSimple', maxPaymentDay),                               //
                     reminderMsgVar3: meteor_1.Meteor.call('getEmailContent', emailContent.lang_dictionary, 'reminderExpireSoonMsgVar3'),
                     regardVar: meteor_1.Meteor.call('getEmailContent', emailContent.lang_dictionary, 'regardVar'),     //
-                    followMsgVar: meteor_1.Meteor.call('getEmailContent', emailContent.lang_dictionary, 'followMsgVar')
+                    followMsgVar: meteor_1.Meteor.call('getEmailContent', emailContent.lang_dictionary, 'followMsgVar'),
+                    iurestUrl: iurest_url.value,                                                                       //
+                    facebookLink: facebook.value,                                                                      //
+                    twitterLink: twitter.value,                                                                        //
+                    instagramLink: instagram.value,                                                                    //
+                    iurestImgVar: iurestImgVar.value                                                                   //
                 };                                                                                                     //
                 email_1.Email.send({                                                                                   //
                     to: user.emails[0].address,                                                                        //
@@ -1668,6 +2053,11 @@ if (meteor_1.Meteor.isServer) {                                                 
          */                                                                                                            //
         sendEmailRestExpired: function (_countryId) {                                                                  //
             var parameter = parameter_collection_1.Parameters.collection.findOne({ name: 'from_email' });              //
+            var iurest_url = parameter_collection_1.Parameters.collection.findOne({ name: 'iurest_url' });             //
+            var facebook = parameter_collection_1.Parameters.collection.findOne({ name: 'facebook_link' });            //
+            var twitter = parameter_collection_1.Parameters.collection.findOne({ name: 'twitter_link' });              //
+            var instagram = parameter_collection_1.Parameters.collection.findOne({ name: 'instagram_link' });          //
+            var iurestImgVar = parameter_collection_1.Parameters.collection.findOne({ name: 'iurest_img_url' });       //
             var auxArray = [];                                                                                         //
             restaurant_collection_1.Restaurants.collection.find({ countryId: _countryId, isActive: false, freeDays: false, firstPay: false }).forEach(function (restaurant) {
                 var user = user_collection_1.Users.collection.findOne({ _id: restaurant.creation_user });              //
@@ -1678,7 +2068,7 @@ if (meteor_1.Meteor.isServer) {                                                 
             });                                                                                                        //
             user_collection_1.Users.collection.find({ _id: { $in: auxArray } }).forEach(function (user) {              //
                 var auxRestaurants = [];                                                                               //
-                restaurant_collection_1.Restaurants.collection.find({ creation_user: user._id, isActive: false, freeDays: false }, { fields: { _id: 0, name: 1 } }).forEach(function (name) {
+                restaurant_collection_1.Restaurants.collection.find({ creation_user: user._id, isActive: false, freeDays: false, firstPay: false }, { fields: { _id: 0, name: 1 } }).forEach(function (name) {
                     auxRestaurants.push(name.name);                                                                    //
                 });                                                                                                    //
                 var emailContent = email_content_collection_1.EmailContents.collection.findOne({ language: user.profile.language_code });
@@ -1692,7 +2082,12 @@ if (meteor_1.Meteor.isServer) {                                                 
                     reminderMsgVar2: meteor_1.Meteor.call('getEmailContent', emailContent.lang_dictionary, 'reminderRestExpiredVar2'),
                     reminderMsgVar3: meteor_1.Meteor.call('getEmailContent', emailContent.lang_dictionary, 'reminderRestExpiredVar3'),
                     regardVar: meteor_1.Meteor.call('getEmailContent', emailContent.lang_dictionary, 'regardVar'),     //
-                    followMsgVar: meteor_1.Meteor.call('getEmailContent', emailContent.lang_dictionary, 'followMsgVar')
+                    followMsgVar: meteor_1.Meteor.call('getEmailContent', emailContent.lang_dictionary, 'followMsgVar'),
+                    iurestUrl: iurest_url.value,                                                                       //
+                    facebookLink: facebook.value,                                                                      //
+                    twitterLink: twitter.value,                                                                        //
+                    instagramLink: instagram.value,                                                                    //
+                    iurestImgVar: iurestImgVar.value                                                                   //
                 };                                                                                                     //
                 email_1.Email.send({                                                                                   //
                     to: user.emails[0].address,                                                                        //
@@ -1725,7 +2120,7 @@ if (meteor_1.Meteor.isServer) {                                                 
             return day.toString() + '/' + month.toString() + '/' + year.toString();                                    //
         }                                                                                                              //
     });                                                                                                                //
-}                                                                                                                      // 223
+}                                                                                                                      // 256
 //# sourceMappingURL=cron.methods.js.map                                                                               //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1843,25 +2238,9 @@ if (meteor_1.Meteor.isServer) {                                                 
                                                                                                                        //
 Object.defineProperty(exports, "__esModule", { value: true });                                                         //
 var meteor_1 = require("meteor/meteor");                                                                               // 1
-function getPayuMerchantInfo() {                                                                                       // 7
-    var credentialList = [];                                                                                           //
-    //TODO implements functions to encode credentials                                                                  //
-    credentialList[0] = 'pRRXKOl8ikMmt9u';                                                                             //
-    credentialList[1] = '4Vj8eK4rloUd272L48hsrarnUA';                                                                  //
-    return credentialList;                                                                                             //
-}                                                                                                                      // 14
-exports.getPayuMerchantInfo = getPayuMerchantInfo;                                                                     // 7
-if (meteor_1.Meteor.isServer) {                                                                                        // 16
-    meteor_1.Meteor.methods({                                                                                          //
-        getPayuMerchantData: function () {                                                                             //
-            var credentialList = [];                                                                                   //
-            //TODO implements functions to encode credentials                                                          //
-            credentialList[0] = 'pRRXKOl8ikMmt9u';                                                                     //
-            credentialList[1] = '4Vj8eK4rloUd272L48hsrarnUA';                                                          //
-            return credentialList;                                                                                     //
-        }                                                                                                              //
-    });                                                                                                                //
-}                                                                                                                      // 28
+if (meteor_1.Meteor.isServer) {                                                                                        // 6
+    meteor_1.Meteor.methods({});                                                                                       //
+}                                                                                                                      // 10
 //# sourceMappingURL=parameter.methods.js.map                                                                          //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1944,147 +2323,7 @@ if (meteor_1.Meteor.isServer) {                                                 
 //# sourceMappingURL=push-notifications.methods.js.map                                                                 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-}]}},"shared-components":{"auth":{"recover-password":{"recover.class.js":["@angular/forms","meteor/accounts-base","../../validators/custom-validator",function(require,exports){
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                                                     //
-// both/shared-components/auth/recover-password/recover.class.js                                                       //
-//                                                                                                                     //
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                                                                                                       //
-Object.defineProperty(exports, "__esModule", { value: true });                                                         //
-var forms_1 = require("@angular/forms");                                                                               // 2
-var accounts_base_1 = require("meteor/accounts-base");                                                                 // 3
-var custom_validator_1 = require("../../validators/custom-validator");                                                 // 5
-var RecoverClass = (function () {                                                                                      // 7
-    /**                                                                                                                //
-     * RecoverClass Constructor                                                                                        //
-     * @param {NgZone} zone                                                                                            //
-     * @param {TranslateService} translate                                                                             //
-     * @param {UserLanguageService} _userLanguageService                                                               //
-     */                                                                                                                //
-    function RecoverClass(zone, translate) {                                                                           //
-        this.zone = zone;                                                                                              //
-        this.translate = translate;                                                                                    //
-        var userLang = navigator.language.split('-')[0];                                                               //
-        translate.setDefaultLang('en');                                                                                //
-        translate.use(userLang);                                                                                       //
-    }                                                                                                                  //
-    RecoverClass.prototype.ngOnInit = function () {                                                                    //
-        this.recoverForm = new forms_1.FormGroup({                                                                     //
-            email: new forms_1.FormControl('', [forms_1.Validators.required, forms_1.Validators.minLength(6), forms_1.Validators.maxLength(40), custom_validator_1.CustomValidators.emailValidator])
-        });                                                                                                            //
-    };                                                                                                                 //
-    RecoverClass.prototype.recover = function () {                                                                     //
-        var _this = this;                                                                                              //
-        if (this.recoverForm.valid) {                                                                                  //
-            this.zone.run(function () {                                                                                //
-                accounts_base_1.Accounts.forgotPassword({                                                              //
-                    email: _this.recoverForm.value.email                                                               //
-                }, function (err) {                                                                                    //
-                    if (err) {                                                                                         //
-                        _this.showError(err);                                                                          //
-                    }                                                                                                  //
-                    else {                                                                                             //
-                        _this.showAlert('RESET_PASWORD.EMAIL_SEND');                                                   //
-                    }                                                                                                  //
-                });                                                                                                    //
-            });                                                                                                        //
-        }                                                                                                              //
-    };                                                                                                                 //
-    RecoverClass.prototype.showAlert = function (message) { };                                                         //
-    RecoverClass.prototype.showError = function (error) { };                                                           //
-    RecoverClass.prototype.cancel = function () { };                                                                   //
-    RecoverClass.prototype.itemNameTraduction = function (itemName) {                                                  //
-        var wordTraduced;                                                                                              //
-        this.translate.get(itemName).subscribe(function (res) {                                                        //
-            wordTraduced = res;                                                                                        //
-        });                                                                                                            //
-        return wordTraduced;                                                                                           //
-    };                                                                                                                 //
-    return RecoverClass;                                                                                               //
-}());                                                                                                                  // 61
-exports.RecoverClass = RecoverClass;                                                                                   // 7
-//# sourceMappingURL=recover.class.js.map                                                                              //
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-}]},"reset-password.class.js":["@angular/forms","meteor/accounts-base",function(require,exports){
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                                                     //
-// both/shared-components/auth/reset-password.class.js                                                                 //
-//                                                                                                                     //
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                                                                                                       //
-Object.defineProperty(exports, "__esModule", { value: true });                                                         //
-var forms_1 = require("@angular/forms");                                                                               // 2
-var accounts_base_1 = require("meteor/accounts-base");                                                                 // 3
-var ResetPasswordClass = (function () {                                                                                // 10
-    /**                                                                                                                //
-     * ResetPasswordClass Constructor                                                                                  //
-     * @param {NgZone} zone                                                                                            //
-     * @param {TranslateService} translate                                                                             //
-     * @param {ActivatedRoute} route                                                                                   //
-     * @param {UserLanguageService} _userLanguageService                                                               //
-     */                                                                                                                //
-    function ResetPasswordClass(zone, translate, route) {                                                              //
-        this.zone = zone;                                                                                              //
-        this.translate = translate;                                                                                    //
-        this.route = route;                                                                                            //
-        this.showConfirmError = false;                                                                                 //
-        var userLang = navigator.language.split('-')[0];                                                               //
-        translate.setDefaultLang('en');                                                                                //
-        translate.use(userLang);                                                                                       //
-    }                                                                                                                  //
-    ResetPasswordClass.prototype.ngOnInit = function () {                                                              //
-        var _this = this;                                                                                              //
-        this.route.params.forEach(function (params) {                                                                  //
-            _this.tokenId = params['tk'];                                                                              //
-        });                                                                                                            //
-        this.resetPasswordForm = new forms_1.FormGroup({                                                               //
-            password: new forms_1.FormControl('', [forms_1.Validators.required, forms_1.Validators.minLength(8), forms_1.Validators.maxLength(20)]),
-            confirmPassword: new forms_1.FormControl('', [forms_1.Validators.required, forms_1.Validators.minLength(8), forms_1.Validators.maxLength(20)])
-        });                                                                                                            //
-    };                                                                                                                 //
-    ResetPasswordClass.prototype.resetPassword = function () {                                                         //
-        var _this = this;                                                                                              //
-        if (this.resetPasswordForm.valid) {                                                                            //
-            if (this.resetPasswordForm.value.password == this.resetPasswordForm.value.confirmPassword) {               //
-                accounts_base_1.Accounts.resetPassword(this.tokenId, this.resetPasswordForm.value.password, function (err) {
-                    _this.zone.run(function () {                                                                       //
-                        if (err) {                                                                                     //
-                            //this.error = err;                                                                        //
-                            _this.showError(err);                                                                      //
-                        }                                                                                              //
-                        else {                                                                                         //
-                            _this.showAlert('RESET_PASWORD.SUCCESS');                                                  //
-                        }                                                                                              //
-                    });                                                                                                //
-                });                                                                                                    //
-            }                                                                                                          //
-            else {                                                                                                     //
-                this.showConfirmError = true;                                                                          //
-            }                                                                                                          //
-        }                                                                                                              //
-    };                                                                                                                 //
-    ResetPasswordClass.prototype.showAlert = function (message) { };                                                   //
-    ResetPasswordClass.prototype.showError = function (error) {                                                        //
-        alert();                                                                                                       //
-    };                                                                                                                 //
-    ResetPasswordClass.prototype.itemNameTraduction = function (itemName) {                                            //
-        var wordTraduced;                                                                                              //
-        this.translate.get(itemName).subscribe(function (res) {                                                        //
-            wordTraduced = res;                                                                                        //
-        });                                                                                                            //
-        return wordTraduced;                                                                                           //
-    };                                                                                                                 //
-    return ResetPasswordClass;                                                                                         //
-}());                                                                                                                  // 81
-exports.ResetPasswordClass = ResetPasswordClass;                                                                       // 10
-//# sourceMappingURL=reset-password.class.js.map                                                                       //
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-}]},"restaurant":{"financial-info":{"financial-base.js":function(require,exports){
+}]}},"shared-components":{"restaurant":{"financial-info":{"financial-base.js":function(require,exports){
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                                     //
@@ -2285,8 +2524,17 @@ var CustomValidators = (function () {                                           
             return { 'invalidEmailAddress': true };                                                                    //
         }                                                                                                              //
     };                                                                                                                 //
+    /*                                                                                                                 //
+    public static numericValidator(control: AbstractControl) {                                                         //
+      if (control.value.match(/^(0|[1-9][0-9]*)$/)) {                                                                  //
+        return null;                                                                                                   //
+      } else {                                                                                                         //
+        return { 'invalidNumericField': true };                                                                        //
+      }                                                                                                                //
+    }                                                                                                                  //
+    */                                                                                                                 //
     CustomValidators.numericValidator = function (control) {                                                           //
-        if (control.value.match(/^(0|[1-9][0-9]*)$/)) {                                                                //
+        if (control.value.match(/^\d+$/)) {                                                                            //
             return null;                                                                                               //
         }                                                                                                              //
         else {                                                                                                         //
@@ -2334,7 +2582,7 @@ var CustomValidators = (function () {                                           
         }                                                                                                              //
     };                                                                                                                 //
     return CustomValidators;                                                                                           //
-}());                                                                                                                  // 75
+}());                                                                                                                  // 84
 exports.CustomValidators = CustomValidators;                                                                           // 3
 //# sourceMappingURL=custom-validator.js.map                                                                           //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2667,6 +2915,65 @@ exports.UserDetails.allow({                                                     
     remove: loggedIn,                                                                                                  //
 });                                                                                                                    //
 //# sourceMappingURL=user-detail.collection.js.map                                                                     //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+}],"user-login.collection.js":["meteor-rxjs","meteor/meteor",function(require,exports){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                     //
+// both/collections/auth/user-login.collection.js                                                                      //
+//                                                                                                                     //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                       //
+Object.defineProperty(exports, "__esModule", { value: true });                                                         //
+var meteor_rxjs_1 = require("meteor-rxjs");                                                                            // 1
+var meteor_1 = require("meteor/meteor");                                                                               // 2
+/**                                                                                                                    // 5
+ * Function to validate if user exists                                                                                 //
+ */                                                                                                                    //
+function loggedIn() {                                                                                                  // 8
+    return !!meteor_1.Meteor.user();                                                                                   //
+}                                                                                                                      // 10
+/**                                                                                                                    // 12
+ * User Login Collection                                                                                               //
+ */                                                                                                                    //
+exports.UsersLogin = new meteor_rxjs_1.MongoObservable.Collection('users_login');                                      // 15
+exports.UsersLogin.allow({                                                                                             // 17
+    insert: loggedIn,                                                                                                  //
+    update: loggedIn                                                                                                   //
+});                                                                                                                    //
+//# sourceMappingURL=user-login.collection.js.map                                                                      //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+}],"user-penalty.collection.js":["meteor-rxjs","meteor/meteor",function(require,exports){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                     //
+// both/collections/auth/user-penalty.collection.js                                                                    //
+//                                                                                                                     //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                       //
+Object.defineProperty(exports, "__esModule", { value: true });                                                         //
+var meteor_rxjs_1 = require("meteor-rxjs");                                                                            // 1
+var meteor_1 = require("meteor/meteor");                                                                               // 2
+/**                                                                                                                    // 5
+ * Function to validate if user exists                                                                                 //
+ */                                                                                                                    //
+function loggedIn() {                                                                                                  // 8
+    return !!meteor_1.Meteor.user();                                                                                   //
+}                                                                                                                      // 10
+/**                                                                                                                    // 12
+ * User Penalties Collection                                                                                           //
+ */                                                                                                                    //
+exports.UserPenalties = new meteor_rxjs_1.MongoObservable.Collection('user_penalties');                                // 15
+/**                                                                                                                    // 17
+ * Allow User Penalties collection insert and update functions                                                         //
+ */                                                                                                                    //
+exports.UserPenalties.allow({                                                                                          // 20
+    insert: loggedIn,                                                                                                  //
+    update: loggedIn                                                                                                   //
+});                                                                                                                    //
+//# sourceMappingURL=user-penalty.collection.js.map                                                                    //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 }],"user.collection.js":["meteor-rxjs","meteor/meteor",function(require,exports){
@@ -3437,6 +3744,39 @@ Object.defineProperty(exports, "__esModule", { value: true });                  
 //# sourceMappingURL=user-detail.model.js.map                                                                          //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+},"user-login.model.js":function(require,exports){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                     //
+// both/models/auth/user-login.model.js                                                                                //
+//                                                                                                                     //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                       //
+Object.defineProperty(exports, "__esModule", { value: true });                                                         //
+/**                                                                                                                    // 1
+ * User Login Model                                                                                                    //
+ */                                                                                                                    //
+var UserLogin = (function () {                                                                                         // 4
+    function UserLogin() {                                                                                             //
+    }                                                                                                                  //
+    return UserLogin;                                                                                                  //
+}());                                                                                                                  // 17
+exports.UserLogin = UserLogin;                                                                                         // 4
+//# sourceMappingURL=user-login.model.js.map                                                                           //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+},"user-penalty.model.js":function(require,exports){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                     //
+// both/models/auth/user-penalty.model.js                                                                              //
+//                                                                                                                     //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                       //
+Object.defineProperty(exports, "__esModule", { value: true });                                                         //
+//# sourceMappingURL=user-penalty.model.js.map                                                                         //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 },"user-profile.model.js":function(require,exports){
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -3689,6 +4029,15 @@ var ShippingBillingAddress = (function () {                                     
     return ShippingBillingAddress;                                                                                     //
 }());                                                                                                                  // 138
 exports.ShippingBillingAddress = ShippingBillingAddress;                                                               // 130
+/**                                                                                                                    // 140
+ * CusPayInfo Info                                                                                                     //
+ */                                                                                                                    //
+var CusPayInfo = (function () {                                                                                        // 143
+    function CusPayInfo() {                                                                                            //
+    }                                                                                                                  //
+    return CusPayInfo;                                                                                                 //
+}());                                                                                                                  // 148
+exports.CusPayInfo = CusPayInfo;                                                                                       // 143
 //# sourceMappingURL=cc-request-colombia.model.js.map                                                                  //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3864,7 +4213,7 @@ Object.defineProperty(exports, "__esModule", { value: true });                  
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                                                                                                        //
 Object.defineProperty(exports, "__esModule", { value: true });                                                         //
-;                                                                                                                      // 106
+;                                                                                                                      // 112
 //# sourceMappingURL=restaurant.model.js.map                                                                           //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3969,13 +4318,13 @@ exports.ItemImageThumbsStore = new jalik_ufs_1.UploadFS.store.GridFS({          
         remove: loggedIn                                                                                               //
     }),                                                                                                                //
     transformWrite: function (from, to, fileId, file) {                                                                //
-        // Resize to 100x100                                                                                           //
+        // Resize to 160x160                                                                                           //
         //var require: any;                                                                                            //
         var gm = require('gm');                                                                                        //
         gm(from, file.name)                                                                                            //
-            .resize(100, 100, "!")                                                                                     //
+            .resize(160, 160, "!")                                                                                     //
             .gravity('Center')                                                                                         //
-            .extent(100, 100)                                                                                          //
+            .extent(160, 160)                                                                                          //
             .quality(75)                                                                                               //
             .stream()                                                                                                  //
             .pipe(to);                                                                                                 //
@@ -4006,9 +4355,9 @@ exports.ItemImagesStore = new jalik_ufs_1.UploadFS.store.GridFS({               
         //var require: any;                                                                                            //
         var gm = require('gm');                                                                                        //
         gm(from, file.name)                                                                                            //
-            .resize(500, 500, "!")                                                                                     //
+            .resize(250, 250, "!")                                                                                     //
             .gravity('Center')                                                                                         //
-            .extent(500, 500)                                                                                          //
+            .extent(250, 250)                                                                                          //
             .quality(75)                                                                                               //
             .stream()                                                                                                  //
             .pipe(to);                                                                                                 //
@@ -4207,9 +4556,9 @@ exports.RestaurantImagesStore = new jalik_ufs_1.UploadFS.store.GridFS({         
         // Resize to 500x500                                                                                           //
         var gm = require('gm');                                                                                        //
         gm(from, file.name)                                                                                            //
-            .resize(500, 500, "!")                                                                                     //
+            .resize(250, 250, "!")                                                                                     //
             .gravity('Center')                                                                                         //
-            .extent(500, 500)                                                                                          //
+            .extent(250, 250)                                                                                          //
             .quality(75)                                                                                               //
             .stream()                                                                                                  //
             .pipe(to);                                                                                                 //
@@ -4239,7 +4588,7 @@ accounts_base_1.Accounts.onCreateUser(function (options, user) {                
 //# sourceMappingURL=account-creation.js.map                                                                           //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-}],"email-config.js":["meteor/accounts-base","meteor/meteor",function(require,exports){
+}],"email-config.js":["meteor/accounts-base","meteor/meteor","../../../../both/collections/general/parameter.collection","../../../../both/collections/general/email-content.collection",function(require,exports){
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                                     //
@@ -4250,58 +4599,50 @@ accounts_base_1.Accounts.onCreateUser(function (options, user) {                
 Object.defineProperty(exports, "__esModule", { value: true });                                                         //
 var accounts_base_1 = require("meteor/accounts-base");                                                                 // 1
 var meteor_1 = require("meteor/meteor");                                                                               // 2
-var greetVar;                                                                                                          // 4
-var welcomeMsgVar;                                                                                                     // 5
-var btnTextVar;                                                                                                        // 6
-var beforeMsgVar;                                                                                                      // 7
-var regardVar;                                                                                                         // 8
-var followMsgVar;                                                                                                      // 9
-accounts_base_1.Accounts.urls.resetPassword = function (token) {                                                       // 11
+var parameter_collection_1 = require("../../../../both/collections/general/parameter.collection");                     // 4
+var email_content_collection_1 = require("../../../../both/collections/general/email-content.collection");             // 5
+accounts_base_1.Accounts.urls.resetPassword = function (token) {                                                       // 8
     return meteor_1.Meteor.absoluteUrl('reset-password/' + token);                                                     //
-};                                                                                                                     // 13
-function checkLanguage(user) {                                                                                         // 16
-    if (user.profile.language_code === 'en') {                                                                         //
-        greetVar = "Hello ";                                                                                           //
-        welcomeMsgVar = "We got a request to reset you password, if it was you click the button above.";               //
-        btnTextVar = "Reset";                                                                                          //
-        beforeMsgVar = "If you do not want to change the password, ignore this message.";                              //
-        regardVar = "Thanks, Iurest team.";                                                                            //
-        followMsgVar = "Follow us on social networks";                                                                 //
-    }                                                                                                                  //
-    if (user.profile.language_code === 'es') {                                                                         //
-        greetVar = "Hola ";                                                                                            //
-        welcomeMsgVar = "Hemos recibido una petición para cambiar tu contraseña, si fuiste tu haz click en el botón abajo";
-        btnTextVar = "Cambiar";                                                                                        //
-        beforeMsgVar = "Si no quieres cambiar la contraseña, ignora este mensaje.";                                    //
-        regardVar = "Gracias, equipo Iurest";                                                                          //
-        followMsgVar = "Siguenos en redes sociales";                                                                   //
-    }                                                                                                                  //
-}                                                                                                                      // 35
-function greet() {                                                                                                     // 37
+};                                                                                                                     // 10
+function greet() {                                                                                                     // 12
     return function (user, url) {                                                                                      //
-        checkLanguage(user);                                                                                           //
+        var emailContent = email_content_collection_1.EmailContents.collection.findOne({ language: user.profile.language_code });
+        var greetVar = meteor_1.Meteor.call('getEmailContent', emailContent.lang_dictionary, 'greetVar');              //
+        var welcomeMsgVar = meteor_1.Meteor.call('getEmailContent', emailContent.lang_dictionary, 'welcomeMsgVar');    //
+        var btnTextVar = meteor_1.Meteor.call('getEmailContent', emailContent.lang_dictionary, 'btnTextVar');          //
+        var beforeMsgVar = meteor_1.Meteor.call('getEmailContent', emailContent.lang_dictionary, 'beforeMsgVar');      //
+        var regardVar = meteor_1.Meteor.call('getEmailContent', emailContent.lang_dictionary, 'regardVar');            //
+        var followMsgVar = meteor_1.Meteor.call('getEmailContent', emailContent.lang_dictionary, 'followMsgVar');      //
+        var facebookVar = parameter_collection_1.Parameters.collection.findOne({ name: 'facebook_link' }).value;       //
+        var twitterVar = parameter_collection_1.Parameters.collection.findOne({ name: 'twitter_link' }).value;         //
+        var instagramVar = parameter_collection_1.Parameters.collection.findOne({ name: 'instagram_link' }).value;     //
+        var iurestVar = parameter_collection_1.Parameters.collection.findOne({ name: 'iurest_url' }).value;            //
+        var iurestImgVar = parameter_collection_1.Parameters.collection.findOne({ name: 'iurest_img_url' }).value;     //
         var greeting = (user.profile && user.profile.first_name) ? (greetVar + ' ' + user.profile.first_name + ",") : greetVar;
-        return "\n               <table border=\"0\" width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" bgcolor=\"#f5f5f5\"><tbody><tr><td style=\"padding: 20px 0 30px 0;\"><table style=\"border-collapse: collapse; box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);\" border=\"0\" width=\"60%\" cellspacing=\"0\" cellpadding=\"0\" align=\"center\"><tbody><tr><td style=\"padding: 10px 0 10px 0;\" align=\"center\" bgcolor=\"#E53935\"><img style=\"display: block;\" src=\"logo_iurest_white.png\" alt=\"Reset passwd\" /></td></tr><tr><td style=\"padding: 10px 30px 10px 30px;\" bgcolor=\"#ffffff\"><table border=\"0\" width=\"100%\" cellspacing=\"0\" cellpadding=\"0\"><tbody><tr><td style=\"padding: 15px 0 0 0; font-family: Arial, sans-serif; font-size: 24px; font-weight: bold;\">" + greeting + "</td></tr><tr><td style=\"padding: 15px 0 10px 0; font-family: Arial, sans-serif;\">" + welcomeMsgVar + "</td></tr><tr><td style=\"padding: 20px 0 20px 0; font-family: Arial, sans-serif;\"><div align=\"center\"><a style=\"background-color: #e53935; color: white; text-align: center; padding: 15px 30px; text-decoration: none;\" href=\"" + url + "\">" + btnTextVar + "</a></div></td></tr><tr><td style=\"padding: 0 0 0 0; font-family: Arial, sans-serif;\"><p>" + beforeMsgVar + " <br /> " + regardVar + "</p></td></tr></tbody></table></td></tr><tr><td style=\"padding: 0px 30px 10px 30px;\" bgcolor=\"#ffffff\"><hr /><table border=\"0\" width=\"100%\" cellspacing=\"0\" cellpadding=\"0\"><tbody><tr><td style=\"font-family: Arial, sans-serif;\">" + followMsgVar + "</td><td align=\"right\"><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\"><tbody><tr><td><a href=\"http://www.facebook.com/\"> <img style=\"display: block;\" src=\"https://s24.postimg.org/ddsjhe0id/facebook.png\" alt=\"Facebook\" /> </a></td><td style=\"font-size: 0; line-height: 0;\" width=\"20\">&nbsp;</td><td><a href=\"http://www.twitter.com/\"> <img style=\"display: block;\" src=\"https://s30.postimg.org/68qpc9wox/twitter.png\" alt=\"Twitter\" /> </a></td><td style=\"font-size: 0; line-height: 0;\" width=\"20\">&nbsp;</td><td><a href=\"http://www.google.com/\"> <img style=\"display: block;\" src=\"https://s28.postimg.org/wmdctg1cd/google.png\" alt=\"Facebook\" /> </a></td></tr></tbody></table></td></tr><tr><td style=\"font-family: Arial, sans-serif; padding: 10px 0 10px 0;\"><a style=\"font-family: Arial, sans-serif; text-decoration: none; float: left;\" href=\"https://www.iurest.com/\">https://www.iurest.com</a></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table>\n               ";
+        return "\n        <table border=\"0\" width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" bgcolor=\"#f5f5f5\">\n        <tbody>\n            <tr>\n                <td style=\"padding: 20px 0 30px 0;\">\n                    <table style=\"border-collapse: collapse; box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);\"\n                        border=\"0\" width=\"60%\" cellspacing=\"0\" cellpadding=\"0\" align=\"center\">\n                        <tbody>\n                            <tr>\n                                <td style=\"padding: 10px 0 10px 0;\" align=\"center\" bgcolor=\"#3c4146\"><img style=\"display: block;\" src=" + iurestImgVar + "logo_iurest_white.png alt=\"Reset passwd\" /></td>\n                            </tr>\n                            <tr>\n                                <td style=\"padding: 10px 30px 10px 30px;\" bgcolor=\"#ffffff\">\n                                    <table border=\"0\" width=\"100%\" cellspacing=\"0\" cellpadding=\"0\">\n                                        <tbody>\n                                            <tr>\n                                                <td style=\"padding: 15px 0 0 0; font-family: Arial, sans-serif; font-size: 24px; font-weight: bold;\">" + greeting + "</td>\n                                            </tr>\n                                            <tr>\n                                                <td style=\"padding: 15px 0 10px 0; font-family: Arial, sans-serif;\">" + welcomeMsgVar + "</td>\n                                            </tr>\n                                            <tr>\n                                                <td style=\"padding: 20px 0 20px 0; font-family: Arial, sans-serif;\">\n                                                    <div align=\"center\"><a style=\"background-color: white; border-style: solid; border-width: 2px; color: #EF5350; text-align: center; padding: 10px 30px; text-decoration: none; font-weight: bold \"\n                                                            href=\"" + url + "\">" + btnTextVar + "</a></div>\n                                                </td>\n                                            </tr>\n                                            <tr>\n                                                <td style=\"padding: 0 0 0 0; font-family: Arial, sans-serif;\">\n                                                    <p>" + beforeMsgVar + " <br /> " + regardVar + "</p>\n                                                </td>\n                                            </tr>\n                                        </tbody>\n                                    </table>\n                                </td>\n                            </tr>\n                            <tr>\n                                <td style=\"padding: 0px 30px 10px 30px;\" bgcolor=\"#ffffff\">\n                                    <hr />\n                                    <table border=\"0\" width=\"100%\" cellspacing=\"0\" cellpadding=\"0\">\n                                        <tbody>\n                                            <tr>\n                                                <td style=\"font-family: Arial, sans-serif;\">" + followMsgVar + "</td>\n                                                <td align=\"right\">\n                                                    <table border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n                                                        <tbody>\n                                                            <tr>\n                                                                <td><a href=" + facebookVar + "> <img style=\"display: block;\" src=" + iurestImgVar + "facebook_red.png alt=\"Facebook\" /> </a></td>\n                                                                <td style=\"font-size: 0; line-height: 0;\" width=\"20\">&nbsp;</td>\n                                                                <td><a href=" + twitterVar + "> <img style=\"display: block;\" src=" + iurestImgVar + "twitter_red.png alt=\"Twitter\" /> </a></td>\n                                                                <td style=\"font-size: 0; line-height: 0;\" width=\"20\">&nbsp;</td>\n                                                                <td><a href=" + instagramVar + "> <img style=\"display: block;\" src=" + iurestImgVar + "instagram_red.png alt=\"Instagram\" /> </a></td>\n                                                            </tr>\n                                                        </tbody>\n                                                    </table>\n                                                </td>\n                                            </tr>\n                                            <tr>\n                                                <td style=\"font-family: Arial, sans-serif; padding: 10px 0 10px 0;\"><a style=\"font-family: Arial, sans-serif; text-decoration: none; float: left;\"\n                                                        href=" + iurestVar + ">iurest.com</a></td>\n                                            </tr>\n                                        </tbody>\n                                    </table>\n                                </td>\n                            </tr>\n                        </tbody>\n                    </table>\n                </td>\n            </tr>\n        </tbody>\n    </table>\n               ";
     };                                                                                                                 //
-}                                                                                                                      // 47
-function greetText() {                                                                                                 // 49
+}                                                                                                                      // 104
+function greetText() {                                                                                                 // 106
     return function (user, url) {                                                                                      //
-        checkLanguage(user);                                                                                           //
+        var emailContent = email_content_collection_1.EmailContents.collection.findOne({ language: user.profile.language_code });
+        var greetVar = meteor_1.Meteor.call('getEmailContent', emailContent.lang_dictionary, 'greetVar');              //
+        var welcomeMsgVar = meteor_1.Meteor.call('getEmailContent', emailContent.lang_dictionary, 'welcomeMsgVar');    //
+        var btnTextVar = meteor_1.Meteor.call('getEmailContent', emailContent.lang_dictionary, 'btnTextVar');          //
+        var beforeMsgVar = meteor_1.Meteor.call('getEmailContent', emailContent.lang_dictionary, 'beforeMsgVar');      //
+        var regardVar = meteor_1.Meteor.call('getEmailContent', emailContent.lang_dictionary, 'regardVar');            //
+        var followMsgVar = meteor_1.Meteor.call('getEmailContent', emailContent.lang_dictionary, 'followMsgVar');      //
         var greeting = (user.profile && user.profile.first_name) ? (greetVar + user.profile.first_name + ",") : greetVar;
         return "    " + greeting + "\n                    " + welcomeMsgVar + "\n                    " + url + "\n                    " + beforeMsgVar + "\n                    " + regardVar + "\n               ";
     };                                                                                                                 //
-}                                                                                                                      // 62
-accounts_base_1.Accounts.emailTemplates = {                                                                            // 64
-    from: "Iurest <no-reply@iurest.com>",                                                                              //
+}                                                                                                                      // 126
+accounts_base_1.Accounts.emailTemplates = {                                                                            // 128
+    from: '',                                                                                                          //
     siteName: meteor_1.Meteor.absoluteUrl().replace(/^https?:\/\//, '').replace(/\/$/, ''),                            //
     resetPassword: {                                                                                                   //
         subject: function (user) {                                                                                     //
-            if (user.profile.language_code === 'en') {                                                                 //
-                return "Reset your password on " + accounts_base_1.Accounts.emailTemplates.siteName;                   //
-            }                                                                                                          //
-            if (user.profile.language_code === 'es') {                                                                 //
-                return "Cambio de contraseña en " + accounts_base_1.Accounts.emailTemplates.siteName;                  //
-            }                                                                                                          //
+            var emailContent = email_content_collection_1.EmailContents.collection.findOne({ language: user.profile.language_code });
+            var subjectVar = meteor_1.Meteor.call('getEmailContent', emailContent.lang_dictionary, 'resetPasswordSubjectVar');
+            return subjectVar + ' ' + accounts_base_1.Accounts.emailTemplates.siteName;                                //
         },                                                                                                             //
         html: greet(),                                                                                                 //
         text: greetText(),                                                                                             //
@@ -4319,6 +4660,10 @@ accounts_base_1.Accounts.emailTemplates = {                                     
         text: greet()                                                                                                  //
     }                                                                                                                  //
 };                                                                                                                     //
+accounts_base_1.Accounts.emailTemplates.resetPassword.from = function () {                                             // 156
+    var fromVar = parameter_collection_1.Parameters.collection.findOne({ name: 'from_email' }).value;                  //
+    return fromVar;                                                                                                    //
+};                                                                                                                     // 159
 //# sourceMappingURL=email-config.js.map                                                                               //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4376,17 +4721,24 @@ function loadMenus() {                                                          
                     }, {                                                                                               //
                         _id: "1003",                                                                                   //
                         is_active: true,                                                                               //
-                        name: "MENUS.ADMINISTRATION.COLLABORATORS",                                                    //
-                        url: "/app/collaborators",                                                                     //
+                        name: "MENUS.ADMINISTRATION.TABLE_CONTROL",                                                    //
+                        url: "/app/restaurant-table-control",                                                          //
                         icon_name: "",                                                                                 //
                         order: 1003                                                                                    //
                     }, {                                                                                               //
                         _id: "1004",                                                                                   //
                         is_active: true,                                                                               //
+                        name: "MENUS.ADMINISTRATION.COLLABORATORS",                                                    //
+                        url: "/app/collaborators",                                                                     //
+                        icon_name: "",                                                                                 //
+                        order: 1004                                                                                    //
+                    }, {                                                                                               //
+                        _id: "1005",                                                                                   //
+                        is_active: true,                                                                               //
                         name: "MENUS.ADMINISTRATION.MONTHLY_CONFIG",                                                   //
                         url: "/app/monthly-config",                                                                    //
                         icon_name: "",                                                                                 //
-                        order: 1004                                                                                    //
+                        order: 1005                                                                                    //
                     }                                                                                                  //
                 ]                                                                                                      //
             },                                                                                                         //
@@ -4394,9 +4746,25 @@ function loadMenus() {                                                          
                 _id: "1100",                                                                                           //
                 is_active: true,                                                                                       //
                 name: "MENUS.ADMINISTRATION.COLLABORATORS",                                                            //
-                url: "/app/collaborators",                                                                             //
+                url: "/app/supervisor-collaborators",                                                                  //
                 icon_name: "supervisor account",                                                                       //
                 order: 1100                                                                                            //
+            },                                                                                                         //
+            {                                                                                                          //
+                _id: "1200",                                                                                           //
+                is_active: true,                                                                                       //
+                name: "MENUS.ADMINISTRATION.TABLES",                                                                   //
+                url: "/app/supervisor-tables",                                                                         //
+                icon_name: "restaurant",                                                                               //
+                order: 1200                                                                                            //
+            },                                                                                                         //
+            {                                                                                                          //
+                _id: "1300",                                                                                           //
+                is_active: true,                                                                                       //
+                name: "MENUS.ADMINISTRATION.TABLE_CONTROL",                                                            //
+                url: "/app/supervisor-restaurant-table-control",                                                       //
+                icon_name: "list",                                                                                     //
+                order: 1300                                                                                            //
             },                                                                                                         //
             {                                                                                                          //
                 _id: "2000",                                                                                           //
@@ -4535,7 +4903,7 @@ function loadMenus() {                                                          
         ];                                                                                                             //
         menus.forEach(function (menu) { return menu_collection_1.Menus.insert(menu); });                               //
     }                                                                                                                  //
-}                                                                                                                      // 212
+}                                                                                                                      // 235
 exports.loadMenus = loadMenus;                                                                                         // 4
 //# sourceMappingURL=menus.js.map                                                                                      //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -4563,13 +4931,15 @@ function loadRoles() {                                                          
                 is_active: true,                                                                                       //
                 name: "ROLE.WAITER",                                                                                   //
                 description: "restaurant waiter",                                                                      //
-                menus: []                                                                                              //
+                menus: [],                                                                                             //
+                user_prefix: 'wa'                                                                                      //
             }, {                                                                                                       //
                 _id: "300",                                                                                            //
                 is_active: false,                                                                                      //
                 name: "ROLE.CASHIER",                                                                                  //
                 description: "restaurant cashier",                                                                     //
-                menus: []                                                                                              //
+                menus: [],                                                                                             //
+                user_prefix: 'ca'                                                                                      //
             }, {                                                                                                       //
                 _id: "400",                                                                                            //
                 is_active: true,                                                                                       //
@@ -4581,17 +4951,19 @@ function loadRoles() {                                                          
                 is_active: true,                                                                                       //
                 name: "ROLE.CHEF",                                                                                     //
                 description: "restaurant chef",                                                                        //
-                menus: ["7000"]                                                                                        //
+                menus: ["7000"],                                                                                       //
+                user_prefix: 'cf'                                                                                      //
             }, {                                                                                                       //
                 _id: "600",                                                                                            //
                 is_active: true,                                                                                       //
                 name: "ROLE.SUPERVISOR",                                                                               //
                 description: "restaurant supervisor",                                                                  //
-                menus: ["910", "1100", "3100"]                                                                         //
+                menus: ["910", "1100", "3100", "1200", "1300"],                                                        //
+                user_prefix: 'sp'                                                                                      //
             }];                                                                                                        //
         roles.forEach(function (role) { return role_collection_1.Roles.insert(role); });                               //
     }                                                                                                                  //
-}                                                                                                                      // 48
+}                                                                                                                      // 52
 exports.loadRoles = loadRoles;                                                                                         // 4
 //# sourceMappingURL=roles.js.map                                                                                      //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -4699,7 +5071,8 @@ function loadEmailContents() {                                                  
                     { label: 'reminderRestExpiredVar', traduction: 'Your monthly Iurest service for: ' },              //
                     { label: 'reminderRestExpiredVar2', traduction: 'Has expired' },                                   //
                     { label: 'reminderRestExpiredVar3', traduction: 'If you want to continue using all the system features, entering with your email or username and select the menu Payments > Reactivate ' },
-                    { label: 'restExpiredEmailSubjectVar', traduction: 'Your Iurest service has expired' }             //
+                    { label: 'restExpiredEmailSubjectVar', traduction: 'Your Iurest service has expired' },            //
+                    { label: 'resetPasswordSubjectVar', traduction: 'Reset your password on' }                         //
                 ]                                                                                                      //
             },                                                                                                         //
             {                                                                                                          //
@@ -4723,13 +5096,14 @@ function loadEmailContents() {                                                  
                     { label: 'reminderRestExpiredVar', traduction: 'Tu servicio mensual de Iurest para: ' },           //
                     { label: 'reminderRestExpiredVar2', traduction: 'ha expirado' },                                   //
                     { label: 'reminderRestExpiredVar3', traduction: 'Si deseas seguir usando todas las funcionalidades del sistema, ingresa con tu usuario o correo y selecciona la opción Pagos > Reactivar ' },
-                    { label: 'restExpiredEmailSubjectVar', traduction: 'Tu servicio de Iurest ha expirado' }           //
+                    { label: 'restExpiredEmailSubjectVar', traduction: 'Tu servicio de Iurest ha expirado' },          //
+                    { label: 'resetPasswordSubjectVar', traduction: 'Cambio de contraseña en' }                        //
                 ]                                                                                                      //
             }                                                                                                          //
         ];                                                                                                             //
         emailContents.forEach(function (emailContent) { return email_content_collection_1.EmailContents.insert(emailContent); });
     }                                                                                                                  //
-}                                                                                                                      // 58
+}                                                                                                                      // 60
 exports.loadEmailContents = loadEmailContents;                                                                         // 4
 //# sourceMappingURL=email-contents.js.map                                                                             //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -4820,11 +5194,35 @@ function loadParameters() {                                                     
             { _id: '200', name: 'end_payment_day', value: '5', description: 'final day of month to validate client payment' },
             { _id: '300', name: 'from_email', value: 'Iurest <no-reply@iurest.com>', description: 'default from account email to send messages' },
             { _id: '400', name: 'first_pay_discount', value: '50', description: 'discount in percent to service first pay' },
-            { _id: '500', name: 'colombia_tax_iva', value: '19', description: 'Colombia tax iva to monthly iurest payment' }
+            { _id: '500', name: 'colombia_tax_iva', value: '19', description: 'Colombia tax iva to monthly iurest payment' },
+            { _id: '600', name: 'payu_script_p_tag', value: 'url(https://maf.pagosonline.net/ws/fp?id=', description: 'url for security script for payu form in <p> tag' },
+            { _id: '700', name: 'payu_script_img_tag', value: 'https://maf.pagosonline.net/ws/fp/clear.png?id=', description: 'url for security script for payu form in <img> tag' },
+            { _id: '800', name: 'payu_script_script_tag', value: 'https://maf.pagosonline.net/ws/fp/check.js?id=', description: 'url for security script for payu form in <script> tag' },
+            { _id: '900', name: 'payu_script_object_tag', value: 'https://maf.pagosonline.net/ws/fp/fp.swf?id=', description: 'url for security script for payu form in <object> tag' },
+            { _id: '1000', name: 'payu_payments_url', value: 'https://sandbox.api.payulatam.com/payments-api/4.0/service.cgi', description: 'url for connect payu payments API' },
+            { _id: '2000', name: 'payu_reports_url', value: 'https://sandbox.api.payulatam.com/reports-api/4.0/service.cgi', description: 'url for connect payu reports API' },
+            { _id: '3000', name: 'ip_public_service_url', value: 'https://api.ipify.org?format=json', description: 'url for retrieve the client public ip' },
+            { _id: '4000', name: 'payu_pay_info_url', value: 'http://192.168.0.3:9000/api/getCusPayInfo', description: 'url for retrieve credentials for payu payment' },
+            { _id: '1100', name: 'company_name', value: 'Realbind S.A.S', description: 'Realbind company name for invoice' },
+            { _id: '1200', name: 'company_address', value: 'Cra 6 # 58-43 Of 201', description: 'Realbind company address' },
+            { _id: '1300', name: 'company_country', value: 'Colombia', description: 'Realbind country location' },     //
+            { _id: '1400', name: 'company_city', value: 'Bogotá', description: 'Realbind city location' },             //
+            { _id: '1500', name: 'company_nit', value: 'NIT: 901036585-0', description: 'Realbind NIT' },              //
+            { _id: '1600', name: 'iurest_url', value: 'https://www.iurest.com', description: 'iurest url page' },      //
+            { _id: '1700', name: 'facebook_link', value: 'https://www.facebook.com', description: 'facebook link for iurest' },
+            { _id: '1800', name: 'twitter_link', value: 'https://www.twitter.com', description: 'twitter link for iurest' },
+            { _id: '1900', name: 'instagram_link', value: 'https://www.instagram.com', description: 'instagram link for iurest' },
+            { _id: '1610', name: 'iurest_img_url', value: 'https://www.iurest.com/images/', description: 'iurest images url' },
+            { _id: '3100', name: 'ip_public_service_url2', value: 'https://ipinfo.io/json', description: 'url for retrieve the client public ip #2' },
+            { _id: '3200', name: 'ip_public_service_url3', value: 'https://ifconfig.co/json', description: 'url for retrieve the client public ip #3' },
+            { _id: '9000', name: 'payu_is_prod', value: 'false', description: 'Flag to enable to prod payu payment' },
+            { _id: '9100', name: 'payu_test_state', value: 'APPROVED', description: 'Test state for payu payment transaction' },
+            { _id: '2100', name: 'max_user_penalties', value: '3', description: 'Max number of user penalties' },      //
+            { _id: '2200', name: 'penalty_days', value: '30', description: 'User penalty days' }                       //
         ];                                                                                                             //
         parameters.forEach(function (parameter) { return parameter_collection_1.Parameters.insert(parameter); });      //
     }                                                                                                                  //
-}                                                                                                                      // 16
+}                                                                                                                      // 40
 exports.loadParameters = loadParameters;                                                                               // 4
 //# sourceMappingURL=parameters.js.map                                                                                 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -5008,7 +5406,7 @@ function loadCountries() {                                                      
             { _id: '1600', is_active: false, name: 'COUNTRIES.CANADA', alfaCode2: 'CA', alfaCode3: 'CAN', numericCode: '124', indicative: '(+ 001)', currencyId: '150', itemsWithDifferentTax: false, queue: [], financialInformation: [], restaurantPrice: 0, tablePrice: 0, cronValidateActive: '', cronChangeFreeDays: '', cronEmailChargeSoon: '', cronEmailExpireSoon: '', cronEmailRestExpired: '' },
             { _id: '1700', is_active: false, name: 'COUNTRIES.CHILE', alfaCode2: 'CL', alfaCode3: 'CHL', numericCode: '152', indicative: '(+ 56)', currencyId: '380', itemsWithDifferentTax: true, queue: [], financialInformation: [], restaurantPrice: 0, tablePrice: 0, cronValidateActive: '', cronChangeFreeDays: '', cronEmailChargeSoon: '', cronEmailExpireSoon: '', cronEmailRestExpired: '' },
             { _id: '1800', is_active: false, name: 'COUNTRIES.CYPRUS', alfaCode2: 'CY', alfaCode3: 'CYP', numericCode: '196', indicative: '(+357)', currencyId: '200', itemsWithDifferentTax: false, queue: [], financialInformation: [], restaurantPrice: 0, tablePrice: 0, cronValidateActive: '', cronChangeFreeDays: '', cronEmailChargeSoon: '', cronEmailExpireSoon: '', cronEmailRestExpired: '' },
-            { _id: '1900', is_active: true, name: 'COUNTRIES.COLOMBIA', alfaCode2: 'CO', alfaCode3: 'COL', numericCode: '170', indicative: '(+ 57)', currencyId: '390', itemsWithDifferentTax: false, queue: ["0", "1"], financialInformation: [{ controlType: 'text', key: 'INC', label: 'FINANCIAL_INFO.COLOMBIA.INC', order: 1 }, { controlType: 'text', key: 'BUSINESS_NAME_TEXT', label: 'FINANCIAL_INFO.COLOMBIA.BUSINESS_NAME', order: 2 }, { controlType: 'textbox', key: 'BUSINESS_NAME', label: 'FINANCIAL_INFO.COLOMBIA.BUSINESS_NAME_LABEL', required: true, order: 3 }, { controlType: 'text', key: 'NIT_TEXT', label: 'FINANCIAL_INFO.COLOMBIA.NIT', order: 4 }, { controlType: 'textbox', key: 'NIT', label: 'FINANCIAL_INFO.COLOMBIA.NIT_LABEL', required: true, order: 5 }, { controlType: 'text', key: 'DIAN_NUMERATION_TEXT', label: 'FINANCIAL_INFO.COLOMBIA.DIAN_NUMERATION', order: 6 }, { controlType: 'textbox', key: 'DIAN_NUMERATION_FROM', label: 'FINANCIAL_INFO.COLOMBIA.DIAN_NUMERATION_FROM', required: true, order: 7 }, { controlType: 'textbox', key: 'DIAN_NUMERATION_TO', label: 'FINANCIAL_INFO.COLOMBIA.DIAN_NUMERATION_TO', required: true, order: 8 }, { controlType: 'text', key: 'TIP_PERCENTAGE_TEXT', label: 'FINANCIAL_INFO.COLOMBIA.ENTER_TIP_PERCENTAGE', order: 9 }, { controlType: 'slider', key: 'TIP_PERCENTAGE', label: 'TIP_PERCENTAGE', value: 0, minValue: 0, maxValue: 100, stepValue: 0.01, required: true, order: 10 }], restaurantPrice: 22000, tablePrice: 200, cronValidateActive: '1 0 10 * *', cronChangeFreeDays: '1 0 10 * * *', cronEmailChargeSoon: '30 17 28 * *', cronEmailExpireSoon: '30 17 28 * *', cronEmailRestExpired: '30 17 28 * *' },
+            { _id: '1900', is_active: true, name: 'COUNTRIES.COLOMBIA', alfaCode2: 'CO', alfaCode3: 'COL', numericCode: '170', indicative: '(+ 57)', currencyId: '390', itemsWithDifferentTax: false, queue: ["0", "1"], financialInformation: [{ controlType: 'text', key: 'INC', label: 'FINANCIAL_INFO.COLOMBIA.INC', order: 1 }, { controlType: 'text', key: 'BUSINESS_NAME_TEXT', label: 'FINANCIAL_INFO.COLOMBIA.BUSINESS_NAME', order: 2 }, { controlType: 'textbox', key: 'BUSINESS_NAME', label: 'FINANCIAL_INFO.COLOMBIA.BUSINESS_NAME_LABEL', required: true, order: 3 }, { controlType: 'text', key: 'NIT_TEXT', label: 'FINANCIAL_INFO.COLOMBIA.NIT', order: 4 }, { controlType: 'textbox', key: 'NIT', label: 'FINANCIAL_INFO.COLOMBIA.NIT_LABEL', required: true, order: 5 }, { controlType: 'text', key: 'DIAN_NUMERATION_TEXT', label: 'FINANCIAL_INFO.COLOMBIA.DIAN_NUMERATION', order: 6 }, { controlType: 'textbox', key: 'DIAN_NUMERATION_FROM', label: 'FINANCIAL_INFO.COLOMBIA.DIAN_NUMERATION_FROM', required: true, order: 7 }, { controlType: 'textbox', key: 'DIAN_NUMERATION_TO', label: 'FINANCIAL_INFO.COLOMBIA.DIAN_NUMERATION_TO', required: true, order: 8 }, { controlType: 'text', key: 'TIP_PERCENTAGE_TEXT', label: 'FINANCIAL_INFO.COLOMBIA.ENTER_TIP_PERCENTAGE', order: 9 }, { controlType: 'slider', key: 'TIP_PERCENTAGE', label: 'TIP_PERCENTAGE', value: 0, minValue: 0, maxValue: 100, stepValue: 0.01, required: true, order: 10 }], restaurantPrice: 22000, tablePrice: 200, cronValidateActive: '1 0 6 * *', cronChangeFreeDays: '0 0 1 * *', cronEmailChargeSoon: '30 17 28 * *', cronEmailExpireSoon: '30 17 3 * *', cronEmailRestExpired: '10 0 6 * *' },
             { _id: '2000', is_active: false, name: 'COUNTRIES.COSTA_RICA', alfaCode2: 'CR', alfaCode3: 'CRI', numericCode: '188', indicative: '(+ 506)', currencyId: '40', itemsWithDifferentTax: false, queue: [], financialInformation: [], restaurantPrice: 0, tablePrice: 0, cronValidateActive: '', cronChangeFreeDays: '', cronEmailChargeSoon: '', cronEmailExpireSoon: '', cronEmailRestExpired: '' },
             { _id: '2100', is_active: false, name: 'COUNTRIES.CROATIA', alfaCode2: 'HR', alfaCode3: 'HRV', numericCode: '191', indicative: '(+ 385)', currencyId: '250', itemsWithDifferentTax: false, queue: [], financialInformation: [], restaurantPrice: 0, tablePrice: 0, cronValidateActive: '', cronChangeFreeDays: '', cronEmailChargeSoon: '', cronEmailExpireSoon: '', cronEmailRestExpired: '' },
             { _id: '2200', is_active: false, name: 'COUNTRIES.DENMARK', alfaCode2: 'DK', alfaCode3: 'DNK', numericCode: '208', indicative: '(+ 45)', currencyId: '70', itemsWithDifferentTax: false, queue: [], financialInformation: [], restaurantPrice: 0, tablePrice: 0, cronValidateActive: '', cronChangeFreeDays: '', cronEmailChargeSoon: '', cronEmailExpireSoon: '', cronEmailRestExpired: '' },
@@ -5257,11 +5655,16 @@ meteor_1.Meteor.publish('getCategoriesByRestaurantWork', function (_userId) {   
     check_1.check(_userId, String);                                                                                    //
     var _sections = [];                                                                                                //
     var user_detail = user_detail_collection_1.UserDetails.findOne({ user_id: _userId });                              //
-    section_collection_1.Sections.collection.find({ restaurants: { $in: [user_detail.restaurant_work] } }).fetch().forEach(function (s) {
-        _sections.push(s._id);                                                                                         //
-    });                                                                                                                //
-    return category_collection_1.Categories.collection.find({ section: { $in: _sections }, is_active: true });         //
-});                                                                                                                    // 42
+    if (user_detail) {                                                                                                 //
+        section_collection_1.Sections.collection.find({ restaurants: { $in: [user_detail.restaurant_work] } }).fetch().forEach(function (s) {
+            _sections.push(s._id);                                                                                     //
+        });                                                                                                            //
+        return category_collection_1.Categories.collection.find({ section: { $in: _sections }, is_active: true });     //
+    }                                                                                                                  //
+    else {                                                                                                             //
+        return;                                                                                                        //
+    }                                                                                                                  //
+});                                                                                                                    // 46
 //# sourceMappingURL=categories.js.map                                                                                 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -5637,8 +6040,13 @@ meteor_1.Meteor.publish('getSections', function () {                            
 meteor_1.Meteor.publish('getSectionsByRestaurantWork', function (_userId) {                                            // 32
     check_1.check(_userId, String);                                                                                    //
     var user_detail = user_detail_collection_1.UserDetails.findOne({ user_id: _userId });                              //
-    return section_collection_1.Sections.collection.find({ restaurants: { $in: [user_detail.restaurant_work] }, is_active: true });
-});                                                                                                                    // 36
+    if (user_detail) {                                                                                                 //
+        return section_collection_1.Sections.collection.find({ restaurants: { $in: [user_detail.restaurant_work] }, is_active: true });
+    }                                                                                                                  //
+    else {                                                                                                             //
+        return;                                                                                                        //
+    }                                                                                                                  //
+});                                                                                                                    // 40
 //# sourceMappingURL=sections.js.map                                                                                   //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -5690,14 +6098,19 @@ meteor_1.Meteor.publish('getSubcategoriesByRestaurantWork', function (_userId) {
     var _sections = [];                                                                                                //
     var _categories = [];                                                                                              //
     var user_detail = user_detail_collection_1.UserDetails.findOne({ user_id: _userId });                              //
-    section_collection_1.Sections.collection.find({ restaurants: { $in: [user_detail.restaurant_work] } }).fetch().forEach(function (s) {
-        _sections.push(s._id);                                                                                         //
-    });                                                                                                                //
-    category_collection_1.Categories.collection.find({ section: { $in: _sections } }).fetch().forEach(function (c) {   //
-        _categories.push(c._id);                                                                                       //
-    });                                                                                                                //
-    return subcategory_collection_1.Subcategories.collection.find({ category: { $in: _categories }, is_active: true });
-});                                                                                                                    // 52
+    if (user_detail) {                                                                                                 //
+        section_collection_1.Sections.collection.find({ restaurants: { $in: [user_detail.restaurant_work] } }).fetch().forEach(function (s) {
+            _sections.push(s._id);                                                                                     //
+        });                                                                                                            //
+        category_collection_1.Categories.collection.find({ section: { $in: _sections } }).fetch().forEach(function (c) {
+            _categories.push(c._id);                                                                                   //
+        });                                                                                                            //
+        return subcategory_collection_1.Subcategories.collection.find({ category: { $in: _categories }, is_active: true });
+    }                                                                                                                  //
+    else {                                                                                                             //
+        return;                                                                                                        //
+    }                                                                                                                  //
+});                                                                                                                    // 56
 //# sourceMappingURL=subcategories.js.map                                                                              //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -5779,7 +6192,7 @@ meteor_1.Meteor.publish('getRoleCollaborators', function () {                   
 //# sourceMappingURL=roles.js.map                                                                                      //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-}],"user-details.js":["meteor/meteor","../../../../both/collections/auth/user-detail.collection",function(require,exports){
+}],"user-details.js":["meteor/meteor","../../../../both/collections/auth/user-detail.collection","../../../../both/collections/restaurant/restaurant.collection",function(require,exports){
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                                     //
@@ -5790,27 +6203,49 @@ meteor_1.Meteor.publish('getRoleCollaborators', function () {                   
 Object.defineProperty(exports, "__esModule", { value: true });                                                         //
 var meteor_1 = require("meteor/meteor");                                                                               // 1
 var user_detail_collection_1 = require("../../../../both/collections/auth/user-detail.collection");                    // 2
-meteor_1.Meteor.publish('getUsersDetails', function () {                                                               // 5
+var restaurant_collection_1 = require("../../../../both/collections/restaurant/restaurant.collection");                // 4
+meteor_1.Meteor.publish('getUsersDetails', function () {                                                               // 6
     return user_detail_collection_1.UserDetails.find({});                                                              //
-});                                                                                                                    // 7
-meteor_1.Meteor.publish('getUserDetailsByUser', function (_userId) {                                                   // 10
+});                                                                                                                    // 8
+meteor_1.Meteor.publish('getUserDetailsByUser', function (_userId) {                                                   // 11
     check(_userId, String);                                                                                            //
     return user_detail_collection_1.UserDetails.find({ user_id: _userId });                                            //
-});                                                                                                                    // 13
-meteor_1.Meteor.publish('getUserDetailsByCurrentTable', function (_restaurantId, _tableId) {                           // 15
+});                                                                                                                    // 14
+meteor_1.Meteor.publish('getUserDetailsByCurrentTable', function (_restaurantId, _tableId) {                           // 16
     return user_detail_collection_1.UserDetails.find({ current_restaurant: _restaurantId, current_table: _tableId });  //
-});                                                                                                                    // 17
-/**                                                                                                                    // 19
+});                                                                                                                    // 18
+/**                                                                                                                    // 20
  * Meteor publication return users by restaurants Id                                                                   //
  * @param {string[]} _pRestaurantsId                                                                                   //
  */                                                                                                                    //
-meteor_1.Meteor.publish('getUsersByRestaurantsId', function (_pRestaurantsId) {                                        // 23
+meteor_1.Meteor.publish('getUsersByRestaurantsId', function (_pRestaurantsId) {                                        // 24
     return user_detail_collection_1.UserDetails.find({ current_restaurant: { $in: _pRestaurantsId } });                //
-});                                                                                                                    // 25
+});                                                                                                                    // 26
+/**                                                                                                                    // 28
+ * Meteor publication return users details by admin user                                                               //
+ */                                                                                                                    //
+meteor_1.Meteor.publish('getUserDetailsByAdminUser', function (_userId) {                                              // 31
+    check(_userId, String);                                                                                            //
+    var _lRestaurantsId = [];                                                                                          //
+    restaurant_collection_1.Restaurants.collection.find({ creation_user: _userId }).fetch().forEach(function (restaurant) {
+        _lRestaurantsId.push(restaurant._id);                                                                          //
+    });                                                                                                                //
+    return user_detail_collection_1.UserDetails.find({ current_restaurant: { $in: _lRestaurantsId } });                //
+});                                                                                                                    // 38
+meteor_1.Meteor.publish('getUserDetailsByRestaurantWork', function (_userId) {                                         // 40
+    check(_userId, String);                                                                                            //
+    var _lUserDetail = user_detail_collection_1.UserDetails.findOne({ user_id: _userId });                             //
+    if (_lUserDetail) {                                                                                                //
+        return user_detail_collection_1.UserDetails.find({ current_restaurant: _lUserDetail.restaurant_work });        //
+    }                                                                                                                  //
+    else {                                                                                                             //
+        return;                                                                                                        //
+    }                                                                                                                  //
+});                                                                                                                    // 48
 //# sourceMappingURL=user-details.js.map                                                                               //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-}],"users.js":["meteor/meteor","../../../../both/collections/auth/user.collection","../../../../both/collections/auth/user-detail.collection","meteor/check",function(require,exports){
+}],"users.js":["meteor/meteor","../../../../both/collections/auth/user.collection","../../../../both/collections/auth/user-detail.collection","../../../../both/collections/restaurant/restaurant.collection","meteor/check",function(require,exports){
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                                     //
@@ -5822,31 +6257,32 @@ Object.defineProperty(exports, "__esModule", { value: true });                  
 var meteor_1 = require("meteor/meteor");                                                                               // 1
 var user_collection_1 = require("../../../../both/collections/auth/user.collection");                                  // 2
 var user_detail_collection_1 = require("../../../../both/collections/auth/user-detail.collection");                    // 3
-var check_1 = require("meteor/check");                                                                                 // 4
-/*Meteor.publish('getUserProfile', function () {                                                                       // 6
+var restaurant_collection_1 = require("../../../../both/collections/restaurant/restaurant.collection");                // 4
+var check_1 = require("meteor/check");                                                                                 // 5
+/*Meteor.publish('getUserProfile', function () {                                                                       // 7
     return Users.find({_id: this.userId});                                                                             //
 });*/                                                                                                                  //
-meteor_1.Meteor.publish('getUserSettings', function () {                                                               // 10
+meteor_1.Meteor.publish('getUserSettings', function () {                                                               // 11
     return user_collection_1.Users.find({ _id: this.userId }, { fields: { username: 1, "services.profile.name": 1, "services.facebook": 1, "services.twitter": 1, "services.google": 1 } });
-});                                                                                                                    // 12
-/**                                                                                                                    // 14
+});                                                                                                                    // 13
+/**                                                                                                                    // 15
  * Meteor publish, get all users                                                                                       //
  */                                                                                                                    //
-meteor_1.Meteor.publish('getUsers', function () {                                                                      // 17
+meteor_1.Meteor.publish('getUsers', function () {                                                                      // 18
     return user_collection_1.Users.find({});                                                                           //
-});                                                                                                                    // 19
-/**                                                                                                                    // 21
+});                                                                                                                    // 20
+/**                                                                                                                    // 22
  * Meteor publish. Get user by Id                                                                                      //
  */                                                                                                                    //
-meteor_1.Meteor.publish('getUserByUserId', function (_usrId) {                                                         // 24
+meteor_1.Meteor.publish('getUserByUserId', function (_usrId) {                                                         // 25
     return user_collection_1.Users.find({ _id: _usrId });                                                              //
-});                                                                                                                    // 26
-/**                                                                                                                    // 28
+});                                                                                                                    // 27
+/**                                                                                                                    // 29
  * Meteor publication return users with restaurant and table Id conditions                                             //
  * @param {string} _pRestaurantId                                                                                      //
  * @param {string} _pTableId                                                                                           //
  */                                                                                                                    //
-meteor_1.Meteor.publish('getUserByTableId', function (_pRestaurantId, _pTableId) {                                     // 33
+meteor_1.Meteor.publish('getUserByTableId', function (_pRestaurantId, _pTableId) {                                     // 34
     check_1.check(_pRestaurantId, String);                                                                             //
     check_1.check(_pTableId, String);                                                                                  //
     var _lUsers = [];                                                                                                  //
@@ -5854,14 +6290,57 @@ meteor_1.Meteor.publish('getUserByTableId', function (_pRestaurantId, _pTableId)
         _lUsers.push(user.user_id);                                                                                    //
     });                                                                                                                //
     return user_collection_1.Users.find({ _id: { $in: _lUsers } });                                                    //
-});                                                                                                                    // 41
-/**                                                                                                                    // 43
+});                                                                                                                    // 42
+/**                                                                                                                    // 44
  * Meteor publication return user image                                                                                //
  */                                                                                                                    //
-meteor_1.Meteor.publish('getUserImages', function (_pUserId) {                                                         // 46
+meteor_1.Meteor.publish('getUserImages', function (_pUserId) {                                                         // 47
     check_1.check(_pUserId, String);                                                                                   //
     return user_collection_1.UserImages.find({ userId: _pUserId });                                                    //
-});                                                                                                                    // 49
+});                                                                                                                    // 50
+/**                                                                                                                    // 52
+ * Meteor publication return users by admin user Id                                                                    //
+ */                                                                                                                    //
+meteor_1.Meteor.publish('getUsersByAdminUser', function (_pUserId) {                                                   // 55
+    check_1.check(_pUserId, String);                                                                                   //
+    var _lRestaurantsId = [];                                                                                          //
+    var _lUsers = [];                                                                                                  //
+    restaurant_collection_1.Restaurants.collection.find({ creation_user: _pUserId }).fetch().forEach(function (restaurant) {
+        _lRestaurantsId.push(restaurant._id);                                                                          //
+    });                                                                                                                //
+    user_detail_collection_1.UserDetails.collection.find({ current_restaurant: { $in: _lRestaurantsId } }).fetch().forEach(function (userDetail) {
+        _lUsers.push(userDetail.user_id);                                                                              //
+    });                                                                                                                //
+    return user_collection_1.Users.find({ _id: { $in: _lUsers } });                                                    //
+});                                                                                                                    // 66
+/**                                                                                                                    // 68
+ * Meteor publication return users image by admin user id                                                              //
+ */                                                                                                                    //
+meteor_1.Meteor.publish('getUserImagesByAdminUser', function (_pUserId) {                                              // 71
+    var _lRestaurantsId = [];                                                                                          //
+    var _lUsers = [];                                                                                                  //
+    restaurant_collection_1.Restaurants.collection.find({ creation_user: _pUserId }).fetch().forEach(function (restaurant) {
+        _lRestaurantsId.push(restaurant._id);                                                                          //
+    });                                                                                                                //
+    user_detail_collection_1.UserDetails.collection.find({ current_restaurant: { $in: _lRestaurantsId } }).fetch().forEach(function (userDetail) {
+        _lUsers.push(userDetail.user_id);                                                                              //
+    });                                                                                                                //
+    return user_collection_1.UserImages.find({ userId: { $in: _lUsers } });                                            //
+});                                                                                                                    // 81
+/**                                                                                                                    // 83
+ * Meteor publication return users images with restaurant and table Id conditions                                      //
+ * @param {string} _pRestaurantId                                                                                      //
+ * @param {string} _pTableId                                                                                           //
+ */                                                                                                                    //
+meteor_1.Meteor.publish('getUserImagesByTableId', function (_pRestaurantId, _pTableId) {                               // 88
+    check_1.check(_pRestaurantId, String);                                                                             //
+    check_1.check(_pTableId, String);                                                                                  //
+    var _lUsers = [];                                                                                                  //
+    user_detail_collection_1.UserDetails.find({ current_restaurant: _pRestaurantId, current_table: _pTableId }).fetch().forEach(function (user) {
+        _lUsers.push(user.user_id);                                                                                    //
+    });                                                                                                                //
+    return user_collection_1.UserImages.find({ userId: { $in: _lUsers } });                                            //
+});                                                                                                                    // 96
 //# sourceMappingURL=users.js.map                                                                                      //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -5991,7 +6470,7 @@ meteor_1.Meteor.publish('getParameters', function () {                          
 //# sourceMappingURL=parameter.js.map                                                                                  //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-}],"paymentMethod.js":["meteor/meteor","../../../../both/collections/general/paymentMethod.collection",function(require,exports){
+}],"paymentMethod.js":["meteor/meteor","meteor/check","../../../../both/collections/general/paymentMethod.collection","../../../../both/collections/restaurant/restaurant.collection","../../../../both/collections/auth/user-detail.collection",function(require,exports){
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                                     //
@@ -6001,11 +6480,40 @@ meteor_1.Meteor.publish('getParameters', function () {                          
                                                                                                                        //
 Object.defineProperty(exports, "__esModule", { value: true });                                                         //
 var meteor_1 = require("meteor/meteor");                                                                               // 1
-var paymentMethod_collection_1 = require("../../../../both/collections/general/paymentMethod.collection");             // 2
-/**                                                                                                                    // 4
+var check_1 = require("meteor/check");                                                                                 // 2
+var paymentMethod_collection_1 = require("../../../../both/collections/general/paymentMethod.collection");             // 3
+var restaurant_collection_1 = require("../../../../both/collections/restaurant/restaurant.collection");                // 5
+var user_detail_collection_1 = require("../../../../both/collections/auth/user-detail.collection");                    // 6
+/**                                                                                                                    // 8
  * Meteor publication paymentMethods                                                                                   //
  */                                                                                                                    //
 meteor_1.Meteor.publish('paymentMethods', function () { return paymentMethod_collection_1.PaymentMethods.find({ isActive: true }); });
+/**                                                                                                                    // 13
+ * Meteor publication return payment methods by current restaurant of the user                                         //
+ */                                                                                                                    //
+meteor_1.Meteor.publish('getPaymentMethodsByUserCurrentRestaurant', function (_pUserId) {                              // 16
+    var _lUserDetail = user_detail_collection_1.UserDetails.findOne({ user_id: _pUserId });                            //
+    if (_lUserDetail.current_restaurant) {                                                                             //
+        var _lRestaurant = restaurant_collection_1.Restaurants.findOne({ _id: _lUserDetail.current_restaurant });      //
+        return paymentMethod_collection_1.PaymentMethods.collection.find({ _id: { $in: _lRestaurant.paymentMethods }, isActive: true });
+    }                                                                                                                  //
+    else {                                                                                                             //
+        return paymentMethod_collection_1.PaymentMethods.collection.find({ isActive: true });                          //
+    }                                                                                                                  //
+});                                                                                                                    // 24
+/*                                                                                                                     // 26
+ * Meteor publication return restaurant payment methods                                                                //
+ */                                                                                                                    //
+meteor_1.Meteor.publish('getPaymentMethodsByrestaurantId', function (_pRestaurantId) {                                 // 29
+    check_1.check(_pRestaurantId, String);                                                                             //
+    var _lRestaurant = restaurant_collection_1.Restaurants.findOne({ _id: _pRestaurantId });                           //
+    if (_lRestaurant) {                                                                                                //
+        return paymentMethod_collection_1.PaymentMethods.find({ _id: { $in: _lRestaurant.paymentMethods }, isActive: true });
+    }                                                                                                                  //
+    else {                                                                                                             //
+        return paymentMethod_collection_1.PaymentMethods.find({ isActive: true });                                     //
+    }                                                                                                                  //
+});                                                                                                                    // 37
 //# sourceMappingURL=paymentMethod.js.map                                                                              //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -6072,7 +6580,7 @@ meteor_1.Meteor.publish('getTransactionsByUser', function (_userId) {           
 //# sourceMappingURL=payment-transaction.js.map                                                                        //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-}]},"restaurant":{"account.js":["meteor/meteor","../../../../both/collections/restaurant/account.collection","../../../../both/collections/auth/user-detail.collection","meteor/check",function(require,exports){
+}]},"restaurant":{"account.js":["meteor/meteor","../../../../both/collections/restaurant/account.collection","../../../../both/collections/auth/user-detail.collection","../../../../both/collections/restaurant/restaurant.collection","meteor/check",function(require,exports){
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                                     //
@@ -6084,35 +6592,36 @@ Object.defineProperty(exports, "__esModule", { value: true });                  
 var meteor_1 = require("meteor/meteor");                                                                               // 1
 var account_collection_1 = require("../../../../both/collections/restaurant/account.collection");                      // 2
 var user_detail_collection_1 = require("../../../../both/collections/auth/user-detail.collection");                    // 4
-var check_1 = require("meteor/check");                                                                                 // 5
-/**                                                                                                                    // 7
+var restaurant_collection_1 = require("../../../../both/collections/restaurant/restaurant.collection");                // 5
+var check_1 = require("meteor/check");                                                                                 // 6
+/**                                                                                                                    // 8
  * Meteor publication accounts with restaurantId condition and tableId condition                                       //
  * @param {string} _restaurantId                                                                                       //
  * @param {string} _status                                                                                             //
  */                                                                                                                    //
-meteor_1.Meteor.publish('getAccountsByTableRestaurant', function (_restaurantId, _status) {                            // 12
+meteor_1.Meteor.publish('getAccountsByTableRestaurant', function (_restaurantId, _status) {                            // 13
     check_1.check(_restaurantId, String);                                                                              //
     check_1.check(_status, String);                                                                                    //
     return account_collection_1.Accounts.collection.find({ restaurantId: _restaurantId, status: _status });            //
-});                                                                                                                    // 16
-/**                                                                                                                    // 18
+});                                                                                                                    // 17
+/**                                                                                                                    // 19
  * Meteor publication account by tableId                                                                               //
  * @param {string} _tableId                                                                                            //
  */                                                                                                                    //
-meteor_1.Meteor.publish('getAccountsByTableId', function (_tableId) {                                                  // 22
+meteor_1.Meteor.publish('getAccountsByTableId', function (_tableId) {                                                  // 23
     check_1.check(_tableId, String);                                                                                   //
     return account_collection_1.Accounts.collection.find({ tableId: _tableId });                                       //
-});                                                                                                                    // 25
-/**                                                                                                                    // 27
+});                                                                                                                    // 26
+/**                                                                                                                    // 28
  * Meteor publication account by userId                                                                                //
  * @param {string} userId                                                                                              //
  */                                                                                                                    //
-meteor_1.Meteor.publish('getAccountsByUserId', function (_userId) {                                                    // 31
+meteor_1.Meteor.publish('getAccountsByUserId', function (_userId) {                                                    // 32
     check_1.check(_userId, String);                                                                                    //
     var _lUserDetail = user_detail_collection_1.UserDetails.findOne({ user_id: _userId });                             //
     if (_lUserDetail) {                                                                                                //
         if (_lUserDetail.current_restaurant !== "" && _lUserDetail.current_table !== "") {                             //
-            return account_collection_1.Accounts.collection.find({ restaurantId: _lUserDetail.current_restaurant, tableId: _lUserDetail.current_table });
+            return account_collection_1.Accounts.collection.find({ restaurantId: _lUserDetail.current_restaurant, tableId: _lUserDetail.current_table, status: 'OPEN' });
         }                                                                                                              //
         else {                                                                                                         //
             return;                                                                                                    //
@@ -6121,7 +6630,33 @@ meteor_1.Meteor.publish('getAccountsByUserId', function (_userId) {             
     else {                                                                                                             //
         return;                                                                                                        //
     }                                                                                                                  //
-});                                                                                                                    // 44
+});                                                                                                                    // 45
+/**                                                                                                                    // 47
+ * Meteor publication return accounts by admin user restaurants                                                        //
+ * @param {string} _userId                                                                                             //
+ */                                                                                                                    //
+meteor_1.Meteor.publish('getAccountsByAdminUser', function (_userId) {                                                 // 51
+    check_1.check(_userId, String);                                                                                    //
+    var _lRestaurantsId = [];                                                                                          //
+    restaurant_collection_1.Restaurants.collection.find({ creation_user: _userId }).fetch().forEach(function (restaurant) {
+        _lRestaurantsId.push(restaurant._id);                                                                          //
+    });                                                                                                                //
+    return account_collection_1.Accounts.collection.find({ restaurantId: { $in: _lRestaurantsId }, status: 'OPEN' });  //
+});                                                                                                                    // 58
+/**                                                                                                                    // 60
+ * Meteor publication return accounts by restaurant work                                                               //
+ * @param {string} _userId                                                                                             //
+ */                                                                                                                    //
+meteor_1.Meteor.publish('getAccountsByRestaurantWork', function (_userId) {                                            // 64
+    check_1.check(_userId, String);                                                                                    //
+    var _lUserDetail = user_detail_collection_1.UserDetails.findOne({ user_id: _userId });                             //
+    if (_lUserDetail) {                                                                                                //
+        return account_collection_1.Accounts.collection.find({ restaurantId: _lUserDetail.restaurant_work, status: 'OPEN' });
+    }                                                                                                                  //
+    else {                                                                                                             //
+        return;                                                                                                        //
+    }                                                                                                                  //
+});                                                                                                                    // 72
 //# sourceMappingURL=account.js.map                                                                                    //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -6148,7 +6683,7 @@ meteor_1.Meteor.publish('getInvoicesByUserId', function (_pUserId) {            
 //# sourceMappingURL=invoice.js.map                                                                                    //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-}],"order.js":["meteor/meteor","../../../../both/collections/restaurant/order.collection","meteor/check","../../../../both/collections/restaurant/table.collection","../../../../both/collections/auth/user-detail.collection","../../../../both/collections/restaurant/account.collection",function(require,exports){
+}],"order.js":["meteor/meteor","../../../../both/collections/restaurant/order.collection","meteor/check","../../../../both/collections/restaurant/table.collection","../../../../both/collections/auth/user-detail.collection","../../../../both/collections/restaurant/account.collection","../../../../both/collections/restaurant/restaurant.collection",function(require,exports){
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                                     //
@@ -6163,12 +6698,13 @@ var check_1 = require("meteor/check");                                          
 var table_collection_1 = require("../../../../both/collections/restaurant/table.collection");                          // 5
 var user_detail_collection_1 = require("../../../../both/collections/auth/user-detail.collection");                    // 6
 var account_collection_1 = require("../../../../both/collections/restaurant/account.collection");                      // 9
-/**                                                                                                                    // 11
+var restaurant_collection_1 = require("../../../../both/collections/restaurant/restaurant.collection");                // 10
+/**                                                                                                                    // 12
  * Meteor publication orders with restaurantId and status conditions                                                   //
  * @param {string} _restaurantId                                                                                       //
  * @param {string} _status                                                                                             //
  */                                                                                                                    //
-meteor_1.Meteor.publish('getOrders', function (_restaurantId, _tableQRCode, _status) {                                 // 16
+meteor_1.Meteor.publish('getOrders', function (_restaurantId, _tableQRCode, _status) {                                 // 17
     check_1.check(_restaurantId, String);                                                                              //
     check_1.check(_tableQRCode, String);                                                                               //
     var _lTable = table_collection_1.Tables.collection.findOne({ QR_code: _tableQRCode });                             //
@@ -6179,31 +6715,41 @@ meteor_1.Meteor.publish('getOrders', function (_restaurantId, _tableQRCode, _sta
     else {                                                                                                             //
         return;                                                                                                        //
     }                                                                                                                  //
-});                                                                                                                    // 27
-/**                                                                                                                    // 29
+});                                                                                                                    // 28
+/**                                                                                                                    // 30
  * Meteor publications orders with restaurantId and status conditions                                                  //
  * @param {string}                                                                                                     //
  * @param {string}                                                                                                     //
 */                                                                                                                     //
-meteor_1.Meteor.publish('getOrdersByTableId', function (_restaurantId, _tableId, _status) {                            // 34
+meteor_1.Meteor.publish('getOrdersByTableId', function (_restaurantId, _tableId, _status) {                            // 35
     check_1.check(_restaurantId, String);                                                                              //
     var _lAccount = account_collection_1.Accounts.findOne({ restaurantId: _restaurantId, tableId: _tableId, status: 'OPEN' });
-    return order_collection_1.Orders.collection.find({ accountId: _lAccount._id, restaurantId: _restaurantId, tableId: _tableId, status: { $in: _status } });
-});                                                                                                                    // 38
-/**                                                                                                                    // 40
+    if (_lAccount) {                                                                                                   //
+        return order_collection_1.Orders.collection.find({ accountId: _lAccount._id, restaurantId: _restaurantId, tableId: _tableId, status: { $in: _status } });
+    }                                                                                                                  //
+    else {                                                                                                             //
+        return;                                                                                                        //
+    }                                                                                                                  //
+});                                                                                                                    // 43
+/**                                                                                                                    // 45
  * Meteor publications orders with userId and status conditions                                                        //
  * @param {string}                                                                                                     //
  * @param {string}                                                                                                     //
 */                                                                                                                     //
-meteor_1.Meteor.publish('getOrdersByUserId', function (_userId, _status) {                                             // 45
+meteor_1.Meteor.publish('getOrdersByUserId', function (_userId, _status) {                                             // 50
     check_1.check(_userId, String);                                                                                    //
     var _lUserDetail = user_detail_collection_1.UserDetails.findOne({ user_id: _userId });                             //
     if (_lUserDetail) {                                                                                                //
-        if (_lUserDetail.current_restaurant && _lUserDetail.current_table) {                                           //
+        if (_lUserDetail.current_restaurant !== '' && _lUserDetail.current_table !== '') {                             //
             var _lAccount = account_collection_1.Accounts.findOne({ restaurantId: _lUserDetail.current_restaurant,     //
                 tableId: _lUserDetail.current_table,                                                                   //
                 status: 'OPEN' });                                                                                     //
-            return order_collection_1.Orders.collection.find({ accountId: _lAccount._id, restaurantId: _lAccount.restaurantId, tableId: _lAccount.tableId, status: { $in: _status } });
+            if (_lAccount) {                                                                                           //
+                return order_collection_1.Orders.collection.find({ accountId: _lAccount._id, restaurantId: _lAccount.restaurantId, tableId: _lAccount.tableId, status: { $in: _status } });
+            }                                                                                                          //
+            else {                                                                                                     //
+                return;                                                                                                //
+            }                                                                                                          //
         }                                                                                                              //
         else {                                                                                                         //
             return;                                                                                                    //
@@ -6212,21 +6758,21 @@ meteor_1.Meteor.publish('getOrdersByUserId', function (_userId, _status) {      
     else {                                                                                                             //
         return;                                                                                                        //
     }                                                                                                                  //
-});                                                                                                                    // 60
-/**                                                                                                                    // 62
+});                                                                                                                    // 69
+/**                                                                                                                    // 71
  * Meteor publication orders with restaurantId condition                                                               //
  * @param {string} _restaurantId                                                                                       //
 */                                                                                                                     //
-meteor_1.Meteor.publish('getOrdersByRestaurantId', function (_restaurantId, _status) {                                 // 66
+meteor_1.Meteor.publish('getOrdersByRestaurantId', function (_restaurantId, _status) {                                 // 75
     check_1.check(_restaurantId, String);                                                                              //
     return order_collection_1.Orders.collection.find({ restaurantId: _restaurantId, status: { $in: _status } });       //
-});                                                                                                                    // 69
-/**                                                                                                                    // 71
+});                                                                                                                    // 78
+/**                                                                                                                    // 80
  * Meteor publication orders by restaurant work                                                                        //
  * @param {string} _userId                                                                                             //
  * @param {sring[]} _status                                                                                            //
  */                                                                                                                    //
-meteor_1.Meteor.publish('getOrdersByRestaurantWork', function (_userId, _status) {                                     // 76
+meteor_1.Meteor.publish('getOrdersByRestaurantWork', function (_userId, _status) {                                     // 85
     check_1.check(_userId, String);                                                                                    //
     var _lUserDetail = user_detail_collection_1.UserDetails.findOne({ user_id: _userId });                             //
     if (_lUserDetail) {                                                                                                //
@@ -6235,12 +6781,12 @@ meteor_1.Meteor.publish('getOrdersByRestaurantWork', function (_userId, _status)
     else {                                                                                                             //
         return;                                                                                                        //
     }                                                                                                                  //
-});                                                                                                                    // 84
-/**                                                                                                                    // 87
+});                                                                                                                    // 93
+/**                                                                                                                    // 96
  * Meteor publication orders by account                                                                                //
  * @param {string} _userId                                                                                             //
  */                                                                                                                    //
-meteor_1.Meteor.publish('getOrdersByAccount', function (_userId) {                                                     // 91
+meteor_1.Meteor.publish('getOrdersByAccount', function (_userId) {                                                     // 100
     check_1.check(_userId, String);                                                                                    //
     var _lUserDetail = user_detail_collection_1.UserDetails.findOne({ user_id: _userId });                             //
     if (_lUserDetail) {                                                                                                //
@@ -6248,44 +6794,70 @@ meteor_1.Meteor.publish('getOrdersByAccount', function (_userId) {              
             var _lAccount = account_collection_1.Accounts.findOne({ restaurantId: _lUserDetail.current_restaurant,     //
                 tableId: _lUserDetail.current_table,                                                                   //
                 status: 'OPEN' });                                                                                     //
-            return order_collection_1.Orders.find({ creation_user: _userId, restaurantId: _lAccount.restaurantId, tableId: _lAccount.tableId, status: 'ORDER_STATUS.DELIVERED' });
+            if (_lAccount) {                                                                                           //
+                return order_collection_1.Orders.find({ creation_user: _userId, restaurantId: _lAccount.restaurantId, tableId: _lAccount.tableId, status: 'ORDER_STATUS.DELIVERED' });
+            }                                                                                                          //
+            else {                                                                                                     //
+                return;                                                                                                //
+            }                                                                                                          //
         }                                                                                                              //
         else {                                                                                                         //
-            return order_collection_1.Orders.find({ creation_user: _userId, restaurantId: "", tableId: "", status: "" });
+            return;                                                                                                    //
         }                                                                                                              //
     }                                                                                                                  //
     else {                                                                                                             //
         return;                                                                                                        //
     }                                                                                                                  //
-});                                                                                                                    // 106
-/**                                                                                                                    // 108
+});                                                                                                                    // 119
+/**                                                                                                                    // 121
  * Meteor publication return orders with translate confirmation pending                                                //
  */                                                                                                                    //
-meteor_1.Meteor.publish('getOrdersWithConfirmationPending', function (_restaurantId, _tableId) {                       // 111
+meteor_1.Meteor.publish('getOrdersWithConfirmationPending', function (_restaurantId, _tableId) {                       // 124
     check_1.check(_restaurantId, String);                                                                              //
     check_1.check(_tableId, String);                                                                                   //
     var _lAccount = account_collection_1.Accounts.findOne({ restaurantId: _restaurantId, tableId: _tableId, status: 'OPEN' });
-    return order_collection_1.Orders.find({ accountId: _lAccount._id,                                                  //
-        restaurantId: _restaurantId,                                                                                   //
-        tableId: _tableId,                                                                                             //
-        status: 'ORDER_STATUS.PENDING_CONFIRM',                                                                        //
-        'translateInfo.markedToTranslate': true,                                                                       //
-        'translateInfo.confirmedToTranslate': false });                                                                //
-});                                                                                                                    // 121
-/**                                                                                                                    // 123
+    if (_lAccount) {                                                                                                   //
+        return order_collection_1.Orders.find({ accountId: _lAccount._id,                                              //
+            restaurantId: _restaurantId,                                                                               //
+            tableId: _tableId,                                                                                         //
+            status: 'ORDER_STATUS.PENDING_CONFIRM',                                                                    //
+            'translateInfo.markedToTranslate': true,                                                                   //
+            'translateInfo.confirmedToTranslate': false });                                                            //
+    }                                                                                                                  //
+    else {                                                                                                             //
+        return;                                                                                                        //
+    }                                                                                                                  //
+});                                                                                                                    // 138
+/**                                                                                                                    // 140
  * Meteor publications return orders by id                                                                             //
  */                                                                                                                    //
-meteor_1.Meteor.publish('getOrderById', function (_orderId) {                                                          // 126
+meteor_1.Meteor.publish('getOrderById', function (_orderId) {                                                          // 143
     return order_collection_1.Orders.find({ _id: _orderId });                                                          //
-});                                                                                                                    // 128
-/**                                                                                                                    // 130
+});                                                                                                                    // 145
+/**                                                                                                                    // 147
  * Meteor publications orders with restaurant Ids and status conditions                                                //
  * @param {string[]} _pRestaurantIds                                                                                   //
  * @param {string[]} _status                                                                                           //
 */                                                                                                                     //
-meteor_1.Meteor.publish('getOrdersByRestaurantIds', function (_pRestaurantIds, _status) {                              // 135
+meteor_1.Meteor.publish('getOrdersByRestaurantIds', function (_pRestaurantIds, _status) {                              // 152
     return order_collection_1.Orders.collection.find({ restaurantId: { $in: _pRestaurantIds }, status: { $in: _status } });
-});                                                                                                                    // 137
+});                                                                                                                    // 154
+/**                                                                                                                    // 156
+ * Meteor publication return orders by user admin restaurants                                                          //
+ * @param {string} _userId                                                                                             //
+ */                                                                                                                    //
+meteor_1.Meteor.publish('getOrdersByAdminUser', function (_userId, _status) {                                          // 160
+    check_1.check(_userId, String);                                                                                    //
+    var _lRestaurantsId = [];                                                                                          //
+    var _lAccountsId = [];                                                                                             //
+    restaurant_collection_1.Restaurants.collection.find({ creation_user: _userId }).fetch().forEach(function (restaurant) {
+        _lRestaurantsId.push(restaurant._id);                                                                          //
+    });                                                                                                                //
+    account_collection_1.Accounts.collection.find({ restaurantId: { $in: _lRestaurantsId }, status: 'OPEN' }).fetch().forEach(function (account) {
+        _lAccountsId.push(account._id);                                                                                //
+    });                                                                                                                //
+    return order_collection_1.Orders.collection.find({ accountId: { $in: _lAccountsId }, status: { $in: _status } });  //
+});                                                                                                                    // 171
 //# sourceMappingURL=order.js.map                                                                                      //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -6337,29 +6909,34 @@ meteor_1.Meteor.publish('getUserPaymentsByRestaurantAndTable', function (_userId
         var _lAccount = account_collection_1.Accounts.findOne({ restaurantId: _lUserDetail.current_restaurant,         //
             tableId: _lUserDetail.current_table,                                                                       //
             status: 'OPEN' });                                                                                         //
-        return payment_collection_1.Payments.collection.find({ creation_user: _userId, restaurantId: _restaurantId, tableId: _tableId, accountId: _lAccount._id, status: { $in: _status } });
+        if (_lAccount) {                                                                                               //
+            return payment_collection_1.Payments.collection.find({ creation_user: _userId, restaurantId: _restaurantId, tableId: _tableId, accountId: _lAccount._id, status: { $in: _status } });
+        }                                                                                                              //
+        else {                                                                                                         //
+            return;                                                                                                    //
+        }                                                                                                              //
     }                                                                                                                  //
     else {                                                                                                             //
         return;                                                                                                        //
     }                                                                                                                  //
-});                                                                                                                    // 50
-/**                                                                                                                    // 52
+});                                                                                                                    // 54
+/**                                                                                                                    // 56
  * Meteor publication payments with resturantId and tableId conditions                                                 //
  * @param {string} _restaurantId                                                                                       //
  * @param {string} _tableId                                                                                            //
  */                                                                                                                    //
-meteor_1.Meteor.publish('getPaymentsToWaiter', function (_restaurantId, _tableId) {                                    // 57
+meteor_1.Meteor.publish('getPaymentsToWaiter', function (_restaurantId, _tableId) {                                    // 61
     check_1.check(_restaurantId, String);                                                                              //
     check_1.check(_tableId, String);                                                                                   //
     return payment_collection_1.Payments.collection.find({ restaurantId: _restaurantId, tableId: _tableId, status: 'PAYMENT.NO_PAID' });
-});                                                                                                                    // 61
-/**                                                                                                                    // 63
+});                                                                                                                    // 65
+/**                                                                                                                    // 67
  * Meteor publication payments with restaurant Ids                                                                     //
  * @param {string[]} _pRestaurantIds                                                                                   //
  */                                                                                                                    //
-meteor_1.Meteor.publish('getPaymentsByRestaurantIds', function (_pRestaurantIds) {                                     // 67
+meteor_1.Meteor.publish('getPaymentsByRestaurantIds', function (_pRestaurantIds) {                                     // 71
     return payment_collection_1.Payments.collection.find({ restaurantId: { $in: _pRestaurantIds }, status: 'PAYMENT.PAID', received: true });
-});                                                                                                                    // 69
+});                                                                                                                    // 73
 //# sourceMappingURL=payment.js.map                                                                                    //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -6485,10 +7062,29 @@ meteor_1.Meteor.publish('restaurantImageThumbsByUserId', function (_userId) {   
     }                                                                                                                  //
 });                                                                                                                    // 119
 /**                                                                                                                    // 121
+ * Meteor publication restaurantImageThumbs with user Id condition                                                     //
+ * @param {string} _restaurantId                                                                                       //
+ */                                                                                                                    //
+meteor_1.Meteor.publish('restaurantImageByUserId', function (_userId) {                                                // 125
+    check_1.check(_userId, String);                                                                                    //
+    var _lUserDetail = user_detail_collection_1.UserDetails.findOne({ user_id: _userId });                             //
+    if (_lUserDetail) {                                                                                                //
+        if (_lUserDetail.current_restaurant) {                                                                         //
+            return restaurant_collection_1.RestaurantImages.collection.find({ restaurantId: _lUserDetail.current_restaurant });
+        }                                                                                                              //
+        else {                                                                                                         //
+            return;                                                                                                    //
+        }                                                                                                              //
+    }                                                                                                                  //
+    else {                                                                                                             //
+        return;                                                                                                        //
+    }                                                                                                                  //
+});                                                                                                                    // 137
+/**                                                                                                                    // 139
  * Meteor publication to find current restaurants with no pay                                                          //
  * @param {string} _userId                                                                                             //
  */                                                                                                                    //
-meteor_1.Meteor.publish('currentRestaurantsNoPayed', function (_userId) {                                              // 125
+meteor_1.Meteor.publish('currentRestaurantsNoPayed', function (_userId) {                                              // 143
     check_1.check(_userId, String);                                                                                    //
     var currentDate = new Date();                                                                                      //
     var currentMonth = (currentDate.getMonth() + 1).toString();                                                        //
@@ -6508,30 +7104,30 @@ meteor_1.Meteor.publish('currentRestaurantsNoPayed', function (_userId) {       
         });                                                                                                            //
     });                                                                                                                //
     return restaurant_collection_1.Restaurants.collection.find({ _id: { $nin: historyPaymentRes }, creation_user: _userId, isActive: true, freeDays: false });
-});                                                                                                                    // 149
-/**                                                                                                                    // 151
+});                                                                                                                    // 167
+/**                                                                                                                    // 169
  * Meteor publication to find inactive restaurants by user                                                             //
  */                                                                                                                    //
-meteor_1.Meteor.publish('getInactiveRestaurants', function (_userId) {                                                 // 154
+meteor_1.Meteor.publish('getInactiveRestaurants', function (_userId) {                                                 // 172
     check_1.check(_userId, String);                                                                                    //
     return restaurant_collection_1.Restaurants.collection.find({ creation_user: _userId, isActive: false });           //
-});                                                                                                                    // 157
-/**                                                                                                                    // 159
+});                                                                                                                    // 175
+/**                                                                                                                    // 177
  * Meteor publication return active restaurants by user                                                                //
  * @param {string} _userId                                                                                             //
  */                                                                                                                    //
-meteor_1.Meteor.publish('getActiveRestaurants', function (_userId) {                                                   // 163
+meteor_1.Meteor.publish('getActiveRestaurants', function (_userId) {                                                   // 181
     check_1.check(_userId, String);                                                                                    //
     return restaurant_collection_1.Restaurants.collection.find({ creation_user: _userId, isActive: true });            //
-});                                                                                                                    // 166
-/**                                                                                                                    // 168
+});                                                                                                                    // 184
+/**                                                                                                                    // 186
  * Meteor publication return restaurants by id                                                                         //
  * @param {string} _pId                                                                                                //
  */                                                                                                                    //
-meteor_1.Meteor.publish('getRestaurantById', function (_pId) {                                                         // 172
+meteor_1.Meteor.publish('getRestaurantById', function (_pId) {                                                         // 190
     check_1.check(_pId, String);                                                                                       //
     return restaurant_collection_1.Restaurants.collection.find({ _id: _pId });                                         //
-});                                                                                                                    // 175
+});                                                                                                                    // 193
 //# sourceMappingURL=restaurant.js.map                                                                                 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -6605,6 +7201,14 @@ meteor_1.Meteor.publish('getTablesByRestaurantWork', function (_userId) {       
         return;                                                                                                        //
     }                                                                                                                  //
 });                                                                                                                    // 67
+/**                                                                                                                    // 69
+ * Meteor publication tables by QR Code                                                                                //
+ * @param {string} _lQRCode                                                                                            //
+ */                                                                                                                    //
+meteor_1.Meteor.publish('getTableByQRCode', function (_lQRCode) {                                                      // 73
+    check_1.check(_lQRCode, String);                                                                                   //
+    return table_collection_1.Tables.collection.find({ QR_code: _lQRCode });                                           //
+});                                                                                                                    // 76
 //# sourceMappingURL=table.js.map                                                                                      //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -6999,16 +7603,15 @@ percolate_synced_cron_1.SyncedCron.start();                                     
 //                                                                                                                     //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                                                                                                        //
-/*ServiceConfiguration.configurations.remove({                                                                         // 1
-    service: 'facebook'                                                                                                //
-});                                                                                                                    //
-                                                                                                                       //
-ServiceConfiguration.configurations.insert({                                                                           //
-    service: 'facebook',                                                                                               //
-    appId: '1743125776004465',                                                                                         //
-    secret: 'be71d1908bb31c04e3435b047e011b42'                                                                         //
-});                                                                                                                    //
-*/ServiceConfiguration.configurations.remove({                                                                         //
+ServiceConfiguration.configurations.remove({                                                                           // 1
+    service: 'facebook'                                                                                                // 2
+});                                                                                                                    // 1
+ServiceConfiguration.configurations.insert({                                                                           // 5
+    service: 'facebook',                                                                                               // 6
+    appId: '1743125776004465',                                                                                         // 7
+    secret: 'be71d1908bb31c04e3435b047e011b42'                                                                         // 8
+});                                                                                                                    // 5
+ServiceConfiguration.configurations.remove({                                                                           // 11
     service: 'twitter'                                                                                                 // 12
 });                                                                                                                    // 11
 ServiceConfiguration.configurations.insert({                                                                           // 15
@@ -7108,7 +7711,6 @@ meteor_1.Meteor.startup(function () {                                           
 require("./both/methods/restaurant/QR/codeGenerator.js");
 require("./both/methods/restaurant/waiter-queue/queues.methods.js");
 require("./both/methods/restaurant/waiter-queue/waiter-queue.methods.js");
-require("./both/shared-components/auth/recover-password/recover.class.js");
 require("./both/shared-components/restaurant/financial-info/financial-base.js");
 require("./both/shared-components/restaurant/financial-info/financial-checkbox.js");
 require("./both/shared-components/restaurant/financial-info/financial-dropdown.js");
@@ -7126,6 +7728,8 @@ require("./both/collections/auth/device.collection.js");
 require("./both/collections/auth/menu.collection.js");
 require("./both/collections/auth/role.collection.js");
 require("./both/collections/auth/user-detail.collection.js");
+require("./both/collections/auth/user-login.collection.js");
+require("./both/collections/auth/user-penalty.collection.js");
 require("./both/collections/auth/user.collection.js");
 require("./both/collections/general/currency.collection.js");
 require("./both/collections/general/email-content.collection.js");
@@ -7152,7 +7756,9 @@ require("./both/methods/administration/promotion.methods.js");
 require("./both/methods/auth/menu.methods.js");
 require("./both/methods/auth/user-detail.methods.js");
 require("./both/methods/auth/user-devices.methods.js");
+require("./both/methods/auth/user-login.methods.js");
 require("./both/methods/auth/user-profile.methods.js");
+require("./both/methods/auth/user.methods.js");
 require("./both/methods/general/cron.methods.js");
 require("./both/methods/general/email.methods.js");
 require("./both/methods/general/parameter.methods.js");
@@ -7177,6 +7783,8 @@ require("./both/models/auth/device.model.js");
 require("./both/models/auth/menu.model.js");
 require("./both/models/auth/role.model.js");
 require("./both/models/auth/user-detail.model.js");
+require("./both/models/auth/user-login.model.js");
+require("./both/models/auth/user-penalty.model.js");
 require("./both/models/auth/user-profile.model.js");
 require("./both/models/auth/user.model.js");
 require("./both/models/general/currency.model.js");
@@ -7201,7 +7809,6 @@ require("./both/models/restaurant/waiter-call-detail.model.js");
 require("./both/models/settings/city.model.js");
 require("./both/models/settings/country.model.js");
 require("./both/models/settings/language.model.js");
-require("./both/shared-components/auth/reset-password.class.js");
 require("./both/shared-components/validators/custom-validator.js");
 require("./both/stores/administration/item.store.js");
 require("./both/stores/administration/promotion.store.js");

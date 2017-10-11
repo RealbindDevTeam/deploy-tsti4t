@@ -2,22 +2,22 @@
   "format": "web-program-pre1",
   "manifest": [
     {
-      "path": "6e6ce9bfbf86b2705d0c14419ec212fed1d84d57.js",
+      "path": "a98919b492a356a5da243e3ae4e01fc90f64f5c7.js",
       "where": "client",
       "type": "js",
       "cacheable": true,
-      "url": "/6e6ce9bfbf86b2705d0c14419ec212fed1d84d57.js?meteor_js_resource=true",
-      "size": 4378205,
-      "hash": "6e6ce9bfbf86b2705d0c14419ec212fed1d84d57"
+      "url": "/a98919b492a356a5da243e3ae4e01fc90f64f5c7.js?meteor_js_resource=true",
+      "size": 4618130,
+      "hash": "a98919b492a356a5da243e3ae4e01fc90f64f5c7"
     },
     {
-      "path": "582553a5304afabcb90316024b4937ea9e3aaa4d.css",
+      "path": "99cf47cd279afc95ec59167f75eb119806bb4af8.css",
       "where": "client",
       "type": "css",
       "cacheable": true,
-      "url": "/582553a5304afabcb90316024b4937ea9e3aaa4d.css?meteor_css_resource=true",
-      "size": 65570,
-      "hash": "582553a5304afabcb90316024b4937ea9e3aaa4d"
+      "url": "/99cf47cd279afc95ec59167f75eb119806bb4af8.css?meteor_css_resource=true",
+      "size": 66058,
+      "hash": "99cf47cd279afc95ec59167f75eb119806bb4af8"
     },
     {
       "path": "packages/oauth/end_of_popup_response.js",
@@ -106,8 +106,8 @@
       "type": "asset",
       "cacheable": false,
       "url": "/i18n/en.json",
-      "size": 51240,
-      "hash": "b560a86cb282204e6f9304581bd0fe8139c3e95f"
+      "size": 61536,
+      "hash": "6a82dcb6c60e064b2494ae5fda2a0e1bba34f74f"
     },
     {
       "path": "app/i18n/es.json",
@@ -115,8 +115,8 @@
       "type": "asset",
       "cacheable": false,
       "url": "/i18n/es.json",
-      "size": 54120,
-      "hash": "c9786bbc965535fb31bb8b1a7ab7f77d9535c279"
+      "size": 65301,
+      "hash": "779259522030ff4d6a7d5f71ac686c9b75c01869"
     },
     {
       "path": "app/images/aditions.png",
@@ -200,6 +200,15 @@
       "hash": "32ca21db77cd02f03ee5b85e23434fc71fa17757"
     },
     {
+      "path": "app/images/dashboard-banner.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/dashboard-banner.png",
+      "size": 108320,
+      "hash": "7beb0e1c45519180239e4e82d9f77c3abd30acf8"
+    },
+    {
       "path": "app/images/default-plate.png",
       "where": "client",
       "type": "asset",
@@ -236,6 +245,42 @@
       "hash": "5058102b1605e3656576a8128e69b92462229bf8"
     },
     {
+      "path": "app/images/exit.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/exit.png",
+      "size": 5738,
+      "hash": "d827c202708f020089cf8569203ce1fbf28f0819"
+    },
+    {
+      "path": "app/images/facebook_gray.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/facebook_gray.png",
+      "size": 262,
+      "hash": "f31e6cd2174425b7e5567717f7f7436e611d9592"
+    },
+    {
+      "path": "app/images/facebook_red.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/facebook_red.png",
+      "size": 253,
+      "hash": "d97cf4310fca324e6b5b446f50ab5eaf18c194de"
+    },
+    {
+      "path": "app/images/favicon.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/favicon.png",
+      "size": 488,
+      "hash": "ef33cf28921d6067491dd24dadea07845393484f"
+    },
+    {
       "path": "app/images/garnish-food.png",
       "where": "client",
       "type": "asset",
@@ -243,6 +288,24 @@
       "url": "/images/garnish-food.png",
       "size": 20760,
       "hash": "1e4e5ae5c230544dc7e58d8699a3883a5bd83625"
+    },
+    {
+      "path": "app/images/instagram_gray.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/instagram_gray.png",
+      "size": 903,
+      "hash": "f05e9051155bd3a853611d2e03869c46057ba8a4"
+    },
+    {
+      "path": "app/images/instagram_red.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/instagram_red.png",
+      "size": 786,
+      "hash": "4791696369fc90eaa7ad5adb07b084629a1a7868"
     },
     {
       "path": "app/images/isotipo_footer.png",
@@ -313,17 +376,17 @@
       "type": "asset",
       "cacheable": false,
       "url": "/images/logo_iurest.png",
-      "size": 1593,
-      "hash": "5a4b79fd86489811f572e9144f8c990411f6bd61"
+      "size": 1904,
+      "hash": "fc3c9c0a49c703c5324a95936185f961488a6811"
     },
     {
-      "path": "app/images/logo_iurest_200_x_100.png",
+      "path": "app/images/logo_iurest_190_x_60.png",
       "where": "client",
       "type": "asset",
       "cacheable": false,
-      "url": "/images/logo_iurest_200_x_100.png",
-      "size": 3261,
-      "hash": "5918d1edb659b72908782f1cb0a69ffb0d455c46"
+      "url": "/images/logo_iurest_190_x_60.png",
+      "size": 2972,
+      "hash": "481e90ab819f2278f2457dbd60405206749fde9d"
     },
     {
       "path": "app/images/logo_iurest_white.png",
@@ -331,17 +394,8 @@
       "type": "asset",
       "cacheable": false,
       "url": "/images/logo_iurest_white.png",
-      "size": 1436,
-      "hash": "9b8ff343ee393c336bb85bf3cbd6a5c50d279836"
-    },
-    {
-      "path": "app/images/logo_iurest_white_200_x_100.png",
-      "where": "client",
-      "type": "asset",
-      "cacheable": false,
-      "url": "/images/logo_iurest_white_200_x_100.png",
-      "size": 3023,
-      "hash": "f699a92cf9f5229e2a6f0ada2b89c7a5ff72cde1"
+      "size": 2262,
+      "hash": "942415872a54165bc9495d1038ef10d075473c4d"
     },
     {
       "path": "app/images/mastercard.png",
@@ -403,8 +457,8 @@
       "type": "asset",
       "cacheable": false,
       "url": "/images/others-orders.png",
-      "size": 8254,
-      "hash": "540835a97575e9d0f1ca976469f8f5be795636d3"
+      "size": 8203,
+      "hash": "0fe13d690d1d7c89c8b81bd802ce376e1efbdf32"
     },
     {
       "path": "app/images/pago.png",
@@ -574,8 +628,8 @@
       "type": "asset",
       "cacheable": false,
       "url": "/images/social-icons.png",
-      "size": 1650,
-      "hash": "a3ba0aa0fde737c8e98d3f1a43f4843c4847500b"
+      "size": 1645,
+      "hash": "c6bf8ab7254d03ddb1a717968368fe96079849cb"
     },
     {
       "path": "app/images/subcategories.png",
@@ -614,6 +668,24 @@
       "hash": "169b9f63132be4103485c7ad405e9c66bb8929b3"
     },
     {
+      "path": "app/images/twitter_gray.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/twitter_gray.png",
+      "size": 668,
+      "hash": "2ecd30e3a8c09e1a7aaf9a5dbdcf7307333fae25"
+    },
+    {
+      "path": "app/images/twitter_red.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/twitter_red.png",
+      "size": 572,
+      "hash": "96a89fc8114b269bf5d76a4a87ecc922882c7f4f"
+    },
+    {
       "path": "app/images/ubication.png",
       "where": "client",
       "type": "asset",
@@ -648,6 +720,15 @@
       "url": "/images/waiter.png",
       "size": 23546,
       "hash": "e0689c633a35a5189706ef68f3eafda90a2f0de8"
+    },
+    {
+      "path": "app/images/warning.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/warning.png",
+      "size": 2707,
+      "hash": "e7bf9ef5969e84625af10e48924201c1439ed0b2"
     },
     {
       "path": "app/js/jspdf.min.js",
@@ -4088,6 +4169,24 @@
       "hash": "fc997a872ff4f7a5a01aaf28d629c08936678a36"
     },
     {
+      "path": "app/client/imports/app/web/restaurant/restaurant/restaurant-table-control/table-detail/penalize-customer/penalize-customer.component.html.d.ts",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/client/imports/app/web/restaurant/restaurant/restaurant-table-control/table-detail/penalize-customer/penalize-customer.component.html.d.ts",
+      "size": 72,
+      "hash": "a9cf3f2e298b546c5918f0a3b1af0dfe3afe4288"
+    },
+    {
+      "path": "app/client/imports/app/web/restaurant/restaurant/restaurant-table-control/table-detail/penalize-customer/penalize-customer.component.scss",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/client/imports/app/web/restaurant/restaurant/restaurant-table-control/table-detail/penalize-customer/penalize-customer.component.scss",
+      "size": 368,
+      "hash": "de749bbbb1f25856f45fa7d17057efff76ffa7cb"
+    },
+    {
       "path": "app/client/imports/app/web/administration/items/items-enable/enable-confirm/enable-confirm.component.html.d.ts",
       "where": "client",
       "type": "asset",
@@ -4156,6 +4255,78 @@
       "type": "asset",
       "cacheable": false,
       "url": "/client/imports/app/web/restaurant/restaurant/restaurant-register/create-confirm/create-confirm.component.scss",
+      "size": 0,
+      "hash": "1d6ae98d42f808bbae3ef7f1bf284c4968836669"
+    },
+    {
+      "path": "app/client/imports/app/web/restaurant/restaurant/restaurant-table-control/table-detail/table-detail.component.html.d.ts",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/client/imports/app/web/restaurant/restaurant/restaurant-table-control/table-detail/table-detail.component.html.d.ts",
+      "size": 72,
+      "hash": "a9cf3f2e298b546c5918f0a3b1af0dfe3afe4288"
+    },
+    {
+      "path": "app/client/imports/app/web/restaurant/restaurant/restaurant-table-control/table-detail/table-detail.component.scss",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/client/imports/app/web/restaurant/restaurant/restaurant-table-control/table-detail/table-detail.component.scss",
+      "size": 772,
+      "hash": "22d4fdf139f74d2b69d18c08d31fee05d18b3ec9"
+    },
+    {
+      "path": "app/client/imports/app/web/restaurant/restaurant/social-network/facebook/restaurant-facebook.component.html.d.ts",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/client/imports/app/web/restaurant/restaurant/social-network/facebook/restaurant-facebook.component.html.d.ts",
+      "size": 72,
+      "hash": "a9cf3f2e298b546c5918f0a3b1af0dfe3afe4288"
+    },
+    {
+      "path": "app/client/imports/app/web/restaurant/restaurant/social-network/facebook/restaurant-facebook.component.scss",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/client/imports/app/web/restaurant/restaurant/social-network/facebook/restaurant-facebook.component.scss",
+      "size": 0,
+      "hash": "1d6ae98d42f808bbae3ef7f1bf284c4968836669"
+    },
+    {
+      "path": "app/client/imports/app/web/restaurant/restaurant/social-network/instagram/restaurant-instagram.component.html.d.ts",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/client/imports/app/web/restaurant/restaurant/social-network/instagram/restaurant-instagram.component.html.d.ts",
+      "size": 72,
+      "hash": "a9cf3f2e298b546c5918f0a3b1af0dfe3afe4288"
+    },
+    {
+      "path": "app/client/imports/app/web/restaurant/restaurant/social-network/instagram/restaurant-instagram.component.scss",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/client/imports/app/web/restaurant/restaurant/social-network/instagram/restaurant-instagram.component.scss",
+      "size": 0,
+      "hash": "1d6ae98d42f808bbae3ef7f1bf284c4968836669"
+    },
+    {
+      "path": "app/client/imports/app/web/restaurant/restaurant/social-network/twitter/restaurant-twitter.component.html.d.ts",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/client/imports/app/web/restaurant/restaurant/social-network/twitter/restaurant-twitter.component.html.d.ts",
+      "size": 72,
+      "hash": "a9cf3f2e298b546c5918f0a3b1af0dfe3afe4288"
+    },
+    {
+      "path": "app/client/imports/app/web/restaurant/restaurant/social-network/twitter/restaurant-twitter.component.scss",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/client/imports/app/web/restaurant/restaurant/social-network/twitter/restaurant-twitter.component.scss",
       "size": 0,
       "hash": "1d6ae98d42f808bbae3ef7f1bf284c4968836669"
     },
@@ -4372,8 +4543,8 @@
       "type": "asset",
       "cacheable": false,
       "url": "/client/imports/app/web/customer/orders/order-create/order-create.component.scss",
-      "size": 8590,
-      "hash": "1ea8635bf022f850548ecae4137db13f62a437e3"
+      "size": 8585,
+      "hash": "47fefaf91b4649f1afda1e4b2008b4d086fdf39b"
     },
     {
       "path": "app/client/imports/app/web/customer/orders/order-list/order-list.component.html.d.ts",
@@ -4390,8 +4561,8 @@
       "type": "asset",
       "cacheable": false,
       "url": "/client/imports/app/web/customer/orders/order-list/order-list.component.scss",
-      "size": 3920,
-      "hash": "083406e053165e2f460a52c4a158eba872d7982e"
+      "size": 4100,
+      "hash": "ba2f2fc8705445f9eb1776b3fde5988f1a3b20a2"
     },
     {
       "path": "app/client/imports/app/web/customer/orders/order-navigation/order-menu-option.component.scss",
@@ -4565,38 +4736,20 @@
       "hash": "45d10c28262c05905ca11fa4c56f0085f9faa693"
     },
     {
-      "path": "app/client/imports/app/web/restaurant/restaurant/restaurant-info-detail/restaurant-info-detail.component.html.d.ts",
+      "path": "app/client/imports/app/web/restaurant/restaurant/restaurant-info/restaurant-info.component.html.d.ts",
       "where": "client",
       "type": "asset",
       "cacheable": false,
-      "url": "/client/imports/app/web/restaurant/restaurant/restaurant-info-detail/restaurant-info-detail.component.html.d.ts",
+      "url": "/client/imports/app/web/restaurant/restaurant/restaurant-info/restaurant-info.component.html.d.ts",
       "size": 72,
       "hash": "a9cf3f2e298b546c5918f0a3b1af0dfe3afe4288"
     },
     {
-      "path": "app/client/imports/app/web/restaurant/restaurant/restaurant-info-detail/restaurant-info-detail.component.scss",
+      "path": "app/client/imports/app/web/restaurant/restaurant/restaurant-info/restaurant-info.component.scss",
       "where": "client",
       "type": "asset",
       "cacheable": false,
-      "url": "/client/imports/app/web/restaurant/restaurant/restaurant-info-detail/restaurant-info-detail.component.scss",
-      "size": 0,
-      "hash": "1d6ae98d42f808bbae3ef7f1bf284c4968836669"
-    },
-    {
-      "path": "app/client/imports/app/web/restaurant/restaurant/restaurant-info-master/restaurant-info-master.component.html.d.ts",
-      "where": "client",
-      "type": "asset",
-      "cacheable": false,
-      "url": "/client/imports/app/web/restaurant/restaurant/restaurant-info-master/restaurant-info-master.component.html.d.ts",
-      "size": 72,
-      "hash": "a9cf3f2e298b546c5918f0a3b1af0dfe3afe4288"
-    },
-    {
-      "path": "app/client/imports/app/web/restaurant/restaurant/restaurant-info-master/restaurant-info-master.component.scss",
-      "where": "client",
-      "type": "asset",
-      "cacheable": false,
-      "url": "/client/imports/app/web/restaurant/restaurant/restaurant-info-master/restaurant-info-master.component.scss",
+      "url": "/client/imports/app/web/restaurant/restaurant/restaurant-info/restaurant-info.component.scss",
       "size": 365,
       "hash": "c0c312fb811fede9e4468c9094f14f749569859e"
     },
@@ -4673,6 +4826,42 @@
       "hash": "1d6ae98d42f808bbae3ef7f1bf284c4968836669"
     },
     {
+      "path": "app/client/imports/app/web/restaurant/restaurant/restaurant-table-control/restaurant-table-control.component.html.d.ts",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/client/imports/app/web/restaurant/restaurant/restaurant-table-control/restaurant-table-control.component.html.d.ts",
+      "size": 72,
+      "hash": "a9cf3f2e298b546c5918f0a3b1af0dfe3afe4288"
+    },
+    {
+      "path": "app/client/imports/app/web/restaurant/restaurant/restaurant-table-control/restaurant-table-control.component.scss",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/client/imports/app/web/restaurant/restaurant/restaurant-table-control/restaurant-table-control.component.scss",
+      "size": 113,
+      "hash": "c9b8e282d36d32225e43b559c2d4dc3b8cce6117"
+    },
+    {
+      "path": "app/client/imports/app/web/supervisor/collaborators/collaborators-edition/supervisor-collaborators-edition.component.html.d.ts",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/client/imports/app/web/supervisor/collaborators/collaborators-edition/supervisor-collaborators-edition.component.html.d.ts",
+      "size": 72,
+      "hash": "a9cf3f2e298b546c5918f0a3b1af0dfe3afe4288"
+    },
+    {
+      "path": "app/client/imports/app/web/supervisor/collaborators/collaborators-register/supervisor-collaborators-register.component.html.d.ts",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/client/imports/app/web/supervisor/collaborators/collaborators-register/supervisor-collaborators-register.component.html.d.ts",
+      "size": 72,
+      "hash": "a9cf3f2e298b546c5918f0a3b1af0dfe3afe4288"
+    },
+    {
       "path": "app/client/imports/app/web/waiter/calls/call-close-confirm/call-close-confirm.component.html.d.ts",
       "where": "client",
       "type": "asset",
@@ -4709,6 +4898,24 @@
       "hash": "47b82dd208f9c4e63ace628e51cdf641adb7d184"
     },
     {
+      "path": "app/client/imports/app/web/waiter/calls/restaurant-exit-confirm/restaurant-exit-confirm.component.html.d.ts",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/client/imports/app/web/waiter/calls/restaurant-exit-confirm/restaurant-exit-confirm.component.html.d.ts",
+      "size": 72,
+      "hash": "a9cf3f2e298b546c5918f0a3b1af0dfe3afe4288"
+    },
+    {
+      "path": "app/client/imports/app/web/waiter/calls/restaurant-exit-confirm/restaurant-exit-confirm.component.scss",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/client/imports/app/web/waiter/calls/restaurant-exit-confirm/restaurant-exit-confirm.component.scss",
+      "size": 1121,
+      "hash": "46a894ecba424734e71b9f11c9c16f2feac6cd16"
+    },
+    {
       "path": "app/client/imports/app/web/waiter/calls/send-order-confirm/send-order-confirm.component.html.d.ts",
       "where": "client",
       "type": "asset",
@@ -4741,8 +4948,8 @@
       "type": "asset",
       "cacheable": false,
       "url": "/client/imports/app/web/administration/additions/addition.component.scss",
-      "size": 616,
-      "hash": "c1838f6d1a71e16bcd25068c7731cb3db68e9ac6"
+      "size": 704,
+      "hash": "ca6e779f67e6d3cc6308ab0c2cf9f6eb47ec078b"
     },
     {
       "path": "app/client/imports/app/web/administration/categories/categories.component.html.d.ts",
@@ -4759,8 +4966,8 @@
       "type": "asset",
       "cacheable": false,
       "url": "/client/imports/app/web/administration/categories/categories.component.scss",
-      "size": 234,
-      "hash": "57f7a7c328a017261f8196f97deb7272cff9d3c7"
+      "size": 322,
+      "hash": "65f20ffe4f08e669c8d42dc60957e33a493ad216"
     },
     {
       "path": "app/client/imports/app/web/administration/garnish-food/garnish-food.component.html.d.ts",
@@ -4777,8 +4984,8 @@
       "type": "asset",
       "cacheable": false,
       "url": "/client/imports/app/web/administration/garnish-food/garnish-food.component.scss",
-      "size": 686,
-      "hash": "ed5fd85d4c5596ca1b83da02e52fbc101d75f04c"
+      "size": 774,
+      "hash": "3a3d5f029d25d7b77c37cd4302d3af2beed750a4"
     },
     {
       "path": "app/client/imports/app/web/administration/items/item.component.html.d.ts",
@@ -4795,8 +5002,8 @@
       "type": "asset",
       "cacheable": false,
       "url": "/client/imports/app/web/administration/items/item.component.scss",
-      "size": 565,
-      "hash": "4381dcf78c13f7959bc85b4f0bb3b18150bba95c"
+      "size": 554,
+      "hash": "34f0dc70c032b036f0dadace2e2c2c09c3d6463b"
     },
     {
       "path": "app/client/imports/app/web/administration/promotions/promotion.component.html.d.ts",
@@ -4831,8 +5038,8 @@
       "type": "asset",
       "cacheable": false,
       "url": "/client/imports/app/web/administration/sections/section.component.scss",
-      "size": 127,
-      "hash": "3f0823aa2a5b5a03674beb849c927d9f8cbff582"
+      "size": 215,
+      "hash": "98539a65d61a38a75ad0836530b163da614213ce"
     },
     {
       "path": "app/client/imports/app/web/administration/subcategories/subcategories.component.html.d.ts",
@@ -4849,8 +5056,8 @@
       "type": "asset",
       "cacheable": false,
       "url": "/client/imports/app/web/administration/subcategories/subcategories.component.scss",
-      "size": 245,
-      "hash": "cfe4832e136e7bbc458c08680bd81f131069ebeb"
+      "size": 333,
+      "hash": "73b80920f0a24799b1ce04b839595ecc27f7eed4"
     },
     {
       "path": "app/client/imports/app/web/auth/go-to-store/go-to-store.component.html.d.ts",
@@ -4869,6 +5076,15 @@
       "url": "/client/imports/app/web/auth/go-to-store/go-to-store.component.scss",
       "size": 674,
       "hash": "b1def6e5fd574369397f036085b42cbb2016ba50"
+    },
+    {
+      "path": "app/client/imports/app/web/auth/recover-password/recover-confirm.component.html.d.ts",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/client/imports/app/web/auth/recover-password/recover-confirm.component.html.d.ts",
+      "size": 72,
+      "hash": "a9cf3f2e298b546c5918f0a3b1af0dfe3afe4288"
     },
     {
       "path": "app/client/imports/app/web/auth/recover-password/recover.web.component.html.d.ts",
@@ -4903,8 +5119,8 @@
       "type": "asset",
       "cacheable": false,
       "url": "/client/imports/app/web/chef/menu-list/menu-list.component.scss",
-      "size": 8590,
-      "hash": "1ea8635bf022f850548ecae4137db13f62a437e3"
+      "size": 8550,
+      "hash": "05439163a6fb869234eb57b5caf88a989e265869"
     },
     {
       "path": "app/client/imports/app/web/chef/order-attention/order-attention.component.html.d.ts",
@@ -4921,8 +5137,8 @@
       "type": "asset",
       "cacheable": false,
       "url": "/client/imports/app/web/chef/order-attention/order-attention.component.scss",
-      "size": 1069,
-      "hash": "11d27415ca91e70ae8f681ec46efbe508c61bd42"
+      "size": 1325,
+      "hash": "5ef1e23a26051ac7323adda94a36525460456c2d"
     },
     {
       "path": "app/client/imports/app/web/custom/schedule/schedule.component.html.d.ts",
@@ -4997,6 +5213,24 @@
       "hash": "1d6ae98d42f808bbae3ef7f1bf284c4968836669"
     },
     {
+      "path": "app/client/imports/app/web/customer/restaurant-exit/restaurant-exit.component.html.d.ts",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/client/imports/app/web/customer/restaurant-exit/restaurant-exit.component.html.d.ts",
+      "size": 72,
+      "hash": "a9cf3f2e298b546c5918f0a3b1af0dfe3afe4288"
+    },
+    {
+      "path": "app/client/imports/app/web/customer/restaurant-exit/restaurant-exit.component.scss",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/client/imports/app/web/customer/restaurant-exit/restaurant-exit.component.scss",
+      "size": 286,
+      "hash": "c352ea39ac5851e1b7892d5addda592662d989f1"
+    },
+    {
       "path": "app/client/imports/app/web/customer/settings/settings.web.component.html.d.ts",
       "where": "client",
       "type": "asset",
@@ -5015,6 +5249,24 @@
       "hash": "336f80e705c2342e58dc721c361d3f33a1ed3e49"
     },
     {
+      "path": "app/client/imports/app/web/customer/table-change/table-change.component.html.d.ts",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/client/imports/app/web/customer/table-change/table-change.component.html.d.ts",
+      "size": 72,
+      "hash": "a9cf3f2e298b546c5918f0a3b1af0dfe3afe4288"
+    },
+    {
+      "path": "app/client/imports/app/web/customer/table-change/table-change.component.scss",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/client/imports/app/web/customer/table-change/table-change.component.scss",
+      "size": 57,
+      "hash": "0e7d049426bcf8d592daba0be4b52d321622c46d"
+    },
+    {
       "path": "app/client/imports/app/web/customer/waiter-call/waiter-call.component.html.d.ts",
       "where": "client",
       "type": "asset",
@@ -5030,7 +5282,7 @@
       "cacheable": false,
       "url": "/client/imports/app/web/customer/waiter-call/waiter-call.component.scss",
       "size": 725,
-      "hash": "114f2c92c3121bbfa7742e5e2ad2976ce689bf11"
+      "hash": "6578dab94b849512581043a33b800877b6ce1a02"
     },
     {
       "path": "app/client/imports/app/web/general/alert-confirm/alert-confirm.component.html.d.ts",
@@ -5119,8 +5371,8 @@
       "type": "asset",
       "cacheable": false,
       "url": "/client/imports/app/web/navigation/topnav/topnav.component.scss",
-      "size": 780,
-      "hash": "efae369b84f48c0ffc1ead302c257d209dfba848"
+      "size": 768,
+      "hash": "a2b834f46f8ce4941de7254d30b6147804d690cd"
     },
     {
       "path": "app/client/imports/app/web/payment/monthly-payment/monthly-payment.component.html.d.ts",
@@ -5155,8 +5407,8 @@
       "type": "asset",
       "cacheable": false,
       "url": "/client/imports/app/web/payment/payment-history/payment-history.component.scss",
-      "size": 169,
-      "hash": "0074d9b56dccedc9888776c765a23559233ae375"
+      "size": 195,
+      "hash": "af0cc81db9330234cb1375aa0589fe6dc39e8db9"
     },
     {
       "path": "app/client/imports/app/web/payment/payu-payment-form/payu-payment-form.component.html.d.ts",
@@ -5227,8 +5479,8 @@
       "type": "asset",
       "cacheable": false,
       "url": "/client/imports/app/web/restaurant/monthly-config/enable-disable.component.scss",
-      "size": 249,
-      "hash": "8bc706e98f8062f141a32fafa47a56dca2a53dae"
+      "size": 107,
+      "hash": "1b77d3d1d1befddd2ec30feffe786d6ee0b571c3"
     },
     {
       "path": "app/client/imports/app/web/restaurant/monthly-config/monthly-config.component.html.d.ts",
@@ -5281,8 +5533,8 @@
       "type": "asset",
       "cacheable": false,
       "url": "/client/imports/app/web/restaurant/restaurant/restaurant.component.scss",
-      "size": 385,
-      "hash": "0ca0aa92de6c99862c96cd620d4a6f128219af4e"
+      "size": 313,
+      "hash": "2b2c77eb3bb03b17ba19c74ebd46c9802f822cbc"
     },
     {
       "path": "app/client/imports/app/web/restaurant/tables/table.component.html.d.ts",
@@ -5299,6 +5551,60 @@
       "type": "asset",
       "cacheable": false,
       "url": "/client/imports/app/web/restaurant/tables/table.component.scss",
+      "size": 0,
+      "hash": "1d6ae98d42f808bbae3ef7f1bf284c4968836669"
+    },
+    {
+      "path": "app/client/imports/app/web/supervisor/collaborators/supervisor-collaborators.component.html.d.ts",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/client/imports/app/web/supervisor/collaborators/supervisor-collaborators.component.html.d.ts",
+      "size": 72,
+      "hash": "a9cf3f2e298b546c5918f0a3b1af0dfe3afe4288"
+    },
+    {
+      "path": "app/client/imports/app/web/supervisor/collaborators/supervisor-collaborators.component.scss",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/client/imports/app/web/supervisor/collaborators/supervisor-collaborators.component.scss",
+      "size": 393,
+      "hash": "338a5dea0ad6d4504247175edf66d9c22857e6a7"
+    },
+    {
+      "path": "app/client/imports/app/web/supervisor/restaurant-table-control/supervisor-restaurant-table-control.component.html.d.ts",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/client/imports/app/web/supervisor/restaurant-table-control/supervisor-restaurant-table-control.component.html.d.ts",
+      "size": 72,
+      "hash": "a9cf3f2e298b546c5918f0a3b1af0dfe3afe4288"
+    },
+    {
+      "path": "app/client/imports/app/web/supervisor/restaurant-table-control/supervisor-restaurant-table-control.component.scss",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/client/imports/app/web/supervisor/restaurant-table-control/supervisor-restaurant-table-control.component.scss",
+      "size": 0,
+      "hash": "1d6ae98d42f808bbae3ef7f1bf284c4968836669"
+    },
+    {
+      "path": "app/client/imports/app/web/supervisor/tables/supervisor-tables.component.html.d.ts",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/client/imports/app/web/supervisor/tables/supervisor-tables.component.html.d.ts",
+      "size": 72,
+      "hash": "a9cf3f2e298b546c5918f0a3b1af0dfe3afe4288"
+    },
+    {
+      "path": "app/client/imports/app/web/supervisor/tables/supervisor-tables.component.scss",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/client/imports/app/web/supervisor/tables/supervisor-tables.component.scss",
       "size": 0,
       "hash": "1d6ae98d42f808bbae3ef7f1bf284c4968836669"
     },
@@ -5434,8 +5740,8 @@
       "type": "asset",
       "cacheable": false,
       "url": "/client/imports/app/web/dashboard/dashboard.component.scss",
-      "size": 28,
-      "hash": "b35acf67c7c082d497e7be5dd068d6157c4f5b2a"
+      "size": 926,
+      "hash": "479bb970b40ba8f92b6f46d31d163db87b63ca9f"
     },
     {
       "path": "app/client/imports/app/web/landing-page/landing-page.component.html.d.ts",
@@ -5470,8 +5776,8 @@
       "type": "asset",
       "cacheable": false,
       "url": "/client/imports/app/web/supervisor-dashboard/supervisor-dashboard.component.scss",
-      "size": 0,
-      "hash": "1d6ae98d42f808bbae3ef7f1bf284c4968836669"
+      "size": 926,
+      "hash": "479bb970b40ba8f92b6f46d31d163db87b63ca9f"
     },
     {
       "path": "app/node_modules/angular-meteor/examples/todos-meteor-1.3/client/app.component.html.d.ts",
@@ -5747,7 +6053,7 @@
       "path": "head.html",
       "where": "internal",
       "type": "head",
-      "hash": "aa404f08456d38e94276e65bee3ed13a919e8e09"
+      "hash": "5a5eade3a02b0e21c630c83cedd565b01deed42a"
     },
     {
       "path": "body.html",
