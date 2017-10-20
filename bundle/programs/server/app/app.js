@@ -5227,11 +5227,12 @@ function loadParameters() {                                                     
             { _id: '9000', name: 'payu_is_prod', value: 'false', description: 'Flag to enable to prod payu payment' },
             { _id: '9100', name: 'payu_test_state', value: 'APPROVED', description: 'Test state for payu payment transaction' },
             { _id: '2100', name: 'max_user_penalties', value: '3', description: 'Max number of user penalties' },      //
-            { _id: '2200', name: 'penalty_days', value: '30', description: 'User penalty days' }                       //
+            { _id: '2200', name: 'penalty_days', value: '30', description: 'User penalty days' },                      //
+            { _id: '8000', name: 'date_test_monthly_pay', value: "October 3, 2017", description: 'Date test for monthly payment of iurest service' }
         ];                                                                                                             //
         parameters.forEach(function (parameter) { return parameter_collection_1.Parameters.insert(parameter); });      //
     }                                                                                                                  //
-}                                                                                                                      // 40
+}                                                                                                                      // 41
 exports.loadParameters = loadParameters;                                                                               // 4
 //# sourceMappingURL=parameters.js.map                                                                                 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
