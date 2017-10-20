@@ -539,7 +539,7 @@ if (meteor_1.Meteor.isServer) {                                                 
 //# sourceMappingURL=waiter-queue.methods.js.map                                                                       //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-}]},"invoice.methods.js":["meteor/meteor","/both/collections/restaurant/invoice.collection","/both/collections/restaurant/restaurant.collection","/both/collections/restaurant/table.collection","/both/collections/restaurant/order.collection","/both/collections/administration/item.collection","/both/collections/administration/garnish-food.collection","/both/collections/administration/addition.collection","/both/collections/general/currency.collection","/both/collections/general/paymentMethod.collection",function(require,exports){
+}]},"invoice.methods.js":["meteor/meteor","../../collections/restaurant/invoice.collection","/both/collections/restaurant/restaurant.collection","../../collections/restaurant/table.collection","../../collections/restaurant/order.collection","../../collections/administration/item.collection","../../collections/administration/garnish-food.collection","../../collections/administration/addition.collection","../../collections/general/currency.collection","../../collections/general/paymentMethod.collection",function(require,exports){
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                                     //
@@ -549,15 +549,15 @@ if (meteor_1.Meteor.isServer) {                                                 
                                                                                                                        //
 Object.defineProperty(exports, "__esModule", { value: true });                                                         //
 var meteor_1 = require("meteor/meteor");                                                                               // 1
-var invoice_collection_1 = require("/both/collections/restaurant/invoice.collection");                                 // 3
+var invoice_collection_1 = require("../../collections/restaurant/invoice.collection");                                 // 3
 var restaurant_collection_1 = require("/both/collections/restaurant/restaurant.collection");                           // 4
-var table_collection_1 = require("/both/collections/restaurant/table.collection");                                     // 5
-var order_collection_1 = require("/both/collections/restaurant/order.collection");                                     // 6
-var item_collection_1 = require("/both/collections/administration/item.collection");                                   // 7
-var garnish_food_collection_1 = require("/both/collections/administration/garnish-food.collection");                   // 8
-var addition_collection_1 = require("/both/collections/administration/addition.collection");                           // 9
-var currency_collection_1 = require("/both/collections/general/currency.collection");                                  // 10
-var paymentMethod_collection_1 = require("/both/collections/general/paymentMethod.collection");                        // 11
+var table_collection_1 = require("../../collections/restaurant/table.collection");                                     // 5
+var order_collection_1 = require("../../collections/restaurant/order.collection");                                     // 6
+var item_collection_1 = require("../../collections/administration/item.collection");                                   // 7
+var garnish_food_collection_1 = require("../../collections/administration/garnish-food.collection");                   // 8
+var addition_collection_1 = require("../../collections/administration/addition.collection");                           // 9
+var currency_collection_1 = require("../../collections/general/currency.collection");                                  // 10
+var paymentMethod_collection_1 = require("../../collections/general/paymentMethod.collection");                        // 11
 if (meteor_1.Meteor.isServer) {                                                                                        // 13
     meteor_1.Meteor.methods({                                                                                          //
         /**                                                                                                            //
@@ -621,6 +621,8 @@ if (meteor_1.Meteor.isServer) {                                                 
                 phone: lRestaurant.phone,                                                                              //
             };                                                                                                         //
             invoice_collection_1.Invoices.insert({                                                                     //
+                restaurant_id: _pPay.restaurantId,                                                                     //
+                payment_id: _pPay._id,                                                                                 //
                 restaurant_name: lRestaurant.name,                                                                     //
                 table_number: lTable._number,                                                                          //
                 total_pay: _pPay.totalToPayment,                                                                       //
@@ -637,7 +639,7 @@ if (meteor_1.Meteor.isServer) {                                                 
             });                                                                                                        //
         }                                                                                                              //
     });                                                                                                                //
-}                                                                                                                      // 99
+}                                                                                                                      // 101
 //# sourceMappingURL=invoice.methods.js.map                                                                            //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1006,7 +1008,7 @@ if (meteor_1.Meteor.isServer) {                                                 
 //# sourceMappingURL=payment.methods.js.map                                                                            //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-}],"restaurant.methods.js":["meteor/meteor","meteor/jalik:ufs","../../stores/restaurant/restaurant.store","./QR/codeGenerator","../../collections/restaurant/table.collection","../../collections/auth/user-detail.collection","../../collections/restaurant/account.collection","../../collections/restaurant/restaurant.collection","../../collections/restaurant/order.collection","../../collections/restaurant/waiter-call-detail.collection","../../collections/general/parameter.collection","../../collections/auth/user-penalty.collection",function(require,exports){
+}],"restaurant.methods.js":["meteor/meteor","meteor/jalik:ufs","../../stores/restaurant/restaurant.store","/both/methods/restaurant/QR/codeGenerator","/both/collections/restaurant/table.collection","/both/collections/auth/user-detail.collection","/both/collections/restaurant/account.collection","/both/collections/restaurant/restaurant.collection","/both/collections/restaurant/order.collection","/both/collections/restaurant/waiter-call-detail.collection","/both/collections/general/parameter.collection","/both/collections/auth/user-penalty.collection",function(require,exports){
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                                     //
@@ -1018,15 +1020,15 @@ Object.defineProperty(exports, "__esModule", { value: true });                  
 var meteor_1 = require("meteor/meteor");                                                                               // 1
 var jalik_ufs_1 = require("meteor/jalik:ufs");                                                                         // 2
 var restaurant_store_1 = require("../../stores/restaurant/restaurant.store");                                          // 3
-var codeGenerator_1 = require("./QR/codeGenerator");                                                                   // 4
-var table_collection_1 = require("../../collections/restaurant/table.collection");                                     // 6
-var user_detail_collection_1 = require("../../collections/auth/user-detail.collection");                               // 7
-var account_collection_1 = require("../../collections/restaurant/account.collection");                                 // 9
-var restaurant_collection_1 = require("../../collections/restaurant/restaurant.collection");                           // 11
-var order_collection_1 = require("../../collections/restaurant/order.collection");                                     // 13
-var waiter_call_detail_collection_1 = require("../../collections/restaurant/waiter-call-detail.collection");           // 15
-var parameter_collection_1 = require("../../collections/general/parameter.collection");                                // 17
-var user_penalty_collection_1 = require("../../collections/auth/user-penalty.collection");                             // 20
+var codeGenerator_1 = require("/both/methods/restaurant/QR/codeGenerator");                                            // 4
+var table_collection_1 = require("/both/collections/restaurant/table.collection");                                     // 6
+var user_detail_collection_1 = require("/both/collections/auth/user-detail.collection");                               // 7
+var account_collection_1 = require("/both/collections/restaurant/account.collection");                                 // 9
+var restaurant_collection_1 = require("/both/collections/restaurant/restaurant.collection");                           // 11
+var order_collection_1 = require("/both/collections/restaurant/order.collection");                                     // 13
+var waiter_call_detail_collection_1 = require("/both/collections/restaurant/waiter-call-detail.collection");           // 15
+var parameter_collection_1 = require("/both/collections/general/parameter.collection");                                // 17
+var user_penalty_collection_1 = require("/both/collections/auth/user-penalty.collection");                             // 20
 /**                                                                                                                    // 24
  * Function allow upload restaurant images                                                                             //
  * @param {File} data                                                                                                  //
@@ -1786,7 +1788,7 @@ exports.uploadUserImage = uploadUserImage;                                      
 //# sourceMappingURL=user-profile.methods.js.map                                                                       //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-}],"user.methods.js":["meteor/meteor","../../collections/auth/user-detail.collection","../../collections/restaurant/account.collection","../../collections/restaurant/order.collection","../../collections/restaurant/payment.collection","../../collections/restaurant/waiter-call-detail.collection","../../collections/restaurant/table.collection","/both/collections/auth/user-penalty.collection","../../collections/general/parameter.collection",function(require,exports){
+}],"user.methods.js":["meteor/meteor","/both/collections/auth/user-detail.collection","/both/collections/restaurant/account.collection","/both/collections/restaurant/order.collection","/both/collections/restaurant/payment.collection","/both/collections/restaurant/waiter-call-detail.collection","/both/collections/restaurant/table.collection","/both/collections/auth/user-penalty.collection","/both/collections/general/parameter.collection",function(require,exports){
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                                     //
@@ -1796,14 +1798,14 @@ exports.uploadUserImage = uploadUserImage;                                      
                                                                                                                        //
 Object.defineProperty(exports, "__esModule", { value: true });                                                         //
 var meteor_1 = require("meteor/meteor");                                                                               // 1
-var user_detail_collection_1 = require("../../collections/auth/user-detail.collection");                               // 4
-var account_collection_1 = require("../../collections/restaurant/account.collection");                                 // 6
-var order_collection_1 = require("../../collections/restaurant/order.collection");                                     // 8
-var payment_collection_1 = require("../../collections/restaurant/payment.collection");                                 // 9
-var waiter_call_detail_collection_1 = require("../../collections/restaurant/waiter-call-detail.collection");           // 10
-var table_collection_1 = require("../../collections/restaurant/table.collection");                                     // 12
+var user_detail_collection_1 = require("/both/collections/auth/user-detail.collection");                               // 4
+var account_collection_1 = require("/both/collections/restaurant/account.collection");                                 // 6
+var order_collection_1 = require("/both/collections/restaurant/order.collection");                                     // 8
+var payment_collection_1 = require("/both/collections/restaurant/payment.collection");                                 // 9
+var waiter_call_detail_collection_1 = require("/both/collections/restaurant/waiter-call-detail.collection");           // 10
+var table_collection_1 = require("/both/collections/restaurant/table.collection");                                     // 12
 var user_penalty_collection_1 = require("/both/collections/auth/user-penalty.collection");                             // 13
-var parameter_collection_1 = require("../../collections/general/parameter.collection");                                // 14
+var parameter_collection_1 = require("/both/collections/general/parameter.collection");                                // 14
 if (meteor_1.Meteor.isServer) {                                                                                        // 17
     meteor_1.Meteor.methods({                                                                                          //
         penalizeCustomer: function (_pCustomerUser) {                                                                  //
@@ -4739,6 +4741,13 @@ function loadMenus() {                                                          
                         url: "/app/monthly-config",                                                                    //
                         icon_name: "",                                                                                 //
                         order: 1005                                                                                    //
+                    }, {                                                                                               //
+                        _id: "1006",                                                                                   //
+                        is_active: true,                                                                               //
+                        name: "MENUS.ADMINISTRATION.INVOICES_DOWNLOAD",                                                //
+                        url: "/app/invoices-download",                                                                 //
+                        icon_name: "",                                                                                 //
+                        order: 1006                                                                                    //
                     }                                                                                                  //
                 ]                                                                                                      //
             },                                                                                                         //
@@ -4903,7 +4912,7 @@ function loadMenus() {                                                          
         ];                                                                                                             //
         menus.forEach(function (menu) { return menu_collection_1.Menus.insert(menu); });                               //
     }                                                                                                                  //
-}                                                                                                                      // 235
+}                                                                                                                      // 242
 exports.loadMenus = loadMenus;                                                                                         // 4
 //# sourceMappingURL=menus.js.map                                                                                      //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -6680,6 +6689,13 @@ meteor_1.Meteor.publish('getInvoicesByUserId', function (_pUserId) {            
     check_1.check(_pUserId, String);                                                                                   //
     return invoice_collection_1.Invoices.collection.find({ customer_id: _pUserId });                                   //
 });                                                                                                                    // 12
+/**                                                                                                                    // 14
+ * Meteor publication invoices with restaurant Ids                                                                     //
+ * @param {string[]} _pRestaurantIds                                                                                   //
+ */                                                                                                                    //
+meteor_1.Meteor.publish('getInvoicesByRestaurantIds', function (_pRestaurantIds) {                                     // 18
+    return invoice_collection_1.Invoices.collection.find({ restaurant_id: { $in: _pRestaurantIds } });                 //
+});                                                                                                                    // 20
 //# sourceMappingURL=invoice.js.map                                                                                    //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

@@ -2,22 +2,22 @@
   "format": "web-program-pre1",
   "manifest": [
     {
-      "path": "e15380a15525b86e1a497de5d9e5d34557944b24.js",
+      "path": "d5d1cfa134e27ef8d82ac2f0a10c7ebac8166ee3.js",
       "where": "client",
       "type": "js",
       "cacheable": true,
-      "url": "/e15380a15525b86e1a497de5d9e5d34557944b24.js?meteor_js_resource=true",
-      "size": 4609227,
-      "hash": "e15380a15525b86e1a497de5d9e5d34557944b24"
+      "url": "/d5d1cfa134e27ef8d82ac2f0a10c7ebac8166ee3.js?meteor_js_resource=true",
+      "size": 4628496,
+      "hash": "d5d1cfa134e27ef8d82ac2f0a10c7ebac8166ee3"
     },
     {
-      "path": "99cf47cd279afc95ec59167f75eb119806bb4af8.css",
+      "path": "c1b2049d99db6b97f14d3fa467767ec1f34a0f1d.css",
       "where": "client",
       "type": "css",
       "cacheable": true,
-      "url": "/99cf47cd279afc95ec59167f75eb119806bb4af8.css?meteor_css_resource=true",
-      "size": 66058,
-      "hash": "99cf47cd279afc95ec59167f75eb119806bb4af8"
+      "url": "/c1b2049d99db6b97f14d3fa467767ec1f34a0f1d.css?meteor_css_resource=true",
+      "size": 66107,
+      "hash": "c1b2049d99db6b97f14d3fa467767ec1f34a0f1d"
     },
     {
       "path": "packages/oauth/end_of_popup_response.js",
@@ -36,6 +36,15 @@
       "url": "/packages/oauth/end_of_redirect_response.js",
       "size": 273,
       "hash": "6a6f05754801932831eca4680f582c87a8da062a"
+    },
+    {
+      "path": "app/css/animate.css",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/css/animate.css",
+      "size": 23848,
+      "hash": "644dc7109b0e2ef74a2be1044ae37f762c7d78c2"
     },
     {
       "path": "app/css/font-awesome.min.css",
@@ -106,8 +115,8 @@
       "type": "asset",
       "cacheable": false,
       "url": "/i18n/en.json",
-      "size": 61536,
-      "hash": "6a82dcb6c60e064b2494ae5fda2a0e1bba34f74f"
+      "size": 63261,
+      "hash": "7694158d3ded3235f6090bf90dde166c260915f2"
     },
     {
       "path": "app/i18n/es.json",
@@ -115,8 +124,8 @@
       "type": "asset",
       "cacheable": false,
       "url": "/i18n/es.json",
-      "size": 65301,
-      "hash": "779259522030ff4d6a7d5f71ac686c9b75c01869"
+      "size": 67325,
+      "hash": "1c135dbb8100497692fcf46025f4928aab4765af"
     },
     {
       "path": "app/images/aditions.png",
@@ -227,6 +236,15 @@
       "hash": "0f3c1ff3be92aad8067a5988cf53a25c3d275fe1"
     },
     {
+      "path": "app/images/default_addition.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/default_addition.png",
+      "size": 23510,
+      "hash": "b3639e71f626fac3b87a83840dee62bfb788ea7b"
+    },
+    {
       "path": "app/images/diners.png",
       "where": "client",
       "type": "asset",
@@ -306,6 +324,15 @@
       "url": "/images/instagram_red.png",
       "size": 786,
       "hash": "4791696369fc90eaa7ad5adb07b084629a1a7868"
+    },
+    {
+      "path": "app/images/iphone.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/iphone.png",
+      "size": 16690,
+      "hash": "5783857c3d546394eb8c6aff92e2587b58e2a1ea"
     },
     {
       "path": "app/images/isotipo_footer.png",
@@ -729,6 +756,15 @@
       "url": "/images/warning.png",
       "size": 2707,
       "hash": "e7bf9ef5969e84625af10e48924201c1439ed0b2"
+    },
+    {
+      "path": "app/js/animate.js",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/js/animate.js",
+      "size": 1252,
+      "hash": "4baf1cdef6da7098dd0342bf3319d785dc772fe7"
     },
     {
       "path": "app/js/jspdf.min.js",
@@ -4219,8 +4255,8 @@
       "type": "asset",
       "cacheable": false,
       "url": "/client/imports/app/web/customer/payments/country-payment/colombia-payment/colombia-payment.component.scss",
-      "size": 2225,
-      "hash": "d1e77ac25da3d0352cd1777579aecdd1a4baf3cf"
+      "size": 2364,
+      "hash": "86ef3017c51868534e68a265896002eb944e1468"
     },
     {
       "path": "app/client/imports/app/web/customer/payments/order-payment-translate/order-to-translate/order-to-translate.component.html.d.ts",
@@ -4273,8 +4309,8 @@
       "type": "asset",
       "cacheable": false,
       "url": "/client/imports/app/web/restaurant/restaurant/restaurant-table-control/table-detail/table-detail.component.scss",
-      "size": 772,
-      "hash": "22d4fdf139f74d2b69d18c08d31fee05d18b3ec9"
+      "size": 769,
+      "hash": "35f1a621ed9321e254c580f5886fd2bcff0c12e0"
     },
     {
       "path": "app/client/imports/app/web/restaurant/restaurant/social-network/facebook/restaurant-facebook.component.html.d.ts",
@@ -4543,8 +4579,8 @@
       "type": "asset",
       "cacheable": false,
       "url": "/client/imports/app/web/customer/orders/order-create/order-create.component.scss",
-      "size": 8585,
-      "hash": "47fefaf91b4649f1afda1e4b2008b4d086fdf39b"
+      "size": 8899,
+      "hash": "f9e68b7804ea9724d6f6d0ded62b3772ab744dd0"
     },
     {
       "path": "app/client/imports/app/web/customer/orders/order-list/order-list.component.html.d.ts",
@@ -4561,8 +4597,8 @@
       "type": "asset",
       "cacheable": false,
       "url": "/client/imports/app/web/customer/orders/order-list/order-list.component.scss",
-      "size": 4100,
-      "hash": "ba2f2fc8705445f9eb1776b3fde5988f1a3b20a2"
+      "size": 4658,
+      "hash": "6edd5912e70281adb0b4595668e80a58eadc5de2"
     },
     {
       "path": "app/client/imports/app/web/customer/orders/order-navigation/order-menu-option.component.scss",
@@ -4986,6 +5022,24 @@
       "url": "/client/imports/app/web/administration/garnish-food/garnish-food.component.scss",
       "size": 774,
       "hash": "3a3d5f029d25d7b77c37cd4302d3af2beed750a4"
+    },
+    {
+      "path": "app/client/imports/app/web/administration/invoices-download/invoices-download.component.html.d.ts",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/client/imports/app/web/administration/invoices-download/invoices-download.component.html.d.ts",
+      "size": 72,
+      "hash": "a9cf3f2e298b546c5918f0a3b1af0dfe3afe4288"
+    },
+    {
+      "path": "app/client/imports/app/web/administration/invoices-download/invoices-download.component.scss",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/client/imports/app/web/administration/invoices-download/invoices-download.component.scss",
+      "size": 985,
+      "hash": "ac7560bdbca6dddd73d2cce6613d362095ff5ca8"
     },
     {
       "path": "app/client/imports/app/web/administration/items/item.component.html.d.ts",
@@ -5758,8 +5812,8 @@
       "type": "asset",
       "cacheable": false,
       "url": "/client/imports/app/web/landing-page/landing-page.component.scss",
-      "size": 15783,
-      "hash": "0cc3d89d6d272d6333305839b56cdb6b2781415b"
+      "size": 9904,
+      "hash": "a9f03b16167194f1ce5967113f24c0da10bce267"
     },
     {
       "path": "app/client/imports/app/web/supervisor-dashboard/supervisor-dashboard.component.html.d.ts",
@@ -6053,13 +6107,13 @@
       "path": "head.html",
       "where": "internal",
       "type": "head",
-      "hash": "5a5eade3a02b0e21c630c83cedd565b01deed42a"
+      "hash": "eeac8cf46d4593c3ff156946cb3f920c3e3e5d68"
     },
     {
       "path": "body.html",
       "where": "internal",
       "type": "body",
-      "hash": "e1ea104edb5f7d35ef9f01100f868a289ae91e21"
+      "hash": "ec93fecc4fc00724903edd69198b0b5076de9200"
     }
   ]
 }
