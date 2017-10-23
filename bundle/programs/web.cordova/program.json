@@ -2,13 +2,13 @@
   "format": "web-program-pre1",
   "manifest": [
     {
-      "path": "c8c13270156a6fc871b01aa1d3aa9d058c26fc22.js",
+      "path": "8563dba2102e15db628f4de8979e1cc6c637a5dd.js",
       "where": "client",
       "type": "js",
       "cacheable": true,
-      "url": "/c8c13270156a6fc871b01aa1d3aa9d058c26fc22.js?meteor_js_resource=true",
-      "size": 4639973,
-      "hash": "c8c13270156a6fc871b01aa1d3aa9d058c26fc22"
+      "url": "/8563dba2102e15db628f4de8979e1cc6c637a5dd.js?meteor_js_resource=true",
+      "size": 4661284,
+      "hash": "8563dba2102e15db628f4de8979e1cc6c637a5dd"
     },
     {
       "path": "c1b2049d99db6b97f14d3fa467767ec1f34a0f1d.css",
@@ -115,8 +115,8 @@
       "type": "asset",
       "cacheable": false,
       "url": "/i18n/en.json",
-      "size": 63261,
-      "hash": "7694158d3ded3235f6090bf90dde166c260915f2"
+      "size": 65962,
+      "hash": "790cecc1a7f942fed54b642f6c7a5f301e325aba"
     },
     {
       "path": "app/i18n/es.json",
@@ -124,8 +124,8 @@
       "type": "asset",
       "cacheable": false,
       "url": "/i18n/es.json",
-      "size": 67325,
-      "hash": "1c135dbb8100497692fcf46025f4928aab4765af"
+      "size": 70308,
+      "hash": "6d3730eb2a74a529dcc8ee027e62877437b12397"
     },
     {
       "path": "app/images/aditions.png",
@@ -155,22 +155,22 @@
       "hash": "d889e6ca6389262a1aed2cdb7c064a25c24ca4d5"
     },
     {
-      "path": "app/images/background1.png",
+      "path": "app/images/asd-en.png",
       "where": "client",
       "type": "asset",
       "cacheable": false,
-      "url": "/images/background1.png",
-      "size": 859111,
-      "hash": "0b8fef2d4784bca5788d669b19c3d402a90e477c"
+      "url": "/images/asd-en.png",
+      "size": 20157,
+      "hash": "5aab6ad9f4f43a131992fdf8b0278a3ea9e1c26a"
     },
     {
-      "path": "app/images/background_logo.png",
+      "path": "app/images/asd-es.png",
       "where": "client",
       "type": "asset",
       "cacheable": false,
-      "url": "/images/background_logo.png",
-      "size": 35584,
-      "hash": "0d31c934baf9b73370f923ceaec7dd68411415a5"
+      "url": "/images/asd-es.png",
+      "size": 19806,
+      "hash": "1b18e3275a39d3fe51af4805cfa16970eb6c5314"
     },
     {
       "path": "app/images/background_waiter.png",
@@ -180,6 +180,15 @@
       "url": "/images/background_waiter.png",
       "size": 4089,
       "hash": "cd19b2659e220f22b67638ce56c14b60ba0d131d"
+    },
+    {
+      "path": "app/images/cash-payment.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/cash-payment.png",
+      "size": 8280,
+      "hash": "b97f0c9cc892415d512da5c092b830a6b9969d64"
     },
     {
       "path": "app/images/categories.png",
@@ -200,13 +209,13 @@
       "hash": "efd9b5f5a489c220f0f8068633c8ff4fb96c7a2a"
     },
     {
-      "path": "app/images/computador.png",
+      "path": "app/images/credit-card-payment.png",
       "where": "client",
       "type": "asset",
       "cacheable": false,
-      "url": "/images/computador.png",
-      "size": 3298,
-      "hash": "32ca21db77cd02f03ee5b85e23434fc71fa17757"
+      "url": "/images/credit-card-payment.png",
+      "size": 5104,
+      "hash": "ed2fe091cb6d34f03e7f519f983a1758fb470a06"
     },
     {
       "path": "app/images/dashboard-banner.png",
@@ -216,6 +225,15 @@
       "url": "/images/dashboard-banner.png",
       "size": 108320,
       "hash": "7beb0e1c45519180239e4e82d9f77c3abd30acf8"
+    },
+    {
+      "path": "app/images/debit-card-payment.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/debit-card-payment.png",
+      "size": 5952,
+      "hash": "d94b910074dec98b87422e0b7e7f1fe68d072a16"
     },
     {
       "path": "app/images/default-plate.png",
@@ -245,6 +263,15 @@
       "hash": "b3639e71f626fac3b87a83840dee62bfb788ea7b"
     },
     {
+      "path": "app/images/delivery-of-item.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/delivery-of-item.png",
+      "size": 16352,
+      "hash": "560c79fcc9623629a65183b446ecff136e795018"
+    },
+    {
       "path": "app/images/diners.png",
       "where": "client",
       "type": "asset",
@@ -254,11 +281,11 @@
       "hash": "81e2140f2394677476e00e5a42da6c49fe1cdb73"
     },
     {
-      "path": "app/images/empleados.png",
+      "path": "app/images/employees.png",
       "where": "client",
       "type": "asset",
       "cacheable": false,
-      "url": "/images/empleados.png",
+      "url": "/images/employees.png",
       "size": 27828,
       "hash": "5058102b1605e3656576a8128e69b92462229bf8"
     },
@@ -270,24 +297,6 @@
       "url": "/images/exit.png",
       "size": 5738,
       "hash": "d827c202708f020089cf8569203ce1fbf28f0819"
-    },
-    {
-      "path": "app/images/facebook_gray.png",
-      "where": "client",
-      "type": "asset",
-      "cacheable": false,
-      "url": "/images/facebook_gray.png",
-      "size": 262,
-      "hash": "f31e6cd2174425b7e5567717f7f7436e611d9592"
-    },
-    {
-      "path": "app/images/facebook_red.png",
-      "where": "client",
-      "type": "asset",
-      "cacheable": false,
-      "url": "/images/facebook_red.png",
-      "size": 253,
-      "hash": "d97cf4310fca324e6b5b446f50ab5eaf18c194de"
     },
     {
       "path": "app/images/favicon.png",
@@ -308,40 +317,22 @@
       "hash": "1e4e5ae5c230544dc7e58d8699a3883a5bd83625"
     },
     {
-      "path": "app/images/instagram_gray.png",
-      "where": "client",
-      "type": "asset",
-      "cacheable": false,
-      "url": "/images/instagram_gray.png",
-      "size": 903,
-      "hash": "f05e9051155bd3a853611d2e03869c46057ba8a4"
-    },
-    {
-      "path": "app/images/instagram_red.png",
-      "where": "client",
-      "type": "asset",
-      "cacheable": false,
-      "url": "/images/instagram_red.png",
-      "size": 786,
-      "hash": "4791696369fc90eaa7ad5adb07b084629a1a7868"
-    },
-    {
       "path": "app/images/iphone.png",
       "where": "client",
       "type": "asset",
       "cacheable": false,
       "url": "/images/iphone.png",
-      "size": 16690,
-      "hash": "5783857c3d546394eb8c6aff92e2587b58e2a1ea"
+      "size": 34390,
+      "hash": "978b49fde12f8c66b8f3018dfdd2e4e94e41e291"
     },
     {
-      "path": "app/images/isotipo_footer.png",
+      "path": "app/images/item.png",
       "where": "client",
       "type": "asset",
       "cacheable": false,
-      "url": "/images/isotipo_footer.png",
-      "size": 274,
-      "hash": "c63b44b86ef255e51f77ee2738053e89a12dd69f"
+      "url": "/images/item.png",
+      "size": 13073,
+      "hash": "b254eb537a9802ce9c09c20f3b0c6d3ba210b7dd"
     },
     {
       "path": "app/images/items-enabled.png",
@@ -358,8 +349,8 @@
       "type": "asset",
       "cacheable": false,
       "url": "/images/items.png",
-      "size": 13073,
-      "hash": "b254eb537a9802ce9c09c20f3b0c6d3ba210b7dd"
+      "size": 24721,
+      "hash": "a768d60f8857a885158ed4e4cffa1ea1268a66cf"
     },
     {
       "path": "app/images/landing-1.png",
@@ -389,22 +380,13 @@
       "hash": "ddd60cbc8ec6b3963be342dfb6e016887240e3f2"
     },
     {
-      "path": "app/images/llamar_mesero.png",
-      "where": "client",
-      "type": "asset",
-      "cacheable": false,
-      "url": "/images/llamar_mesero.png",
-      "size": 10547,
-      "hash": "7c2d7b9bb3270b3f0a1cc03b5f37e1a955c2a053"
-    },
-    {
       "path": "app/images/logo_iurest.png",
       "where": "client",
       "type": "asset",
       "cacheable": false,
       "url": "/images/logo_iurest.png",
-      "size": 1904,
-      "hash": "fc3c9c0a49c703c5324a95936185f961488a6811"
+      "size": 1790,
+      "hash": "4676d36286e0abf4dd92b3d30f81a36819b533d4"
     },
     {
       "path": "app/images/logo_iurest_190_x_60.png",
@@ -412,8 +394,8 @@
       "type": "asset",
       "cacheable": false,
       "url": "/images/logo_iurest_190_x_60.png",
-      "size": 2972,
-      "hash": "481e90ab819f2278f2457dbd60405206749fde9d"
+      "size": 2803,
+      "hash": "991d659af460c4bc35d270adae23d3e924c5e68b"
     },
     {
       "path": "app/images/logo_iurest_white.png",
@@ -421,8 +403,8 @@
       "type": "asset",
       "cacheable": false,
       "url": "/images/logo_iurest_white.png",
-      "size": 2262,
-      "hash": "942415872a54165bc9495d1038ef10d075473c4d"
+      "size": 2032,
+      "hash": "fbeab1aa92cd9fe8a51dae43a85dae710f217cb6"
     },
     {
       "path": "app/images/mastercard.png",
@@ -432,15 +414,6 @@
       "url": "/images/mastercard.png",
       "size": 1990,
       "hash": "133e4d3f8a1d554180e499c5c40c54b4910c4407"
-    },
-    {
-      "path": "app/images/mesas.png",
-      "where": "client",
-      "type": "asset",
-      "cacheable": false,
-      "url": "/images/mesas.png",
-      "size": 19962,
-      "hash": "b1732593125627f6674d5b1827eaababdb863611"
     },
     {
       "path": "app/images/my-orders.png",
@@ -488,42 +461,6 @@
       "hash": "0fe13d690d1d7c89c8b81bd802ce376e1efbdf32"
     },
     {
-      "path": "app/images/pago.png",
-      "where": "client",
-      "type": "asset",
-      "cacheable": false,
-      "url": "/images/pago.png",
-      "size": 8280,
-      "hash": "b97f0c9cc892415d512da5c092b830a6b9969d64"
-    },
-    {
-      "path": "app/images/pago_tarjeta_credito.png",
-      "where": "client",
-      "type": "asset",
-      "cacheable": false,
-      "url": "/images/pago_tarjeta_credito.png",
-      "size": 5104,
-      "hash": "ed2fe091cb6d34f03e7f519f983a1758fb470a06"
-    },
-    {
-      "path": "app/images/pago_tarjeta_debito.png",
-      "where": "client",
-      "type": "asset",
-      "cacheable": false,
-      "url": "/images/pago_tarjeta_debito.png",
-      "size": 5952,
-      "hash": "d94b910074dec98b87422e0b7e7f1fe68d072a16"
-    },
-    {
-      "path": "app/images/pagos.png",
-      "where": "client",
-      "type": "asset",
-      "cacheable": false,
-      "url": "/images/pagos.png",
-      "size": 21088,
-      "hash": "2e5bac1fa7b1ccd3c1219e455a86b0199a3573d6"
-    },
-    {
       "path": "app/images/payment-desabled.png",
       "where": "client",
       "type": "asset",
@@ -551,15 +488,6 @@
       "hash": "3d3d9e1eb8d93ab812283a690408599bb3e3bd10"
     },
     {
-      "path": "app/images/payment-pending.png",
-      "where": "client",
-      "type": "asset",
-      "cacheable": false,
-      "url": "/images/payment-pending.png",
-      "size": 5812,
-      "hash": "b502ef039c4830c7b92570c172fa6ea793cd7da8"
-    },
-    {
       "path": "app/images/payments-history.png",
       "where": "client",
       "type": "asset",
@@ -578,22 +506,22 @@
       "hash": "3daf8eeceec81f427b7eb37d513ddd79c1f72d41"
     },
     {
-      "path": "app/images/platos-orden.png",
+      "path": "app/images/psd-en.png",
       "where": "client",
       "type": "asset",
       "cacheable": false,
-      "url": "/images/platos-orden.png",
-      "size": 16352,
-      "hash": "560c79fcc9623629a65183b446ecff136e795018"
+      "url": "/images/psd-en.png",
+      "size": 23334,
+      "hash": "ee887418fe1dab6e9731fbc57acd2afd7fa8fcd5"
     },
     {
-      "path": "app/images/platos.png",
+      "path": "app/images/psd-es.png",
       "where": "client",
       "type": "asset",
       "cacheable": false,
-      "url": "/images/platos.png",
-      "size": 24721,
-      "hash": "a768d60f8857a885158ed4e4cffa1ea1268a66cf"
+      "url": "/images/psd-es.png",
+      "size": 24557,
+      "hash": "b3ccc7ea6f8f1ffc16996c768d468daa729e7a5a"
     },
     {
       "path": "app/images/reactivate-restaurant.png",
@@ -650,13 +578,49 @@
       "hash": "98910505b9137379e74344ebbf7f0f084c2262f8"
     },
     {
-      "path": "app/images/social-icons.png",
+      "path": "app/images/step-1.png",
       "where": "client",
       "type": "asset",
       "cacheable": false,
-      "url": "/images/social-icons.png",
-      "size": 1645,
-      "hash": "c6bf8ab7254d03ddb1a717968368fe96079849cb"
+      "url": "/images/step-1.png",
+      "size": 4694,
+      "hash": "36f2027cf443318b8334374335c0296463d2fd6b"
+    },
+    {
+      "path": "app/images/step-2.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/step-2.png",
+      "size": 10736,
+      "hash": "4262716995e6c91580d22a8fbbf22cc6a67b83fb"
+    },
+    {
+      "path": "app/images/step-3.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/step-3.png",
+      "size": 10999,
+      "hash": "fe93c11f4b2f32d9e53f9f0435e67a3551bf4585"
+    },
+    {
+      "path": "app/images/step-4.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/step-4.png",
+      "size": 11043,
+      "hash": "86792bcfcc002581e8362f0e02977957fe0b877e"
+    },
+    {
+      "path": "app/images/step-5.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/step-5.png",
+      "size": 8872,
+      "hash": "7a711746744f3afe0ba90ddc0bbc90455c8f1c8e"
     },
     {
       "path": "app/images/subcategories.png",
@@ -666,6 +630,15 @@
       "url": "/images/subcategories.png",
       "size": 19828,
       "hash": "f370c5dfc5a8903858c7c8b54648d62866768923"
+    },
+    {
+      "path": "app/images/tables.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/tables.png",
+      "size": 19962,
+      "hash": "b1732593125627f6674d5b1827eaababdb863611"
     },
     {
       "path": "app/images/trn_approved.png",
@@ -695,33 +668,6 @@
       "hash": "169b9f63132be4103485c7ad405e9c66bb8929b3"
     },
     {
-      "path": "app/images/twitter_gray.png",
-      "where": "client",
-      "type": "asset",
-      "cacheable": false,
-      "url": "/images/twitter_gray.png",
-      "size": 668,
-      "hash": "2ecd30e3a8c09e1a7aaf9a5dbdcf7307333fae25"
-    },
-    {
-      "path": "app/images/twitter_red.png",
-      "where": "client",
-      "type": "asset",
-      "cacheable": false,
-      "url": "/images/twitter_red.png",
-      "size": 572,
-      "hash": "96a89fc8114b269bf5d76a4a87ecc922882c7f4f"
-    },
-    {
-      "path": "app/images/ubication.png",
-      "where": "client",
-      "type": "asset",
-      "cacheable": false,
-      "url": "/images/ubication.png",
-      "size": 15045,
-      "hash": "ddacb6bf5e1761eeb4d0fa6da8766898e57c3551"
-    },
-    {
       "path": "app/images/user_default_image.png",
       "where": "client",
       "type": "asset",
@@ -738,6 +684,15 @@
       "url": "/images/visa.png",
       "size": 2509,
       "hash": "fe379ceda2aaa4bbd002888c577d6b971dfd3685"
+    },
+    {
+      "path": "app/images/waiter-call.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/waiter-call.png",
+      "size": 10547,
+      "hash": "7c2d7b9bb3270b3f0a1cc03b5f37e1a955c2a053"
     },
     {
       "path": "app/images/waiter.png",
@@ -4183,8 +4138,8 @@
       "type": "asset",
       "cacheable": false,
       "url": "/client/imports/app/web/customer/payments/country-payment/colombia-payment/colombia-order-info/colombia-order-info.component.scss",
-      "size": 1603,
-      "hash": "6e9619ed1e644c60b128b8f16ca70f21d100b707"
+      "size": 1750,
+      "hash": "a78f586ec2a5184a962ddf81d72cda20a8c01585"
     },
     {
       "path": "app/client/imports/app/web/customer/payments/country-payment/colombia-payment/colombia-pay-info/colombia-pay-info.component.html.d.ts",
@@ -4203,6 +4158,24 @@
       "url": "/client/imports/app/web/customer/payments/country-payment/colombia-payment/colombia-pay-info/colombia-pay-info.component.scss",
       "size": 1772,
       "hash": "fc997a872ff4f7a5a01aaf28d629c08936678a36"
+    },
+    {
+      "path": "app/client/imports/app/web/restaurant/restaurant/legality/country-legality/colombia-legality/colombia-legality.component.html.d.ts",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/client/imports/app/web/restaurant/restaurant/legality/country-legality/colombia-legality/colombia-legality.component.html.d.ts",
+      "size": 72,
+      "hash": "a9cf3f2e298b546c5918f0a3b1af0dfe3afe4288"
+    },
+    {
+      "path": "app/client/imports/app/web/restaurant/restaurant/legality/country-legality/colombia-legality/colombia-legality.component.scss",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/client/imports/app/web/restaurant/restaurant/legality/country-legality/colombia-legality/colombia-legality.component.scss",
+      "size": 1023,
+      "hash": "6f086c845838d665c64018253a5d1400f1a3e641"
     },
     {
       "path": "app/client/imports/app/web/restaurant/restaurant/restaurant-table-control/table-detail/penalize-customer/penalize-customer.component.html.d.ts",
@@ -4256,7 +4229,7 @@
       "cacheable": false,
       "url": "/client/imports/app/web/customer/payments/country-payment/colombia-payment/colombia-payment.component.scss",
       "size": 2364,
-      "hash": "86ef3017c51868534e68a265896002eb944e1468"
+      "hash": "d7ea009ce8b46c76275077049ff36b3fb318f0ed"
     },
     {
       "path": "app/client/imports/app/web/customer/payments/order-payment-translate/order-to-translate/order-to-translate.component.html.d.ts",
@@ -4529,42 +4502,6 @@
       "hash": "1d9b4ba80d5ec7025685e2d8a20d47e99c85c139"
     },
     {
-      "path": "app/client/imports/app/web/custom/financial-info/financial-element/financial-element.component.html.d.ts",
-      "where": "client",
-      "type": "asset",
-      "cacheable": false,
-      "url": "/client/imports/app/web/custom/financial-info/financial-element/financial-element.component.html.d.ts",
-      "size": 72,
-      "hash": "a9cf3f2e298b546c5918f0a3b1af0dfe3afe4288"
-    },
-    {
-      "path": "app/client/imports/app/web/custom/financial-info/financial-element/financial-element.component.scss",
-      "where": "client",
-      "type": "asset",
-      "cacheable": false,
-      "url": "/client/imports/app/web/custom/financial-info/financial-element/financial-element.component.scss",
-      "size": 0,
-      "hash": "1d6ae98d42f808bbae3ef7f1bf284c4968836669"
-    },
-    {
-      "path": "app/client/imports/app/web/custom/financial-info/financial-form/financial-form.component.html.d.ts",
-      "where": "client",
-      "type": "asset",
-      "cacheable": false,
-      "url": "/client/imports/app/web/custom/financial-info/financial-form/financial-form.component.html.d.ts",
-      "size": 72,
-      "hash": "a9cf3f2e298b546c5918f0a3b1af0dfe3afe4288"
-    },
-    {
-      "path": "app/client/imports/app/web/custom/financial-info/financial-form/financial-form.component.scss",
-      "where": "client",
-      "type": "asset",
-      "cacheable": false,
-      "url": "/client/imports/app/web/custom/financial-info/financial-form/financial-form.component.scss",
-      "size": 0,
-      "hash": "1d6ae98d42f808bbae3ef7f1bf284c4968836669"
-    },
-    {
       "path": "app/client/imports/app/web/customer/orders/order-create/order-create.component.html.d.ts",
       "where": "client",
       "type": "asset",
@@ -4750,6 +4687,24 @@
       "type": "asset",
       "cacheable": false,
       "url": "/client/imports/app/web/restaurant/monthly-config/disable-confirm/disable-confirm.component.scss",
+      "size": 0,
+      "hash": "1d6ae98d42f808bbae3ef7f1bf284c4968836669"
+    },
+    {
+      "path": "app/client/imports/app/web/restaurant/restaurant/legality/restaurant-legality.component.html.d.ts",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/client/imports/app/web/restaurant/restaurant/legality/restaurant-legality.component.html.d.ts",
+      "size": 72,
+      "hash": "a9cf3f2e298b546c5918f0a3b1af0dfe3afe4288"
+    },
+    {
+      "path": "app/client/imports/app/web/restaurant/restaurant/legality/restaurant-legality.component.scss",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/client/imports/app/web/restaurant/restaurant/legality/restaurant-legality.component.scss",
       "size": 0,
       "hash": "1d6ae98d42f808bbae3ef7f1bf284c4968836669"
     },
@@ -5128,8 +5083,8 @@
       "type": "asset",
       "cacheable": false,
       "url": "/client/imports/app/web/auth/go-to-store/go-to-store.component.scss",
-      "size": 674,
-      "hash": "b1def6e5fd574369397f036085b42cbb2016ba50"
+      "size": 672,
+      "hash": "7be50cf3a6ce1e7ba7dfd9ac55b244d8d2fb778f"
     },
     {
       "path": "app/client/imports/app/web/auth/recover-password/recover-confirm.component.html.d.ts",
@@ -5812,8 +5767,8 @@
       "type": "asset",
       "cacheable": false,
       "url": "/client/imports/app/web/landing-page/landing-page.component.scss",
-      "size": 9904,
-      "hash": "a9f03b16167194f1ce5967113f24c0da10bce267"
+      "size": 10463,
+      "hash": "a65b65d0e3c89bbb586b75e1e7b6b72cb0e636ec"
     },
     {
       "path": "app/client/imports/app/web/supervisor-dashboard/supervisor-dashboard.component.html.d.ts",
