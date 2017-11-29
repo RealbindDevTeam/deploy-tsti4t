@@ -9,8 +9,8 @@ var Match = Package.check.Match;
 var _ = Package.underscore._;
 var RoutePolicy = Package.routepolicy.RoutePolicy;
 var WebApp = Package.webapp.WebApp;
-var main = Package.webapp.main;
 var WebAppInternals = Package.webapp.WebAppInternals;
+var main = Package.webapp.main;
 var MongoInternals = Package.mongo.MongoInternals;
 var Mongo = Package.mongo.Mongo;
 var ServiceConfiguration = Package['service-configuration'].ServiceConfiguration;
@@ -87,7 +87,7 @@ OAuth.retrieveCredential = function(credentialToken, credentialSecret) {
 // `btoa`, but for tests we need a version that runs on the server.
 //
 OAuth._generateState = function (loginStyle, credentialToken, redirectUrl) {
-  return new Buffer(JSON.stringify({
+  return Buffer.from(JSON.stringify({
     loginStyle: loginStyle,
     credentialToken: credentialToken,
     redirectUrl: redirectUrl})).toString('base64');
@@ -96,7 +96,7 @@ OAuth._generateState = function (loginStyle, credentialToken, redirectUrl) {
 OAuth._stateFromQuery = function (query) {
   var string;
   try {
-    string = new Buffer(query.state, 'base64').toString('binary');
+    string = Buffer.from(query.state, 'base64').toString('binary');
   } catch (e) {
     Log.warn('Unable to base64 decode state from OAuth query: ' + query.state);
     throw e;

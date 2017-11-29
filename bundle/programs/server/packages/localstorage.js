@@ -22,11 +22,13 @@ var Random = Package.random.Random;
 // Accessing window.localStorage can also immediately throw an error in IE (#1291).
 
 var hasOwn = Object.prototype.hasOwnProperty;
-var storage = global.localStorage;
 var key = '_localstorage_test_' + Random.id();
 var retrieved;
+var storage;
 
 try {
+  storage = global.localStorage;
+
   if (storage) {
     storage.setItem(key, key);
     retrieved = storage.getItem(key);
@@ -35,7 +37,23 @@ try {
 } catch (ignored) {}
 
 if (key === retrieved) {
-  Meteor._localStorage = storage;
+  if (Meteor.isServer) {
+    Meteor._localStorage = storage;
+  } else {
+    // Some browsers (e.g. IE11) don't properly handle attempts to change
+    // window.localStorage methods. By using proxy methods to expose
+    // window.localStorage functionality, developers can change the
+    // behavior of Meteor._localStorage methods without breaking
+    // window.localStorage.
+    ["getItem",
+     "setItem",
+     "removeItem",
+    ].forEach(function (name) {
+      this[name] = function () {
+        return storage[name].apply(storage, arguments);
+      };
+    }, Meteor._localStorage = {});
+  }
 }
 
 if (! Meteor._localStorage) {

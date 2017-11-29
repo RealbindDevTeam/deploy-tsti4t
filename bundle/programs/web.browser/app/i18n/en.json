@@ -61,36 +61,36 @@
         "LANGUAGE_SELECT": "Select your language",
         "ADMIN_SIGNUP": "More info",
         "HOME_CONTENT": {
-            "TITLE": "Test Test Test",
-            "TEXT1": "Test Test Test Test Test Test Test Test Test Test Test Test",
-            "TEXT2": "Test Test Test"
+            "TITLE": "A new experience to order in your favorite restaurant",
+            "TEXT1": "",
+            "TEXT2": "Free download: "
         },
         "ABOUT_CONTENT": {
-            "TITLE1": "Test Test Test",
-            "TEXT1": "Test Test Test Test Test Test Test Test Test Test Test Test",
-            "TITLE2": "Test Test Test",
-            "TEXT2": "Test Test Test Test Test Test Test Test Test Test Test Test",
-            "TITLE3": "Test Test Test",
-            "TEXT3": "Test Test Test Test Test Test Test Test Test Test Test Test"
+            "TITLE1": "Enter from mobile app or web page",
+            "TEXT1": "Use the app from your smartphone or tablet, or web page from computer",
+            "TITLE2": "Look at the menu and order directly to the kitchen",
+            "TEXT2": "Ensure your order, check the detail of your food and avoid waiting times to eat",
+            "TITLE3": "Request help of a waiter if you want",
+            "TEXT3": "Call a waiter in a simple and effective way"
         },
-        "STEPS" : {
-            "EASY_AND_FAST" : "Test Test Test Test Test Test Test Test Test Test Test Test",
-            "ONE" : "Test Test Test Test Test Test Test Test Test Test Test Test",
-            "TWO" : "Test Test Test Test Test Test Test Test Test Test Test Test",
-            "THREE" : "Test Test Test Test Test Test Test Test Test Test Test Test",
-            "FOUR" : "Test Test Test Test Test Test Test Test Test Test Test Test",
-            "FIVE" : "Test Test Test Test Test Test Test Test Test Test Test Test"
+        "STEPS": {
+            "EASY_AND_FAST": "Fast and easy",
+            "ONE": "Go to the restaurant and scan the code over the table",
+            "TWO": "Select what you want to eat and confirm your order",
+            "THREE": "A waiter will give to you the food when it's ready to eat",
+            "FOUR": "Review your payment detail",
+            "FIVE": "Request that you want to pay and a waiter will go to your table"
         },
         "OWNER_CONTENT": {
-            "TITLE1": "Test Test Test",
-            "TEXT1": "Test Test Test Test Test Test Test Test Test Test Test Test",
-            "TEXT2": "Test Test Test"
+            "TITLE1": "Do you have a restaurant and would you like use the Iurest service?",
+            "TEXT1": "",
+            "TEXT2": "We offer a system that improve your business"
         },
         "COMPLEMENTARY": {
-            "TITLE": "Sal y disfruta de una buena comida acompañado de amigos, pareja o familia"
+            "TITLE": "Get out to the world and enjoy good food with friends, couple or family"
         },
-        "FOOTER" : {
-            "ALL_RIGHT_RESERVED" : "All right reserved"
+        "FOOTER": {
+            "ALL_RIGHT_RESERVED": "All right reserved"
         }
     },
     "SIGNUP": {
@@ -100,6 +100,7 @@
         "REQUIRED_USERNAME": "You must include a username",
         "MIN_LENGTH_USERNAME": "Your username must be at least 6 characters long",
         "MAX_LENGTH_USERNAME": "Your username cannot exceed 20 characters long",
+        "NO_SPACES": "White space is not allowed",
         "REQUIRED_EMAIL": "Invalid email format",
         "MIN_LENGTH_EMAIL": "Your email must be at least 6 characters long",
         "MAX_LENGTH_EMAIL": "Your email cannot exceed 255 characters long",
@@ -247,11 +248,14 @@
         "ADMINISTRATION": {
             "MANAGEMENT": "Management",
             "RESTAURANTS": "Restaurants",
-            "TABLES": "Tables Search",
+            "TABLES": "Tables",
             "COLLABORATORS": "Employees",
-            "MONTHLY_CONFIG": "Monthly config",
+            "MONTHLY_CONFIG": "Configuration",
             "TABLE_CONTROL": "Tables Control",
-            "INVOICES_DOWNLOAD" : "Invoices download"
+            "INVOICES_DOWNLOAD": "Invoices download",
+            "PROFILE": "Profiles",
+            "TABLES_SEARCH": "Tables search",
+            "MY_RESTAURANTS": "My Restaurants"
         },
         "PAYMENTS": {
             "PAYMENTS": "Payments",
@@ -272,7 +276,9 @@
             "ORDERS_CHEF": "Orders"
         },
         "ORDERS": "Orders",
-        "WAITER_CALL": "Waiter/waitress call"
+        "WAITER_CALL": "Waiter/waitress call",
+        "CALLS": "Calls",
+        "SETTINGS": "Settings"
     },
     "PROMOTIONS": {
         "PROMOTION_CREATION": "Creation promotion",
@@ -331,7 +337,7 @@
         "GENERAL_INFO_TEXT": "Please enter the information of the restaurant. This information will be displayed to people on the internet and will give you greater visibility",
         "LEGAL_LABEL": "Legal",
         "LEGAL_INFO": "Restaurant's Legal Information",
-        "LEGAL_INFO_TEXT": "The legal information of the restaurant will be managed according to the regulations of the country to which it belongs. This will allow Iurest to help you with the accounts and expenses of your business.",
+        "LEGAL_INFO_TEXT": "The legal information of the restaurant will be managed according to the regulations of the country to which it belongs. This will allow iurest to help you with the accounts and expenses of your business.",
         "ADD_LOCATION": "Enter the location of the establishment",
         "SCHEDULE_LABEL": "Schedule",
         "SCHEDULE_INFO": "Timing hours",
@@ -348,12 +354,16 @@
         "TABLES": "tables",
         "MORE": "more",
         "RESTAURANT_CREATION": "Restaurant creation",
-        "ACTIVATION_MESSAGE": "The monthly Iurest service charge will be activated per restaurant",
-        "CLARIFICATION_MESSAGE_1": "Iurest charges the service fee on the ",
+        "ACTIVATION_MESSAGE": "The monthly iurest service charge will be activated per restaurant",
+        "CLARIFICATION_MESSAGE_1": "iurest charges the service fee on the ",
         "CLARIFICATION_MESSAGE_2": " day of each month, the first charge is up to",
         "ACCEPT_CREATION": "Accept",
         "CANCEL_CREATION": "Cancel",
-        "INITIAL_TABLES_NUMBER": "Initial tables number"
+        "INITIAL_TABLES_NUMBER": "Initial tables number, ",
+        "MAX_TABLES": "max ",
+        "TABLES_MSG": "In case you need more tables for your restaurant, in the option Management -> Restaurants -> Configuration, you can add more.",
+        "CREATION_ERROR": "An error has occurred creating the restaurant. Please try again.",
+        "RESTAURANT_CREATED": "Restaurant created"
     },
     "WEEK": {
         "MONDAY": "Monday",
@@ -543,10 +553,16 @@
         "FILE_NAME": "tables"
     },
     "GO_TO_STORE": {
-        "TITTLE": "What do you ",
-        "SUB_TITTLE": "like to eat?",
-        "CONTENT": "We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components",
-        "BUTTON": "Download"
+        "CLIENT": {
+            "TITTLE": "What do you ",
+            "SUB_TITTLE": "like to eat?",
+            "CONTENT": "We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components",
+            "BUTTON": "Download"
+        },
+        "COLLABORATOR": {
+            "TITTLE": "Please signin from computer to enjoy iurest",
+            "BUTTON": "Return"
+        }
     },
     "COLLABORATORS": {
         "COLLABORATORS_SEARCH": "Employees search",
@@ -626,7 +642,9 @@
         "GARNISHFOOD_QUANTITY_MSG": "The number of side dishes must be different from 0",
         "WARNING": "Warning: You have ",
         "WARNING_2": "logged users in your restaurants",
-        "WARNING_3": "Changing the item configuration could affect the experience of the users"
+        "WARNING_3": "Changing the item configuration could affect the experience of the users",
+        "ITEM_CREATED": "Item created successfully",
+        "CREATION_ERROR": "An error has occurred creating the item. Please try again."
     },
     "ROLE": {
         "ADMINISTRATOR": "Administrator",
@@ -676,7 +694,7 @@
         "EMAIL": "Email",
         "LEGAL_LABEL": "Legal",
         "LEGAL_INFO": "Restaurant's Legal Information",
-        "LEGAL_INFO_TEXT": "Edit the legal information of the restaurant. This will allow Iurest to help you with business accounts and expenses",
+        "LEGAL_INFO_TEXT": "Edit the legal information of the restaurant. This will allow iurest to help you with business accounts and expenses",
         "INVOICE_CODE": "Invoice code",
         "TIP_PERCENTAGE": "Tip Percentage",
         "TAX_PERCENTAGE": "Tax Percentage",
@@ -743,7 +761,8 @@
         "ADD_ADDITIONS": "Select additions of your preference",
         "ADD_ADDITION_ORDER": "Add additions to the order",
         "ITEM_AGGREGATED": "Item added successfully",
-        "ADDITON_AGGREGATED": "Addition added succesfully"
+        "ADDITON_AGGREGATED": "Addition added succesfully",
+        "SEARCH_MENU": "Search menu"
     },
     "ORDER_LIST": {
         "TABLE_ORDERS": "Table Orders",
@@ -818,7 +837,7 @@
             "FULL_PAYMENT": "Total order payment",
             "RETURN_ORDER_USER": "Do you want to return the order to the user ",
             "ORDER_PENDING_STATUS": "You have orders pending to confirm. You must confirm them or wait til someone confirm",
-            "NO_ONLINE_PAYMENT": "Online payment is not available in Iurest yet",
+            "NO_ONLINE_PAYMENT": "Online payment is not available in iurest yet",
             "PLEASE_SELECT_PAYMENT_METHOD": "Please select payment method",
             "PAYMENT_UNAVAILABLE": "Payment option is currently unavailable.",
             "WAITER_ATTEND": "A waiter/waitress will attend at your table soon",
@@ -866,7 +885,8 @@
         "CALL_LABEL_CUSTOMER_PAYMENT": "Payment from customer",
         "BTN_CALL_WAITER": "Request waiter/waitress",
         "BTN_CANCEL_WAITER": "Cancel",
-        "CALL_LABEL_EXIT_TABLE": "User Output"
+        "CALL_LABEL_EXIT_TABLE": "User Output",
+        "NO_CALLS": "There are no pending calls"
     },
     "ORDER_ATTENTION": {
         "ORDERS_CONFIRMED": "Orders Confirmed",
@@ -889,7 +909,7 @@
     },
     "FINANCIAL_INFO": {
         "COLOMBIA": {
-            "INC": "According to Colombian laws, restaurants must discriminate in the pre invoice, cash receipt, invoice or equivalent document, the National Consumption Tax (INC), therefore, Iurest will calculate the INC equivalent to 8% at time to request the total value of the account for the customer.",
+            "INC": "According to Colombian laws, restaurants must discriminate in the pre invoice, cash receipt, invoice or equivalent document, the National Consumption Tax (INC), therefore, iurest will calculate the INC equivalent to 8% at time to request the total value of the account for the customer.",
             "BUSINESS_NAME": "Enter surname and firstname (if natural person) or legal name (if legal person):",
             "BUSINESS_NAME_LABEL": "Names - Legal name",
             "NIT": "Enter NIT of who sells the ods or Services. Please include verification digit:",
@@ -909,14 +929,14 @@
         "MSG_1": "You can order what you prefer",
         "NO_ORDERS": "You do not have any orders yet, you can create a new order",
         "ORDER": "Order",
-        "TABLE_NO_ACTIVE": "The restaurant does not have this table active for the service of Iurest",
+        "TABLE_NO_ACTIVE": "The restaurant does not have this table active for the service of iurest",
         "TABLE_NOT_EXISTS": "The table does not exist. Please check the code.",
-        "IUREST_NO_ACTIVE": "The restaurant does not have the Iurest service active. It is not possible to enter.",
+        "IUREST_NO_ACTIVE": "The restaurant does not have the iurest service active. It is not possible to enter.",
         "RESTAURANT_NOT_EXISTS": "The restaurant does not exist. It is not possible to enter.",
         "PENALTY": "At the moment you do not have available the option to create orders. Try later"
     },
     "MONTHLY_PAYMENT": {
-        "TITLE": "Iurest services",
+        "TITLE": "iurest services",
         "SUBTITLE": "Here you can see the charges by restaurant and number of tables",
         "RESTAURANT_NAME": "Restaurant name",
         "RESTAURANT_PRICE": "Restaurant price",
@@ -1011,7 +1031,8 @@
         "DIALOG_SURE_ACTION": "Are you sure you want to do this action?",
         "RESTAURANT_MODIFIED": "Restaurant modified",
         "TABLES_CREATE": "Tables created",
-        "TABLE_MODIFIED": "Table modified"
+        "TABLE_MODIFIED": "Table modified",
+        "NUMBER_TABLES": "Number of tables, Max "
     },
     "SEND_ORDER": {
         "ORDER": "Order",
@@ -1057,11 +1078,11 @@
         "ADDRESS_MAX": "The address cannot exceed 100 characters long",
         "PHONE_NUMBER": "Phone number *",
         "PHONE_NUMBER_MAX": "The phone number cannot exceed 20 characteres long",
-        "SECURITY_MSG": "* For security, Iurest doesn't save your credit card info",
+        "SECURITY_MSG": "* For security, iurest doesn't save your credit card info",
         "CONTINUE_PAYMENT": "Continue",
         "DIALOG_TITLE": "Payment Confirm",
         "DIALOG_PLEASE": "Please verify the information before to confirm",
-        "IUREST_SERVICE": "Iurest service",
+        "IUREST_SERVICE": "iurest service",
         "MONTHLY_SERVICE": "Monthly",
         "PERSONAL_INFO": "Billing information",
         "PERSONAL_TEL": "Tel. ",
@@ -1070,7 +1091,7 @@
         "PRICE": "Price: ",
         "PAY_CONFIRM": "Confirm",
         "PAY_CANCEL": "Cancel",
-        "ORDER_DESCRIPTION": "Monthly payment for Iurest service",
+        "ORDER_DESCRIPTION": "Monthly payment for iurest service",
         "TRANSACTION_STATUS": "Transaction status",
         "TRANSACTION_APPROVED": "Payment has been approved",
         "TRANSACTION_DECLINED": "Payment has been rejected",
@@ -1082,7 +1103,9 @@
         "AUTH_ERROR_MSG": "the entered card info does not match, please check",
         "FIRST_NAME": "Firstname",
         "LAST_NAME": "Lastname",
-        "UNAVAILABLE_PAYMENT": "The payment option is not available at this moment, please try later"
+        "UNAVAILABLE_PAYMENT": "The payment option is not available at this moment, please try later",
+        "CC_PAYMENT_METHOD": "Credit card",
+        "DESCRIPTION": "Monthly Iurest service"
     },
     "RES_PAYMENT_HISTORY": {
         "TITLE": "Payment history",
@@ -1112,13 +1135,22 @@
         "DATE_LBL": "Date: ",
         "CUSTOMER_LBL": "Customer",
         "DESCRIPTION_LBL": "Description",
-        "DESCRIPTION": "Monthly Iurest Service",
+        "DESCRIPTION": "Monthly iurest Service",
         "PERIOD_LBL": "Period",
         "AMOUNT_LBL": "Amount (no IVA)",
         "SUBTOTAL": "SubTotal: ",
         "IVA": "IVA: ",
         "TOTAL": "Total: ",
-        "UNAVAILABLE_REPORT": "The status option is not available at this moment, please try later"
+        "UNAVAILABLE_REPORT": "The status option is not available at this moment, please try later",
+        "RESOLUTION_MSG": "Resolution DIAN No",
+        "INVOICE_START_DATE": "from",
+        "INVOICE_END_DATE": "to",
+        "INVOICE_START_VALUE": "from No",
+        "INVOICE_END_VALUE": "to",
+        "PAYMENT_METHOD": "Payment method: ",
+        "IDENTIFICATION_NUMBER": "Identification: ",
+        "TELEPHONE_NUMBER": "Phone: ",
+        "EMAIL": "Email: "
     },
     "TRANSACTION_STATUS": {
         "APPROVED": "Approved",
@@ -1159,14 +1191,26 @@
         "INVOICE_SALE": "Factura de venta",
         "DATE": "Fecha-Hora",
         "TOOLTIP_DOWNLOAD_INVOICE": "Download invoice",
-        "NO_PAYS": "You have no payments yet"
+        "NO_PAYS": "You have no payments yet",
+        "INVOICE_GENERATED_BY": "FACTURA EMITIDA POR COMPUTADOR"
     },
     "ADMIN_SIGNUP": {
+        "HOME_CONTENT" : {
+            "TITLE" : "It improves the service of your restaurant and the attention to your clients with our system",
+            "SUB_TITLE" : "It reduces time receiving and delivering the orders of your diners"
+        },
+        "ABOUT_CONTENT" : {
+            "MSG_1" : "Add the detailed information of the menu, in order to the clients can see it, and ordering from his phones, tablets or computers",
+            "MSG_2" : "Creating collaborators and assign them a role (chef, waiter/waitress or supervisor) to interact with the system",
+            "MSG_3" : "You can use the complete free service by limited time, later you pay that you need.",
+            "REF" : "Pricing"
+        },
         "SLOGAN": "Administrator register",
         "USERNAME": "Username",
         "REQUIRED_USERNAME": "You must include a username",
         "MIN_LENGTH_USERNAME": "Your username must be at least 6 characters long",
         "MAX_LENGTH_USERNAME": "Your username cannot exceed 20 characters",
+        "NO_SPACES": "White space is not allowed",
         "EMAIL": "Email",
         "REQUIRED_EMAIL": "Invalid email format",
         "MIN_LENGTH_EMAIL": "Your email must be at least 6 characters long",
@@ -1207,10 +1251,12 @@
         "ALREADY_ACCOUNT": "Already registered?",
         "SIGNIN": "Sign In",
         "LABEL_LEGAL": "By clicking on 'Register', ",
-        "LABEL_LEGAL_END": "you agree the terms and conditions."
+        "LABEL_LEGAL_END": "you agree the terms and conditions.",
+        "GENERAL_INFO": "Personal information",
+        "USER_PASSWD": "User and password"
     },
     "ADMIN_DASHBOARD": {
-        "TITLE": "Welcome to Iurest",
+        "TITLE": "Welcome to iurest",
         "CARD_CONTENT": "Your best investment. Enjoy a new experience with the platform that will grow your business.",
         "LINK": {
             "NEW_RESTAURANT": "Restaurants",
@@ -1261,7 +1307,7 @@
         "ENTER": "Enter Code",
         "CHANGE_TABLE_OK": "Table change applied successfully",
         "TABLE_DESTINY_NOT_EXISTS": "The code for the new table does not exist. Please try again.",
-        "TABLE_DESTINY_NO_ACTIVE": "The table entered is not active for the Iurest service",
+        "TABLE_DESTINY_NO_ACTIVE": "The table entered is not active for the iurest service",
         "TABLE_DESTINY_NO_RESTAURANT": "The code of the table entered does not belong to the restaurant where you are located. Please try again.",
         "PENDING_ORDERS": "You have orders pending to confirm affecting your payment. Please check and try again.",
         "ORDERS_PAY_PROCESS": "You have orders in process of payment. It is not possible to change of table.",
@@ -1345,32 +1391,32 @@
         "ORDER_PREPARED": "Cooked",
         "ORDER_DELIVERED": "Delivered",
         "ORDER_TRANSLATE": "In Transfer",
-        "PENALIZE_MSG": "Creating a penalty, will mark the user on Iurest system for notify the administrator when his/her is in establishment again",
+        "PENALIZE_MSG": "Creating a penalty, will mark the user on iurest system for notify the administrator when his/her is in establishment again",
         "PENALIZE_TABLE": "The penalty will remove the user of the table",
         "PENALIZE_CONFIRM_MSG": "and cancel all his/her orders. Do you want to continue creating the penalty?",
         "ACCOUNT_ERROR": "An error has occurred with the user account. Please check if the user is still at the table with the option ADMINISTRATION -> TABLES CONTROL",
         "GENERAL_ERROR": "An error has occurred while penalizing the user. Please try later.",
         "PENALTY_CREATED": "Penalty created"
     },
-    "INVOICES_DOWNLOAD" : {
-        "TITLE" : "Invoices download",
-        "TEXT" : "It consults the invoices of your restaurant",
-        "FROM" : "From",
-        "INITIAL_DATE" : "Initial date",
-        "TO_DATE" : "To date",
-        "END_DATE" : "End date",
+    "INVOICES_DOWNLOAD": {
+        "TITLE": "Invoices download",
+        "TEXT": "It consults the invoices of your restaurant",
+        "FROM": "From",
+        "INITIAL_DATE": "Initial date",
+        "TO_DATE": "To date",
+        "END_DATE": "End date",
         "SYSTEM_MSG": "System alert",
         "SELECT_RANGE_VALID_DATES": "Select a valid range of dates",
-        "RANGE_DAYS" : "The date range cannot exceed 31 days",
+        "RANGE_DAYS": "The date range cannot exceed 31 days",
         "THERE_NOT_RESTAURANTS": "No restaurants registered yet",
         "MESSAGE": "Register at least one restaurant to enable this option",
         "RESTAURANT_REGISTER": "Register Restaurant",
         "YEAR_FILTER": "Year",
         "MONTH_FILTER": "Month",
         "SELECT_RESTAURANT": "Select restaurant",
-        "NO_INVOICES" : "There are no invoices"
+        "NO_INVOICES": "There are no invoices"
     },
-    "RESTAURANT_LEGALITY":{
+    "RESTAURANT_LEGALITY": {
         "COLOMBIA": {
             "SELECT_REGIME": "Select restaurant regime",
             "REGIME_CO": "Comun regime",
@@ -1402,7 +1448,65 @@
             "ACCEPT": "Accept",
             "ENTER_PREFIX": "Please fill in prefix name",
             "ENTER_BIG_CONTRIBUTOR_FILES": "Please fill in big contributor fields",
-            "ENTER_SELF_ACCEPTING_FILES": "Please fill in self accepting fields"
+            "ENTER_SELF_ACCEPTING_FILES": "Please fill in self accepting fields",
+            "CURRENT_RESOLUTION_TITLE": "Current resolution information",
+            "NEXT_RESOLUTION_TITLE": "Next resolution information",
+            "IS_RETAINING_AGENT": "Is retaining agent"
         }
+    },
+    "RESTAURANT_PROFILE": {
+        "PROFILE_TXT": "Create the profile of your restaurants to be seen by your customers",
+        "NO_RESTAURANTS": "There are not restaurants created on the platform",
+        "REGISTER_RESTAURANT": "Register Restaurant",
+        "RESTAURANTS_PROFILE": "Restaurants Profile",
+        "RESTAURANTS_PROFILE_MSG": "Create the profile of your restaurants for everyone to see",
+        "SELECT_RESTAURANT": "Select Restaurant",
+        "SELECT_RESTAURANT_TO_MODIFY": "Please select a restaurant to create or modify your profile",
+        "PROFILE_SUBTITLE": "Enter the following information so that people know you more when looking for you in iurest. You can modify the information to keep it updated.",
+        "GENERAL_INFO": "General Information",
+        "DESCRIPTION": "Write about your restaurant. Tell us about your story, what motivates you, your food and your services",
+        "DESCRIPTION_LBL": "Restaurant Description",
+        "WEB_PAGE": "If you have a web page, type the URL (www.myrestaurant.com)",
+        "WEB_PAGE_LBL": "Web page",
+        "PHONE": "Enter the phone number of your restaurant (if you have one)",
+        "PHONE_LBL": "Phone",
+        "EMAIL": "Enter the email (if you have one)",
+        "EMAIL_LBL": "Email",
+        "FACEBOOK_LINK": "If you have a Facebook page for your restaurant, enter the link here",
+        "FACEBOOK_LINK_LBL": "Facebook Link",
+        "INSTAGRAM_LINK": "If you have a Instagram page for your restaurant, enter the link here",
+        "INSTAGRAM_LINK_LBL": "Instagram Link",
+        "TWITTER_LINK": "If you have a Twitter page for your restaurant, enter the link here",
+        "TWITTER_LINK_LBL": "Twitter Link",
+        "SCHEDULE": "Schedule",
+        "SCHEDULE_TXT": "Enter the attending hours of the establishment",
+        "IMAGES": "Images",
+        "IMAGES_TXT": "Enter or update restaurant images (Only format .png, .jpg, .jpeg)",
+        "NO_RESTAURANT_IMAGES": "No images of the restaurant have been entered",
+        "NO_NEW_IMAGES": "No new images selected",
+        "IMAGES_TO_SAVE": "Images to save",
+        "REMOVE_IMAGE": "Remove image",
+        "LOCATION": "Location",
+        "LOCATION_TXT": "Enter the location of the restaurant. You can move the mark on the map to locate it with the highest position",
+        "SAVE_INFO": "Save information",
+        "PROFILE_UPDATED": "Restaurant Profile Updated",
+        "PROFILE_CREATED": "Restaurant Profile Created",
+        "REMOVE_IMAGE_CONFIRM": "are you sure to remove the image?",
+        "IMAGE_REMOVED": "Image removed"
+    },
+    "RESTAURANT_PROFILE_DETAIL": {
+        "VIEW_MENU": "View Menu",
+        "NO_PROFILE": "This restaurant has not configured its profile",
+        "ABOUT_RESTAURANT": "About the restaurant",
+        "PHOTOS": "Photos",
+        "NO_PHOTOS": "Photos not found",
+        "CONTACT": "Contact",
+        "NO_WEB_PAGE": "There are no web page",
+        "NO_PHONE": "There are no phone",
+        "NO_EMAIL": "There are no email",
+        "PAYMENT_METHODS": "Payment methods",
+        "CURRENCY_ACCEPTED": "Currency accepted",
+        "LOCATION": "Location",
+        "ADDRESS": "Address"
     }
 }

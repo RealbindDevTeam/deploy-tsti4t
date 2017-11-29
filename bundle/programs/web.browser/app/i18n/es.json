@@ -66,31 +66,31 @@
             "TEXT2": "Descargala gratis en: "
         },
         "ABOUT_CONTENT": {
-            "TITLE1": "Accede desde tu dispositivo preferido",
-            "TEXT1": "Ingresa desde tu smartphone, tablet o computador y disfruta de todas las características que tenemos para ofrecerte.",
+            "TITLE1": "Accede desde nuestra aplicación móvil o página web",
+            "TEXT1": "Ingresa a la app desde tu smartphone y tablet, o web desde computador y disfruta de todas las características que tenemos para ofrecerte.",
             "TITLE2": "Mira el menú y ordena directo a la cocina",
-            "TEXT2": "Asegura tu pedido, revisa el detalle de tus ordenes y evita tiempos de espera para comer.",
+            "TEXT2": "Asegura tu pedido, revisa el detalle de tu comida y evita tiempos de espera para comer.",
             "TITLE3": "Solicita ayuda de un mesero si deseas",
             "TEXT3": "LLama a un mesero de una forma simple y efectiva."
         },
-        "STEPS" : {
-            "EASY_AND_FAST" : "Fácil y rápido",
-            "ONE" : "Ve a un restaurante y escanea el código de la mesa",
-            "TWO" : "Elige lo que deseas comer y confirma para que llegue directo a la cocina",
-            "THREE" : "Un mesero te llevará la comida cuando este preparada",
-            "FOUR" : "Consulta el detalle de tu cuenta",
-            "FIVE" : "Indica que vas a pagar y un mesero ira a tu mesa"
+        "STEPS": {
+            "EASY_AND_FAST": "Fácil y rápido",
+            "ONE": "Ve a un restaurante y escanea el código de la mesa",
+            "TWO": "Elige lo que deseas comer y confirma tu orden",
+            "THREE": "Un mesero te llevará la comida cuando este preparada",
+            "FOUR": "Consulta el detalle de tu cuenta",
+            "FIVE": "Indica que vas a pagar y un mesero ira a tu mesa"
         },
         "OWNER_CONTENT": {
-            "TITLE1": "Tienes un restaurante y te gustaría usar el servicio Iurest?",
+            "TITLE1": "Tienes un restaurante y te gustaría usar el servicio iurest?",
             "TEXT1": "",
             "TEXT2": "Ofrecemos un sistema que va a mejorar tu negocio"
         },
         "COMPLEMENTARY": {
             "TITLE": "Sal y disfruta de una buena comida acompañado de amigos, pareja o familia"
         },
-        "FOOTER" : {
-            "ALL_RIGHT_RESERVED" : "Todos los derechos reservados"
+        "FOOTER": {
+            "ALL_RIGHT_RESERVED": "Todos los derechos reservados"
         }
     },
     "SIGNUP": {
@@ -100,6 +100,7 @@
         "REQUIRED_USERNAME": "El nombre de usuario no puede estar vacío",
         "MIN_LENGTH_USERNAME": "El nombre de usuario debe tener mínimo 6 caracteres",
         "MAX_LENGTH_USERNAME": "El nombre de usuario debe tener máximo 20 caracteres",
+        "NO_SPACES": "No se permiten espacios",
         "REQUIRED_EMAIL": "Formato de correo electrónico incorrecto",
         "MIN_LENGTH_EMAIL": "El correo electrónico debe tener mínimo 6 caracteres",
         "MAX_LENGTH_EMAIL": "EL correo electrónico debe tener máximo 40 caracteres",
@@ -247,11 +248,14 @@
         "ADMINISTRATION": {
             "MANAGEMENT": "Administración",
             "RESTAURANTS": "Restaurantes",
-            "TABLES": "Buscar mesas",
+            "TABLES": "Mesas",
             "COLLABORATORS": "Colaboradores",
-            "MONTHLY_CONFIG": "Configuración mensual",
+            "MONTHLY_CONFIG": "Configuración",
             "TABLE_CONTROL": "Control de Mesas",
-            "INVOICES_DOWNLOAD" : "Descarga de facturas"
+            "INVOICES_DOWNLOAD": "Descarga de facturas",
+            "PROFILE": "Perfiles",
+            "TABLES_SEARCH": "Búscar mesas",
+            "MY_RESTAURANTS": "Mis Restaurantes"
         },
         "PAYMENTS": {
             "PAYMENTS": "Pagos",
@@ -272,7 +276,9 @@
             "ORDERS_CHEF": "Ordenes"
         },
         "ORDERS": "Ordenes",
-        "WAITER_CALL": "Llamar mesero"
+        "WAITER_CALL": "Llamar mesero",
+        "CALLS": "Llamados",
+        "SETTINGS": "Ajustes"
     },
     "PROMOTIONS": {
         "PROMOTION_CREATION": "Creación de promociones",
@@ -331,7 +337,7 @@
         "GENERAL_INFO_TEXT": "Por favor ingresa la información del restaurante. Dicha información será visualizada por las personas en internet y te dará mayor visivilidad",
         "LEGAL_LABEL": "Legal",
         "LEGAL_INFO": "Información legal del restaurante",
-        "LEGAL_INFO_TEXT": "La información legal del restaurante será establecida de acuerdo al país al cual pertenece. Esto le permitirá a Iurest ayudarte con las cuentas y gastos de tu negocio.",
+        "LEGAL_INFO_TEXT": "La información legal del restaurante será establecida de acuerdo al país al cual pertenece. Esto le permitirá a iurest ayudarte con las cuentas y gastos de tu negocio.",
         "ADD_LOCATION": "Ingresa la ubicación del establecimiento",
         "SCHEDULE_LABEL": "Horario",
         "SCHEDULE_INFO": "Horario de atención",
@@ -348,12 +354,16 @@
         "TABLES": "mesas",
         "MORE": "más",
         "RESTAURANT_CREATION": "Creación de restaurante",
-        "ACTIVATION_MESSAGE": "Se activará el cobro mensual del servicio Iurest por restaurante",
-        "CLARIFICATION_MESSAGE_1": "Iurest realiza el cobro de servicio el ",
+        "ACTIVATION_MESSAGE": "Se activará el cobro mensual del servicio iurest por restaurante",
+        "CLARIFICATION_MESSAGE_1": "iurest realiza el cobro de servicio el ",
         "CLARIFICATION_MESSAGE_2": " día de cada mes, el primer cobro es sobre el ",
         "ACCEPT_CREATION": "Aceptar",
         "CANCEL_CREATION": "Cancelar",
-        "INITIAL_TABLES_NUMBER": "Número inicial de mesas"
+        "INITIAL_TABLES_NUMBER": "Número inicial de mesas, ",
+        "MAX_TABLES": "máximo ",
+        "TABLES_MSG": "En caso de necesitar más mesas para tu restaurante, en la opción Administración -> Restaurantes -> Configuración, podrás agregar las que necesites.",
+        "CREATION_ERROR": "Se ha presentado un error creando el restaurante. Por favor intenta nuevamente.",
+        "RESTAURANT_CREATED": "Restaurante Creado"
     },
     "WEEK": {
         "MONDAY": "Lunes",
@@ -543,10 +553,16 @@
         "FILE_NAME": "mesas"
     },
     "GO_TO_STORE": {
-        "TITTLE": "Qué te",
-        "SUB_TITTLE": "gusta comer?",
-        "CONTENT": "Hicimos la mayor parte del trabajo pesado para que usted pueda proporcionar un estilo por defecto que incorpora nuestros componentes personalizados",
-        "BUTTON": "Descargar"
+        "CLIENT": {
+            "TITTLE": "Qué te",
+            "SUB_TITTLE": "gusta comer?",
+            "CONTENT": "Hicimos la mayor parte del trabajo pesado para que usted pueda proporcionar un estilo por defecto que incorpora nuestros componentes personalizados",
+            "BUTTON": "Descargar"
+        },
+        "COLLABORATOR": {
+            "TITTLE": "Por favor ingresa desde tu computador, para disfrutar de iurest",
+            "BUTTON": "Regresar"
+        }
     },
     "COLLABORATORS": {
         "COLLABORATORS_SEARCH": "Consulta de colaboradores",
@@ -626,7 +642,9 @@
         "GARNISHFOOD_QUANTITY_MSG": "La cantidad de guarniciones debe ser diferente a 0",
         "WARNING": "Advertencia: Tienes ",
         "WARNING_2": "usuarios activos en tus restaurantes",
-        "WARNING_3": "Modificar la configuración de un item podría afectar la experiencia de los usuarios"
+        "WARNING_3": "Modificar la configuración de un item podría afectar la experiencia de los usuarios",
+        "ITEM_CREATED": "Item creado correctamente",
+        "CREATION_ERROR": "Se ha presentado un error creando el item. Por favor intenta nuevamente."
     },
     "ROLE": {
         "ADMINISTRATOR": "Administrador",
@@ -676,7 +694,7 @@
         "EMAIL": "Correo electrónico",
         "LEGAL_LABEL": "Legal",
         "LEGAL_INFO": "Información legal del restaurante",
-        "LEGAL_INFO_TEXT": "Edita la información legal del restaurante. Esto le permitirá a Iurest ayudarte con las cuentas y gastos del negocio.",
+        "LEGAL_INFO_TEXT": "Edita la información legal del restaurante. Esto le permitirá a iurest ayudarte con las cuentas y gastos del negocio.",
         "INVOICE_CODE": "Código de factura",
         "TIP_PERCENTAGE": "Porcentaje de propina",
         "TAX_PERCENTAGE": "Porcentaje de impuestos",
@@ -743,7 +761,8 @@
         "ADD_ADDITIONS": "Selecciona las adiciones que desees agregar a la orden e indica su cantidad",
         "ADD_ADDITION_ORDER": "Agregar adición a la orden",
         "ITEM_AGGREGATED": "Item agregado correctamente",
-        "ADDITON_AGGREGATED": "Adición agregada correctamente"
+        "ADDITON_AGGREGATED": "Adición agregada correctamente",
+        "SEARCH_MENU": "Buscar Menú"
     },
     "ORDER_LIST": {
         "TABLE_ORDERS": "Ordenes de la mesa",
@@ -818,7 +837,7 @@
             "FULL_PAYMENT": "Pago total de la orden",
             "RETURN_ORDER_USER": "Desea devolver la orden al usuario ",
             "ORDER_PENDING_STATUS": "Tienes ordenes con estado pendiente por confirmación. Debes confirmarlas o esperar a que te confirmen.",
-            "NO_ONLINE_PAYMENT": "El pago online aún no se encuentra habilitado en Iurest",
+            "NO_ONLINE_PAYMENT": "El pago online aún no se encuentra habilitado en iurest",
             "PLEASE_SELECT_PAYMENT_METHOD": "Por favor selecciona un medio de pago",
             "PAYMENT_UNAVAILABLE": "La opción de pagos no se encuentra disponible por el momento.",
             "WAITER_ATTEND": "En un momento un mesero te atenderá en tu mesa",
@@ -866,7 +885,8 @@
         "CALL_LABEL_CUSTOMER_PAYMENT": "Pago de cliente",
         "BTN_CALL_WAITER": "Solicitar mesero",
         "BTN_CANCEL_WAITER": "Cancelar",
-        "CALL_LABEL_EXIT_TABLE": "Salida de Usuario"
+        "CALL_LABEL_EXIT_TABLE": "Salida de Usuario",
+        "NO_CALLS": "No hay llamados pendientes"
     },
     "ORDER_ATTENTION": {
         "ORDERS_CONFIRMED": "Ordenes confirmadas",
@@ -889,7 +909,7 @@
     },
     "FINANCIAL_INFO": {
         "COLOMBIA": {
-            "INC": "De acuerdo a la ley Colombiana, los restaurantes deben discriminar en la cuenta de cobro, tiquete de registradora, factura o documento equivalente, el Impuesto Nacional al Consumo (INC), por lo tanto, Iurest realizara el cálculo del INC equivalente al 8% al momento de solicitar el valor total de la cuenta por parte del cliente.",
+            "INC": "De acuerdo a la ley Colombiana, los restaurantes deben discriminar en la cuenta de cobro, tiquete de registradora, factura o documento equivalente, el Impuesto Nacional al Consumo (INC), por lo tanto, iurest realizara el cálculo del INC equivalente al 8% al momento de solicitar el valor total de la cuenta por parte del cliente.",
             "BUSINESS_NAME": "Ingresa Apellidos y Nombres (si es persona natural) o Razón Social (si es persona jurídica):",
             "BUSINESS_NAME_LABEL": "Nombres - Razón Social",
             "NIT": "Ingresa NIT de quien vende los Bienes o Servicios. Por favor incluya dígito de verificación:",
@@ -909,15 +929,15 @@
         "MSG_1": "Puedes ordenar lo que deseas",
         "NO_ORDERS": "Aún no tienes ordenes, puedes crear una orden nueva",
         "ORDER": "Ordenar",
-        "TABLE_NO_ACTIVE": "El restaurante no tiene la mesa activa para el servicio de Iurest",
+        "TABLE_NO_ACTIVE": "El restaurante no tiene la mesa activa para el servicio de iurest",
         "TABLE_NOT_EXISTS": "La mesa no existe. Por favor verifíque el código.",
-        "IUREST_NO_ACTIVE": "El restaurante no tiene el servicio de Iurest activo. No es posible ingresar.",
+        "IUREST_NO_ACTIVE": "El restaurante no tiene el servicio de iurest activo. No es posible ingresar.",
         "RESTAURANT_NOT_EXISTS": "El restaurante no existe. No es posible ingresar.",
         "PENALTY": "En el momento no tienes disponible la opción para crear ordenes. Intenta de nuevo después del "
     },
     "MONTHLY_PAYMENT": {
-        "TITLE": "Pago del servicio mensual de Iurest",
-        "SUBTITLE": "Aquí puedes visualizar el costo total por el servicio Iurest por restaurante y número de mesas",
+        "TITLE": "Pago del servicio mensual de iurest",
+        "SUBTITLE": "Aquí puedes visualizar el costo total por el servicio iurest por restaurante y número de mesas",
         "RESTAURANT_NAME": "Nombre del restaurante",
         "RESTAURANT_PRICE": "Precio del restaurante",
         "TABLES_NUMBER": "Número de mesas",
@@ -1011,7 +1031,8 @@
         "DIALOG_SURE_ACTION": "Estas seguro que quieres realizar esta acción?",
         "RESTAURANT_MODIFIED": "Restaurante modificado",
         "TABLES_CREATE": "Mesas creadas",
-        "TABLE_MODIFIED": "Mesa modificada"
+        "TABLE_MODIFIED": "Mesa modificada",
+        "NUMBER_TABLES": "Número de mesas, Máximo "
     },
     "SEND_ORDER": {
         "ORDER": "Orden",
@@ -1057,11 +1078,11 @@
         "ADDRESS_MAX": "La dirección debe tener máximo 100 caracteres",
         "PHONE_NUMBER": "Número de teléfono *",
         "PHONE_NUMBER_MAX": "El número de teléfono debe tener máximo 20 caracteres",
-        "SECURITY_MSG": "* Por seguridad, Iurest no guarda la información de tu tarjeta de crédito",
+        "SECURITY_MSG": "* Por seguridad, iurest no guarda la información de tu tarjeta de crédito",
         "CONTINUE_PAYMENT": "Continuar",
         "DIALOG_TITLE": "Confirmación de pago",
         "DIALOG_PLEASE": "Por favor revisa la información antes de confirmar",
-        "IUREST_SERVICE": "Servicio Iurest",
+        "IUREST_SERVICE": "Servicio iurest",
         "MONTHLY_SERVICE": "Mensual",
         "PERSONAL_INFO": "Información de facturación",
         "PERSONAL_TEL": "Tel. ",
@@ -1070,7 +1091,7 @@
         "PRICE": "Precio: ",
         "PAY_CONFIRM": "Confirmar",
         "PAY_CANCEL": "Cancelar",
-        "ORDER_DESCRIPTION": "Pago mensual de servicio Iurest",
+        "ORDER_DESCRIPTION": "Pago mensual de servicio iurest",
         "TRANSACTION_STATUS": "Estado de la transacción",
         "TRANSACTION_APPROVED": "El pago ha sido aprobado",
         "TRANSACTION_DECLINED": "El pago ha sido rechazado",
@@ -1082,7 +1103,9 @@
         "AUTH_ERROR_MSG": "Los datos ingresados de tu tarjeta no coinciden, por favor verifícalos",
         "FIRST_NAME": "Nombres",
         "LAST_NAME": "Apellidos",
-        "UNAVAILABLE_PAYMENT": "La opción de pago no esta disponible por el momento, por favor intenta mas tarde"
+        "UNAVAILABLE_PAYMENT": "La opción de pago no esta disponible por el momento, por favor intenta mas tarde",
+        "CC_PAYMENT_METHOD": "Tarjeta de crédito",
+        "DESCRIPTION": "Servicio mensual de Iurest"
     },
     "RES_PAYMENT_HISTORY": {
         "TITLE": "Historial de pagos",
@@ -1112,13 +1135,22 @@
         "DATE_LBL": "Fecha: ",
         "CUSTOMER_LBL": "Cliente",
         "DESCRIPTION_LBL": "Descripción",
-        "DESCRIPTION": "Servicio mensual Iurest",
+        "DESCRIPTION": "Servicio mensual iurest",
         "PERIOD_LBL": "Periodo",
         "AMOUNT_LBL": "Valor sin IVA",
         "SUBTOTAL": "SubTotal: ",
         "IVA": "IVA: ",
         "TOTAL": "Total: ",
-        "UNAVAILABLE_REPORT": "La opción de consulta de estado no está disponible en este momento, inténtalo más tarde"
+        "UNAVAILABLE_REPORT": "La opción de consulta de estado no está disponible en este momento, inténtalo más tarde",
+        "RESOLUTION_MSG": "Resolución DIAN No",
+        "INVOICE_START_DATE": "del",
+        "INVOICE_END_DATE": "hasta",
+        "INVOICE_START_VALUE": "desde el No",
+        "INVOICE_END_VALUE": "hasta",
+        "PAYMENT_METHOD": "Forma de pago: ",
+        "IDENTIFICATION_NUMBER": "Identificación: ",
+        "TELEPHONE_NUMBER": "Teléfono: ",
+        "EMAIL": "Email: "
     },
     "TRANSACTION_STATUS": {
         "APPROVED": "Aprobado",
@@ -1159,14 +1191,26 @@
         "INVOICE_SALE": "Factura de venta",
         "DATE": "Fecha-Hora",
         "TOOLTIP_DOWNLOAD_INVOICE": "Descargar factura",
-        "NO_PAYS": "Aún no tiene pagos realizados"
+        "NO_PAYS": "Aún no tiene pagos realizados",
+        "INVOICE_GENERATED_BY": "FACTURA EMITIDA POR COMPUTADOR"
     },
     "ADMIN_SIGNUP": {
+        "HOME_CONTENT" : {
+            "TITLE" : "Mejora el servicio de tu restaurante y la atención a tus clientes con nuestro sistema",
+            "SUB_TITLE" : "Reduce el tiempo en recibir y entregar las ordenes de tus comensales"
+        },
+        "ABOUT_CONTENT" : {
+            "MSG_1" : "Ingresa información detallada del menú, para que los clientes puedan verlo, y ordenar desde sus celulares, tablets o computadores",
+            "MSG_2" : "Crea colaboradores y asignales un rol (chef, mesero ó supervisor) para interactuar con el sistema",
+            "MSG_3" : "Usa el servicio completo gratis por tiempo limitado, después paga de acuerdo a lo que necesites.",
+            "REF" : "Consulta nuestro plan de pagos"
+        },
         "SLOGAN": "Registro de administrador",
         "USERNAME": "Usuario",
         "REQUIRED_USERNAME": "El nombre de usuario no puede estar vacío",
         "MIN_LENGTH_USERNAME": "El nombre de usuario debe tener mínimo 6 caracteres",
         "MAX_LENGTH_USERNAME": "El nombre de usuario debe tener máximo 20 caracteres",
+        "NO_SPACES": "No se permiten espacios",
         "EMAIL": "Correo electrónico",
         "REQUIRED_EMAIL": "Formato de correo electrónico incorrecto",
         "MIN_LENGTH_EMAIL": "El correo electrónico debe tener mínimo 6 caracteres",
@@ -1207,10 +1251,12 @@
         "ALREADY_ACCOUNT": "Ya tienes una cuenta?",
         "SIGNIN": "Iniciar Sesión",
         "LABEL_LEGAL": "Al dar clic en 'Registrarse', ",
-        "LABEL_LEGAL_END": "aceptas los términos y condiciones."
+        "LABEL_LEGAL_END": "aceptas los términos y condiciones.",
+        "GENERAL_INFO": "Información personal",
+        "USER_PASSWD": "Usuario y contraseña"
     },
     "ADMIN_DASHBOARD": {
-        "TITLE": "Te damos la bienvenida a Iurest",
+        "TITLE": "Te damos la bienvenida a iurest",
         "CARD_CONTENT": "Tu mejor inversión. Disfruta una nueva experiencia con la herramienta que hará crecer tu negocio.",
         "LINK": {
             "NEW_RESTAURANT": "Restaurantes",
@@ -1261,7 +1307,7 @@
         "ENTER": "Ingresar código",
         "CHANGE_TABLE_OK": "El cambio de mesa se ha realizado correctamente",
         "TABLE_DESTINY_NOT_EXISTS": "El código de la nueva mesa no existe. Por favor intenta nuevamente.",
-        "TABLE_DESTINY_NO_ACTIVE": "La mesa ingresada no esta activa para el servicio de Iurest",
+        "TABLE_DESTINY_NO_ACTIVE": "La mesa ingresada no esta activa para el servicio de iurest",
         "TABLE_DESTINY_NO_RESTAURANT": "El código de la mesa ingresada no pertenece al restaurante en el que te encuentras en este momento. Por favor intenta nuevamente.",
         "PENDING_ORDERS": "Tienes ordenes pendientes por confirmar que afectan tu pago. Por favor revisa e intenta nuevamente.",
         "ORDERS_PAY_PROCESS": "Tienes ordenes en proceso de pago. No es posible realizar hacer el cambio de mesa.",
@@ -1345,32 +1391,32 @@
         "ORDER_PREPARED": "Preparadas",
         "ORDER_DELIVERED": "Entregadas",
         "ORDER_TRANSLATE": "En Traslado",
-        "PENALIZE_MSG": "Al crear una penalización, este usuario quedara marcado para que Iurest lo tenga presente al momento de entrar en un restaurante y le notifique a sus administradores.",
+        "PENALIZE_MSG": "Al crear una penalización, este usuario quedara marcado para que iurest lo tenga presente al momento de entrar en un restaurante y le notifique a sus administradores.",
         "PENALIZE_TABLE": "La penalización retirara al usuario de la mesa",
         "PENALIZE_CONFIRM_MSG": "y cancelara todas sus ordenes. Deseas continuar creando la penalización?",
         "ACCOUNT_ERROR": "Se ha producido un error con la cuenta del usuario. Por favor verifique si el usuario aún se encuentra en la mesa con la opción ADMINISTRACION -> CONTROL DE MESAS",
         "GENERAL_ERROR": "Se ha producido un error penalizando al usuario. Por favor intente mas tarde.",
         "PENALTY_CREATED": "Penalización Creada"
     },
-    "INVOICES_DOWNLOAD" : {
-        "TITLE" : "Descarga de facturas",
-        "TEXT" : "Consulta las facturas de tu restaurante",
-        "FROM" : "Desde",
-        "INIT_DATE" : "Fecha inicial",
-        "TO_DATE" : "Hasta la fecha",
-        "END_DATE" : "Fecha final",
+    "INVOICES_DOWNLOAD": {
+        "TITLE": "Descarga de facturas",
+        "TEXT": "Consulta las facturas de tu restaurante",
+        "FROM": "Desde",
+        "INIT_DATE": "Fecha inicial",
+        "TO_DATE": "Hasta la fecha",
+        "END_DATE": "Fecha final",
         "SYSTEM_MSG": "Mensaje del sistema",
         "SELECT_RANGE_VALID_DATES": "Selecciona un rango valido de fechas",
-        "RANGE_DAYS" : "El rango de fechas no puede superar a 31 días",
+        "RANGE_DAYS": "El rango de fechas no puede superar a 31 días",
         "THERE_NOT_RESTAURANTS": "Aún no hay restaurantes registrados",
         "MESSAGE": "Registra uno para habilitar esta opción",
         "RESTAURANT_REGISTER": "Registrar restaurante",
         "YEAR_FILTER": "Año",
         "MONTH_FILTER": "Mes",
         "SELECT_RESTAURANT": "Selecciona restaurante",
-        "NO_INVOICES" : "No hay facturas"
+        "NO_INVOICES": "No hay facturas"
     },
-    "RESTAURANT_LEGALITY":{
+    "RESTAURANT_LEGALITY": {
         "COLOMBIA": {
             "SELECT_REGIME": "Selecciona el régimen al que pertenece tu restaurante",
             "REGIME_CO": "Régimen Común",
@@ -1402,7 +1448,65 @@
             "ACCEPT": "Aceptar",
             "ENTER_PREFIX": "Por favor indique el nombre del prefijo",
             "ENTER_BIG_CONTRIBUTOR_FILES": "Por favor ingrese los datos de gran contribuyente",
-            "ENTER_SELF_ACCEPTING_FILES": "Por favor ingrese los datos de autoretenedor"
+            "ENTER_SELF_ACCEPTING_FILES": "Por favor ingrese los datos de autoretenedor",
+            "CURRENT_RESOLUTION_TITLE": "Información de resolución actual",
+            "NEXT_RESOLUTION_TITLE": "Información de siguiente resolución",
+            "IS_RETAINING_AGENT": "Es agente retenedor"
         }
+    },
+    "RESTAURANT_PROFILE": {
+        "PROFILE_TXT": "Crea el perfil de tus restaurantes para ser visto por tus clientes",
+        "NO_RESTAURANTS": "No se encuentran restaurantes creados",
+        "REGISTER_RESTAURANT": "Registrar restaurante",
+        "RESTAURANTS_PROFILE": "Perfil de Restaurantes",
+        "RESTAURANTS_PROFILE_MSG": "Crea el perfil de tus restaurantes para que todos lo vean",
+        "SELECT_RESTAURANT": "Selecciona restaurante",
+        "SELECT_RESTAURANT_TO_MODIFY": "Por favor selecciona un restaurante para crear o modificar su perfil",
+        "PROFILE_SUBTITLE": "Ingresa la siguiente información para que las personas te conozcan más al momento de buscarte en iurest. Puedes modificar la información para mantenerla actualizada.",
+        "GENERAL_INFO": "Información General",
+        "DESCRIPTION": "Escribe sobre tu restaurante. Cuéntanos sobre tu historia, lo que te motiva, tu comida y tus servicios",
+        "DESCRIPTION_LBL": "Descripción de tu restaurante",
+        "WEB_PAGE": "Si tienes página web, escribe la URL (www.mirestaurante.com)",
+        "WEB_PAGE_LBL": "Página Web",
+        "PHONE": "Ingresa el número de teléfono de tu restaurante (si tienes)",
+        "PHONE_LBL": "Teléfono",
+        "EMAIL": "Ingresa un correo electrónico de contácto (Si tienes)",
+        "EMAIL_LBL": "Email",
+        "FACEBOOK_LINK": "Si tienes página en Facebook para tu restaurante, ingresa el link aquí",
+        "FACEBOOK_LINK_LBL": "Link de Facebook",
+        "INSTAGRAM_LINK": "Si tienes página en Instagram para tu restaurante, ingresa el link aquí",
+        "INSTAGRAM_LINK_LBL": "Link de Instagram",
+        "TWITTER_LINK": "Si tienes página en Twitter para tu restaurante, ingresa el link aquí",
+        "TWITTER_LINK_LBL": "Link de Twitter",
+        "SCHEDULE": "Horario",
+        "SCHEDULE_TXT": "Ingresa el horario de atención del restaurante",
+        "IMAGES": "Imágenes",
+        "IMAGES_TXT": "Ingresa o actualiza las imágenes de tu restaurante para que te conozcan en internet (se aceptan formatos .png, .jpg, .jpeg)",
+        "NO_RESTAURANT_IMAGES": "No se han ingresado imágenes del restaurante",
+        "NO_NEW_IMAGES": "No se han seleccionado imágenes nuevas",
+        "IMAGES_TO_SAVE": "Imágenes para guardar",
+        "REMOVE_IMAGE": "Eliminar imágen",
+        "LOCATION": "Ubicación",
+        "LOCATION_TXT": "Ingresa la ubicación del restaurante. Puedes mover la marca en el mapa para ubicar con mayor exactitud la posición",
+        "SAVE_INFO": "Guardar Información",
+        "PROFILE_UPDATED": "Perfil del Restaurante Actualizado",
+        "PROFILE_CREATED": "Perfil del Restaurante Creado",
+        "REMOVE_IMAGE_CONFIRM": "Esta seguro de eliminar la imágen?",
+        "IMAGE_REMOVED": "Imágen Eliminada"
+    },
+    "RESTAURANT_PROFILE_DETAIL": {
+        "VIEW_MENU": "Ver Menú",
+        "NO_PROFILE": "Lo sentimos. Este restaurante no ha configurado su perfil.",
+        "ABOUT_RESTAURANT": "Sobre el Restaurante",
+        "PHOTOS": "Fotos",
+        "NO_PHOTOS": "No se encuentran fotos del restaurante",
+        "CONTACT": "Contácto",
+        "NO_WEB_PAGE": "No tiene página de internet",
+        "NO_PHONE": "No tiene teléfono registrado",
+        "NO_EMAIL": "No tiene correo electrónico registrado",
+        "PAYMENT_METHODS": "Medios de Pago",
+        "CURRENCY_ACCEPTED": "Moneda aceptada",
+        "LOCATION": "Ubicación",
+        "ADDRESS": "Dirección"
     }
 }

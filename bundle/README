@@ -1,5 +1,5 @@
 Iurest Testing Environment Deploy
-Node.js v4.8.3. To run the application:
+Node.js v8.8.1. To run the application:
 
   $ (cd programs/server && npm install)
   $ export MONGO_URL='mongodb://user:password@host:port/databasename'

@@ -4,9 +4,6 @@
 var Meteor = Package.meteor.Meteor;
 var global = Package.meteor.global;
 var meteorEnv = Package.meteor.meteorEnv;
-var Symbol = Package['ecmascript-runtime-server'].Symbol;
-var Map = Package['ecmascript-runtime-server'].Map;
-var Set = Package['ecmascript-runtime-server'].Set;
 
 /* Package-scope variables */
 var Babel, BabelCompiler;
@@ -19,15 +16,18 @@ var Babel, BabelCompiler;
 //                                                                            //
 ////////////////////////////////////////////////////////////////////////////////
                                                                               //
+var meteorBabel = null;
+function getMeteorBabel() {
+  return meteorBabel || (meteorBabel = Npm.require("meteor-babel"));
+}
+
 /**
  * Returns a new object containing default options appropriate for
  */
 function getDefaultOptions(extraFeatures) {
-  var meteorBabel = Npm.require('meteor-babel');
-
   // See https://github.com/meteor/babel/blob/master/options.js for more
   // information about what the default options are.
-  var options = meteorBabel.getDefaultOptions(extraFeatures);
+  var options = getMeteorBabel().getDefaultOptions(extraFeatures);
 
   // The sourceMap option should probably be removed from the default
   // options returned by meteorBabel.getDefaultOptions.
@@ -43,23 +43,25 @@ Babel = {
   validateExtraFeatures: Function.prototype,
 
   parse: function (source) {
-    return Npm.require('meteor-babel').parse(source);
+    return getMeteorBabel().parse(source);
   },
 
   compile: function (source, options) {
-    var meteorBabel = Npm.require('meteor-babel');
     options = options || getDefaultOptions();
-    return meteorBabel.compile(source, options);
+    return getMeteorBabel().compile(source, options);
   },
 
   setCacheDir: function (cacheDir) {
-    Npm.require('meteor-babel').setCacheDir(cacheDir);
+    getMeteorBabel().setCacheDir(cacheDir);
   },
 
-  minify: function(source, options) {
-    var meteorBabel = Npm.require('meteor-babel');
-    var options = options || meteorBabel.getMinifierOptions();
-    return meteorBabel.minify(source, options);
+  minify: function (source, options) {
+    var options = options || getMeteorBabel().getMinifierOptions();
+    return getMeteorBabel().minify(source, options);
+  },
+
+  getMinifierOptions: function (extraFeatures) {
+    return getMeteorBabel().getMinifierOptions(extraFeatures);
   }
 };
 
@@ -154,6 +156,12 @@ BCp.processOneFileForTarget = function (inputFile, source) {
 
     var extraFeatures = Object.assign({}, this.extraFeatures);
 
+    if (inputFile.getArch().startsWith("os.")) {
+      // Start with a much simpler set of Babel presets and plugins if
+      // we're compiling for Node 8.
+      extraFeatures.nodeMajorVersion = parseInt(process.versions.node);
+    }
+
     if (! extraFeatures.hasOwnProperty("jscript")) {
       // Perform some additional transformations to improve compatibility
       // in older browsers (e.g. wrapping named function expressions, per
@@ -242,8 +250,16 @@ BCp._inferFromBabelRc = function (inputFile, babelOptions, cacheDeps) {
   var babelrcPath = inputFile.findControlFile(".babelrc");
   if (babelrcPath) {
     if (! hasOwn.call(this._babelrcCache, babelrcPath)) {
-      this._babelrcCache[babelrcPath] =
-        JSON.parse(inputFile.readAndWatchFile(babelrcPath));
+      try {
+        this._babelrcCache[babelrcPath] =
+          JSON.parse(inputFile.readAndWatchFile(babelrcPath));
+      } catch (e) {
+        if (e instanceof SyntaxError) {
+          e.message = ".babelrc is not a valid JSON file: " + e.message;
+        }
+
+        throw e;
+      }
     }
 
     return this._inferHelper(
@@ -381,6 +397,16 @@ BCp._inferHelper = function (
 
   merge(babelOptions, babelrc, "presets");
   merge(babelOptions, babelrc, "plugins");
+
+  const babelEnv = (process.env.BABEL_ENV ||
+                    process.env.NODE_ENV ||
+                    "development");
+  if (babelrc && babelrc.env && babelrc.env[babelEnv]) {
+    const env = babelrc.env[babelEnv];
+    walkBabelRC(env);
+    merge(babelOptions, env, "presets");
+    merge(babelOptions, env, "plugins");
+  }
 
   return !! (babelrc.presets ||
              babelrc.plugins);

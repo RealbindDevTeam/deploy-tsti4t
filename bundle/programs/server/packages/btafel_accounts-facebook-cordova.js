@@ -13,12 +13,12 @@ var _ = Package.underscore._;
 
 (function(){
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                                     //
-// packages/btafel_accounts-facebook-cordova/facebook_server.js                                        //
-//                                                                                                     //
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                                                                                       //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                 //
+// packages/btafel_accounts-facebook-cordova/facebook_server.js                                                    //
+//                                                                                                                 //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                   //
 Accounts.registerLoginHandler(function(loginRequest) {
   if(!loginRequest.cordova) {
     return undefined;
@@ -70,14 +70,14 @@ var getIdentity = function (accessToken, fields) {
 
 var getProfilePicture = function (accessToken) {
   try {
-    return HTTP.get("https://graph.facebook.com/v2.0/me/picture/?redirect=false", {
+    return HTTP.get("https://graph.facebook.com/v2.8/me/picture/?redirect=false", {
       params: {access_token: accessToken}}).data.data.url;
   } catch (err) {
     throw _.extend(new Error("Failed to fetch identity from Facebook. " + err.message),
                    {response: err.response});
   }
 };
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 }).call(this);
 
@@ -88,19 +88,19 @@ var getProfilePicture = function (accessToken) {
 
 (function(){
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                                     //
-// packages/btafel_accounts-facebook-cordova/facebook.js                                               //
-//                                                                                                     //
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                                                                                       //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                 //
+// packages/btafel_accounts-facebook-cordova/facebook.js                                                           //
+//                                                                                                                 //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                   //
 Accounts.oauth.registerService('facebook');
 
 if (Meteor.isClient) {
 
-  Meteor.loginWithFacebook = function(options, callback) {
+  Meteor.loginWithFacebook = function (options, callback) {
     // support a callback without options
-    if (! callback && typeof options === "function") {
+    if (!callback && typeof options === "function") {
       callback = options;
       options = null;
     }
@@ -114,28 +114,24 @@ if (Meteor.isClient) {
         methodArguments: [data],
         userCallback: callback
       });
-    }
+    };
 
-    if (typeof facebookConnectPlugin != "undefined" && Meteor.settings) {
-      facebookConnectPlugin.getLoginStatus( 
-        function (response) { 
+    if (typeof facebookConnectPlugin != "undefined" && ((Meteor.settings && Meteor.settings.public && Meteor.settings.public.facebook) || options)) {
+      facebookConnectPlugin.getLoginStatus(
+        function (response) {
           if (response.status != "connected") {
-            facebookConnectPlugin.login(Meteor.settings.public.facebook.permissions,
-                fbLoginSuccess,
-                function (error) { 
-                  console.log("" + error) 
-                  // throw new Meteor.Error(500, error);
-                  callback(new Meteor.Error(500, error));
-                }
+            facebookConnectPlugin.login(options.requestPermissions || Meteor.settings.public.facebook.permissions,
+              fbLoginSuccess,
+              function (error) {
+                callback(new Meteor.Error(500, error));
+              }
             );
           } else {
             fbLoginSuccess(response);
           }
         },
-        function (error) { 
-          console.log("" + error) 
+        function (error) {
           callback(new Meteor.Error(500, error));
-          // throw new Meteor.Error(500, error);
         }
       );
     } else {
@@ -145,10 +141,10 @@ if (Meteor.isClient) {
 
 } else {
 
-  if (Meteor.settings && 
-      Meteor.settings.facebook &&
-      Meteor.settings.facebook.appId &&
-      Meteor.settings.facebook.secret) {
+  if (Meteor.settings &&
+    Meteor.settings.facebook &&
+    Meteor.settings.facebook.appId &&
+    Meteor.settings.facebook.secret) {
 
     ServiceConfiguration.configurations.remove({
       service: "facebook"
@@ -171,13 +167,13 @@ if (Meteor.isClient) {
         'services.facebook.id', 'services.facebook.username', 'services.facebook.gender'
       ]
     });
-    
+
   } else {
     console.log("Meteor settings for accounts-facebook-cordova not configured correctly.")
   }
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 }).call(this);
 

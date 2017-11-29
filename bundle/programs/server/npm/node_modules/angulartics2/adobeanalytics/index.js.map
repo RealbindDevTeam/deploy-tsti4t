@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../src/lib/providers/adobeanalytics/index.ts"],"names":[],"mappings":"AAAA;;GAEG;AAEH,cAAc,+BAA+B,CAAC","file":"index.js","sourceRoot":"","sourcesContent":["/**\n * Generated bundle index. Do not edit.\n */\n\nexport * from './angulartics2-adobeanalytics';\n"]}

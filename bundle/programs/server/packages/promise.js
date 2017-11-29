@@ -5,12 +5,11 @@ var Meteor = Package.meteor.Meteor;
 var global = Package.meteor.global;
 var meteorEnv = Package.meteor.meteorEnv;
 var meteorInstall = Package.modules.meteorInstall;
-var process = Package.modules.process;
 
 /* Package-scope variables */
 var Promise;
 
-var require = meteorInstall({"node_modules":{"meteor":{"promise":{"server.js":["meteor-promise","./common.js","fibers",function(require,exports){
+var require = meteorInstall({"node_modules":{"meteor":{"promise":{"server.js":function(require,exports){
 
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                           //
@@ -27,7 +26,7 @@ require("meteor-promise").makeCompatible(
 
 ///////////////////////////////////////////////////////////////////////////////
 
-}],"common.js":["promise/lib/es6-extensions",function(require,exports){
+},"common.js":function(require,exports){
 
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                           //
@@ -59,16 +58,16 @@ exports.Promise.prototype.done = function (onFulfilled, onRejected) {
 
 ///////////////////////////////////////////////////////////////////////////////
 
-}],"node_modules":{"meteor-promise":{"package.json":function(require,exports){
+},"node_modules":{"meteor-promise":{"package.json":function(require,exports){
 
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                           //
-// ../../.0.8.8.1xfiws8++os+web.browser+web.cordova/npm/node_modules/meteor- //
+// ../../.0.10.0.wb3q6c.q34++os+web.browser+web.cordova/npm/node_modules/met //
 //                                                                           //
 ///////////////////////////////////////////////////////////////////////////////
                                                                              //
 exports.name = "meteor-promise";
-exports.version = "0.8.0";
+exports.version = "0.8.6";
 exports.main = "promise_server.js";
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -91,24 +90,45 @@ exports.makeCompatible = function (Promise, Fiber) {
     Promise.Fiber = Fiber;
   }
 
-  // Replace Promise.prototype.then with a wrapper that ensures the
-  // onResolved and onRejected callbacks always run in a Fiber.
-  Promise.prototype.then = function (onResolved, onRejected) {
-    var P = this.constructor;
+  if (es6PromiseThen.name === "meteorPromiseThen") {
+    return; // Already compatible.
+  }
 
-    if (typeof P.Fiber === "function") {
-      var fiber = P.Fiber.current;
-      var dynamics = cloneFiberOwnProperties(fiber);
+  function meteorPromiseThen(onResolved, onRejected) {
+    var Promise = this.constructor;
+    var Fiber = Promise.Fiber;
 
-      return es6PromiseThen.call(
-        this,
-        wrapCallback(onResolved, P, dynamics),
-        wrapCallback(onRejected, P, dynamics)
-      );
+    if (typeof Fiber === "function" &&
+        ! this._meteorPromiseAlreadyWrapped) {
+      onResolved = wrapCallback(onResolved, Promise);
+      onRejected = wrapCallback(onRejected, Promise);
+
+      // Just in case we're wrapping a .then method defined by an older
+      // version of this library, make absolutely sure it doesn't attempt
+      // to rewrap the callbacks, and instead calls its own original
+      // es6PromiseThen function.
+      Promise.Fiber = null;
+      try {
+        return es6PromiseThen.call(this, onResolved, onRejected);
+      } finally {
+        Promise.Fiber = Fiber;
+      }
     }
 
     return es6PromiseThen.call(this, onResolved, onRejected);
-  };
+  }
+
+  // Replace Promise.prototype.then with a wrapper that ensures the
+  // onResolved and onRejected callbacks always run in a Fiber.
+  Object.defineProperty(Promise.prototype, "then", {
+    value: meteorPromiseThen,
+    enumerable: true,
+    // Don't let older versions of the meteor-promise library overwrite
+    // this version of Promise.prototype.then...
+    writable: false,
+    // ... unless they also call Object.defineProperty.
+    configurable: true
+  });
 
   Promise.awaitAll = function (args) {
     return awaitPromise(this.all(args));
@@ -203,7 +223,7 @@ exports.makeCompatible = function (Promise, Fiber) {
   };
 };
 
-function wrapCallback(callback, Promise, dynamics) {
+function wrapCallback(callback, Promise) {
   if (! callback) {
     return callback;
   }
@@ -214,12 +234,19 @@ function wrapCallback(callback, Promise, dynamics) {
     return callback;
   }
 
+  var dynamics = cloneFiberOwnProperties(Promise.Fiber.current);
   var result = function (arg) {
-    return fiberPool.run({
+    var promise = fiberPool.run({
       callback: callback,
       args: [arg], // Avoid dealing with arguments objects.
       dynamics: dynamics
     }, Promise);
+
+    // Avoid wrapping the native resolver functions that will be attached
+    // to this promise per https://github.com/meteor/promise/issues/18.
+    promise._meteorPromiseAlreadyWrapped = true;
+
+    return promise;
   };
 
   // Flag this callback as not wanting to be called in a fiber because it is
@@ -303,9 +330,9 @@ var ZERO = valuePromise(0);
 var EMPTYSTRING = valuePromise('');
 
 function valuePromise(value) {
-  var p = new Promise(Promise._61);
-  p._81 = 1;
-  p._65 = value;
+  var p = new Promise(Promise._44);
+  p._83 = 1;
+  p._18 = value;
   return p;
 }
 Promise.resolve = function (value) {
@@ -342,11 +369,11 @@ Promise.all = function (arr) {
     function res(i, val) {
       if (val && (typeof val === 'object' || typeof val === 'function')) {
         if (val instanceof Promise && val.then === Promise.prototype.then) {
-          while (val._81 === 3) {
-            val = val._65;
+          while (val._83 === 3) {
+            val = val._18;
           }
-          if (val._81 === 1) return res(i, val._65);
-          if (val._81 === 2) reject(val._65);
+          if (val._83 === 1) return res(i, val._18);
+          if (val._83 === 2) reject(val._18);
           val.then(function (val) {
             res(i, val);
           }, reject);
@@ -395,7 +422,12 @@ Promise.prototype['catch'] = function (onRejected) {
 
 ///////////////////////////////////////////////////////////////////////////////
 
-}}}}}}}},{"extensions":[".js",".json"]});
+}}}}}}}},{
+  "extensions": [
+    ".js",
+    ".json"
+  ]
+});
 var exports = require("./node_modules/meteor/promise/server.js");
 
 /* Exports */
