@@ -189,46 +189,6 @@
       "path": "packages/accounts-password.js"
     },
     {
-      "node_modules": "npm/node_modules/meteor/matb33_collection-hooks/node_modules",
-      "path": "packages/matb33_collection-hooks.js"
-    },
-    {
-      "path": "packages/jquery.js"
-    },
-    {
-      "path": "packages/observe-sequence.js"
-    },
-    {
-      "path": "packages/deps.js"
-    },
-    {
-      "path": "packages/htmljs.js"
-    },
-    {
-      "path": "packages/blaze.js"
-    },
-    {
-      "path": "packages/spacebars.js"
-    },
-    {
-      "path": "packages/templating-compiler.js"
-    },
-    {
-      "path": "packages/templating-runtime.js"
-    },
-    {
-      "path": "packages/templating.js"
-    },
-    {
-      "node_modules": "npm/node_modules/meteor/jalik_ufs/node_modules",
-      "sourceMap": "packages/jalik_ufs.js.map",
-      "path": "packages/jalik_ufs.js"
-    },
-    {
-      "sourceMap": "packages/jalik_ufs-gridfs.js.map",
-      "path": "packages/jalik_ufs-gridfs.js"
-    },
-    {
       "path": "packages/accounts-ui.js"
     },
     {
@@ -297,6 +257,24 @@
     {
       "node_modules": "npm/node_modules/meteor/percolate_synced-cron/node_modules",
       "path": "packages/percolate_synced-cron.js"
+    },
+    {
+      "path": "packages/jquery.js"
+    },
+    {
+      "path": "packages/observe-sequence.js"
+    },
+    {
+      "path": "packages/deps.js"
+    },
+    {
+      "path": "packages/htmljs.js"
+    },
+    {
+      "path": "packages/blaze.js"
+    },
+    {
+      "path": "packages/spacebars.js"
     },
     {
       "path": "packages/html-tools.js"
