@@ -4306,7 +4306,7 @@ module.exports = {
   "_args": [
     [
       "babel-runtime@6.26.0",
-      "/Users/leonardoespinosa/Documentos/iurest/i4t/i4t_web"
+      "/Users/leonardoespinosa/Documentos/iurest/i4t-v2/i4t_web"
     ]
   ],
   "_from": "babel-runtime@6.26.0",
@@ -4373,7 +4373,7 @@ module.exports = {
   ],
   "_resolved": "https://registry.npmjs.org/babel-runtime/-/babel-runtime-6.26.0.tgz",
   "_spec": "6.26.0",
-  "_where": "/Users/leonardoespinosa/Documentos/iurest/i4t/i4t_web",
+  "_where": "/Users/leonardoespinosa/Documentos/iurest/i4t-v2/i4t_web",
   "author": {
     "name": "Sebastian McKenzie",
     "email": "sebmck@gmail.com"

@@ -27,7 +27,7 @@
     "JOB": "Cargo",
     "VALIDATE": "Validar",
     "TIP_PERCENTAGE": "Porcentaje de propina",
-    "CLOSE": "Cerrar",
+    "CLOSE": "CERRAR",
     "VIEW_DETAIL": "Ver detalle",
     "OTHER": "Otro...",
     "VALUE": "Valor",
@@ -37,13 +37,13 @@
     "LOGIN_SYSTEM_OPERATIONS_MSG": "Por favor inicia sesión para realizar operaciones en el sistema",
     "YES": "Sí",
     "NO": "No",
+    "VIEW": "VER",
     "ORDER_STATUS": {
-        "REGISTERED": "Registrado",
-        "IN_PROCESS": "En proceso",
-        "PREPARED": "Preparado",
-        "CANCELED": "Cancelado",
-        "DELIVERED": "Entregado",
-        "PENDING_CONFIRM": "Confirmación pendiente para pago"
+        "SELECTING": "Seleccionando",
+        "CONFIRMED": "Confirmado",
+        "RECEIVED": "Recibido",
+        "ATTENDED": "Atendido",
+        "CANCELED": "Cancelado"
     },
     "DATE_VALIDATE": {
         "DAY_FORMAT": "Formato del día incorrecto",
@@ -117,7 +117,11 @@
         "USER_EMAIL_EXISTS": "El usuario y/o correo ya existe, por favor revisa los datos ingresados e intenta de nuevo",
         "ERROR": "Se ha presentado un error registrando el usuario",
         "ACCEPT": "Aceptar",
-        "SUCCESS": "El usuario ha sido creado con éxito"
+        "SUCCESS": "El usuario ha sido creado con éxito",
+        "MALE_GENDER": "Hombre",
+        "FEMALE_GENDER": "Mujer",
+        "OTHER_GENDER": "Otro",
+        "GENDER_LBL": "Género"
     },
     "SIGNIN": {
         "EMAIL_USERNAME": "Correo electrónico/Nombre usuario",
@@ -157,6 +161,7 @@
         "MODIFY": "Modificar",
         "ACTIVATE": "Activar",
         "INACTIVATE": "Inactivar",
+        "REMOVE": "Remover",
         "SECTION_CREATED": "Sección creada correctamente",
         "SECTION_EDITED": "Sección editada correctamente",
         "THERE_NOT_RESTAURANTS": "Aún no hay restaurantes registrados",
@@ -164,7 +169,11 @@
         "MESSAGE": "Registra uno para habilitar esta opción",
         "WARNING": "Advertencia: Tienes ",
         "WARNING_2": "usuarios activos en tus restaurantes",
-        "WARNING_3": "Modificar la configuración de una sección podría afectar la experiencia de los usuarios"
+        "WARNING_3": "Modificar la configuración de una sección podría afectar la experiencia de los usuarios",
+        "REMOVE_TITLE": "Remover sección",
+        "REMOVE_MSG": "Deseas remover la sección?",
+        "SECTION_REMOVED": "Sección removida correctamente",
+        "SECTION_NOT_REMOVED": "La sección tiene categorias o items, no se ha podido remover"
     },
     "CATEGORIES": {
         "CATEGORIES_CREATION": "Creación de categorías",
@@ -179,7 +188,11 @@
         "CATEGORY_EDITED": "Categoría editada correctamente",
         "WARNING": "Advertencia: Tienes ",
         "WARNING_2": "usuarios activos en tus restaurantes",
-        "WARNING_3": "Modificar la configuración de una categoría podría afectar la experiencia de los usuarios"
+        "WARNING_3": "Modificar la configuración de una categoría podría afectar la experiencia de los usuarios",
+        "REMOVE_TITLE": "Remover categoría",
+        "REMOVE_MSG": "Deseas remover la categoría?",
+        "CATEGORY_REMOVED": "Categoría removida correctamente",
+        "CATEGORY_NOT_REMOVED": "La categoría tiene subcategorias o items, no se ha podido remover"
     },
     "SUBCATEGORIES": {
         "SUBCATEGORY_CREATION": "Creación de subcategorías",
@@ -195,7 +208,11 @@
         "SUBCATEGORY_EDITED": "Subcategoría editada correctamente",
         "WARNING": "Advertencia: Tienes ",
         "WARNING_2": "usuarios activos en tus restaurantes",
-        "WARNING_3": "Modificar la configuración de una subcategoría podría afectar la experiencia de los usuarios"
+        "WARNING_3": "Modificar la configuración de una subcategoría podría afectar la experiencia de los usuarios",
+        "REMOVE_TITLE": "Remover subcategoría",
+        "REMOVE_MSG": "Deseas remover la subcategoría?",
+        "SUBCATEGORY_REMOVED": "Sucategoría removida correctamente",
+        "SUBCATEGORY_NOT_REMOVED": "La subcategoría tiene items, no se ha podido remover"
     },
     "ADDITIONS": {
         "ADDITION_CREATION": "Creación de adiciones",
@@ -217,7 +234,10 @@
         "ADDITION_EDITED": "Adición editada correctamente",
         "WARNING": "Advertencia: Tienes ",
         "WARNING_2": "usuarios activos en tus restaurantes",
-        "WARNING_3": "Modificar la configuración de una adición podría afectar la experiencia de los usuarios"
+        "WARNING_3": "Modificar la configuración de una adición podría afectar la experiencia de los usuarios",
+        "REMOVE_TITLE": "Remover adición",
+        "REMOVE_MSG": "Deseas remover la adición?",
+        "ADDITION_REMOVED": "Adición removida correctamente"
     },
     "SETTINGS": {
         "TITTLE": "Ajustes",
@@ -245,6 +265,7 @@
         "DASHBOARD": {
             "DASHBOARD": "Tablero de control"
         },
+        "REWARDS": "Recompensas",
         "ADMINISTRATION": {
             "MANAGEMENT": "Administración",
             "RESTAURANTS": "Restaurantes",
@@ -258,7 +279,7 @@
             "MY_RESTAURANTS": "Mis Restaurantes"
         },
         "PAYMENTS": {
-            "PAYMENTS": "Pagos",
+            "PAYMENTS": "Pago del servicio",
             "MONTHLY_PAYMENT": "Pago mensual",
             "PAYMENT_HISTORY": "Historial de Pagos",
             "REACTIVATE_RESTAURANT": "Reactivar restaurante"
@@ -319,7 +340,10 @@
         "GARNISH_FOOD_EDITED": "Guarnición editada correctamente",
         "WARNING": "Advertencia: Tienes ",
         "WARNING_2": "usuarios activos en tus restaurantes",
-        "WARNING_3": "Modificar la configuración de una guarnición podría afectar la experiencia de los usuarios"
+        "WARNING_3": "Modificar la configuración de una guarnición podría afectar la experiencia de los usuarios",
+        "REMOVE_TITLE": "Remover guarnición",
+        "REMOVE_MSG": "Deseas remover la guarnición?",
+        "GARNISHFOOD_REMOVED": "Guarnición removida correctamente"
     },
     "RESTAURANT_REGISTER": {
         "SELECT_COUNTRY": "Selecciona país",
@@ -608,7 +632,7 @@
         "CREATE_NEW_ITEM": "Crear nuevo item",
         "PRICE": "Precio",
         "ACTIVE_INACTIVE_ITEM": "Activar o inactivar item",
-        "EDIT_ITEM": "Editar item",
+        "EDIT_ITEM": "EDITAR",
         "SECTIONS_CATEGORIES": "Secciones y categorías",
         "SECTIONS_CATEGORIES_TEXT": "Escoge la sección, categoría y subcategoría del item que deseas crear",
         "SELECT_SECTION": "Selecciona la sección",
@@ -651,7 +675,17 @@
         "WARNING_2": "usuarios activos en tus restaurantes",
         "WARNING_3": "Modificar la configuración de un item podría afectar la experiencia de los usuarios",
         "ITEM_CREATED": "Item creado correctamente",
-        "CREATION_ERROR": "Se ha presentado un error creando el item. Por favor intenta nuevamente."
+        "CREATION_ERROR": "Se ha presentado un error creando el item. Por favor intenta nuevamente.",
+        "REMOVE": "REMOVER",
+        "REMOVE_TITLE": "Remover item",
+        "REMOVE_MSG": "Deseas remover el item?",
+        "ITEM_REMOVED": "Item removido correctamente",
+        "REWARD_LABEL": "Asignar puntos de recompensa",
+        "POINTS_PLACEHOLER": "Puntos",
+        "MENU_RECOMMENDED": "Menú recomendado",
+        "ESTABLISHMENTS": "Establecimientos",
+        "RECOMMENDED_CHANGED": "Recomendación de item modificada",
+        "NO_TIME": "No hay tiempo"
     },
     "ROLE": {
         "ADMINISTRATOR": "Administrador",
@@ -769,7 +803,12 @@
         "ADD_ADDITION_ORDER": "Agregar adición a la orden",
         "ITEM_AGGREGATED": "Item agregado correctamente",
         "ADDITON_AGGREGATED": "Adición agregada correctamente",
-        "SEARCH_MENU": "Buscar Menú"
+        "SEARCH_MENU": "Buscar Menú",
+        "RECOMMENDED": "Recomendados",
+        "REWARD": "Recompensa",
+        "POINTS": "puntos",
+        "TOTAL_ITEM_POINTS": "Total",
+        "MENU": "Menú"
     },
     "ORDER_LIST": {
         "TABLE_ORDERS": "Ordenes de la mesa",
@@ -817,7 +856,8 @@
         "DELETE_ITEM_DLG": "Eliminar item de la orden",
         "DELETE_ADITION_DLG": "Eliminar adición de la orden",
         "CANCEL_ORDER_DLG": "Cancelar orden",
-        "CONFIRM_ORDER_DLG": "Confirmar orden"
+        "CONFIRM_ORDER_DLG": "Confirmar orden",
+        "ORDER_CONFIRMED_MSG": "Orden confirmada"
     },
     "PAYMENTS": {
         "THERE_IS_NOT_REST": "No te encuentras en un restaurante",
@@ -887,7 +927,7 @@
         "YES_ANSWER": "Sí",
         "TURN": "Turno",
         "TABLE": "Mesa",
-        "CALL_LABEL_SEND_ORDER": "Entrega de orden",
+        "CALL_LABEL_CUSTOMER_ORDER": "Orden de cliente",
         "CALL_LABEL_CUSTOMER": "Llamado de cliente",
         "CALL_LABEL_CUSTOMER_PAYMENT": "Pago de cliente",
         "BTN_CALL_WAITER": "Solicitar mesero",
@@ -1042,18 +1082,19 @@
         "TABLE_MODIFIED": "Mesa modificada",
         "NUMBER_TABLES": "Número de mesas, Máximo "
     },
-    "SEND_ORDER": {
+    "CUSTOMER_ORDER": {
         "ORDER": "Orden",
         "TABLE": "Mesa",
         "CODE": "Código: ",
         "CUSTOMER": "Cliente",
         "OBSERVATIONS": "Observaciones",
-        "NO_GARNISH_FOOD": "Sin guarniciones",
         "GARNISH_FOOD": "Guarniciones",
-        "NO_ADDITIONS": "Sin adiciones",
         "ADDITIONS": "Adiciones",
         "ADDITION": "Adición(es)",
-        "ORDER_DELIVERED": "Orden Entregada"
+        "RECEIVE_ORDER": "Recibir orden",
+        "RECEIVE_ORDER_CONFIRM": "Orden Recibida",
+        "CANCEL_ORDER": "Cancelar Orden",
+        "CANCEL_ORDER_CONFIRM": "Orden Cancelada"
     },
     "PAYU_PAYMENT_FORM": {
         "TITLE": "Medio de pago",
@@ -1307,9 +1348,10 @@
         "MESSAGE": "Regístra uno para habilitar esta opción"
     },
     "ENABLE_DISABLED": {
-        "BTN_TOGGLE_MSG": "Habilitar/Inhabilitar Item",
+        "TITLE_TOGGLE_MSG": "Habilitar/Inhabilitar Item",
+        "BTN_TOGGLE_MSG": "HABILITAR",
         "DIALOG_SUBTITLE": "Cambia el restaurante donde deseas habilitar o inhabilitar el item",
-        "CLOSE_DIALOG": "Cerrar",
+        "CLOSE_DIALOG": "CERRAR",
         "AVAILABILITY_CHANGED": "Disponiblidad de item modificada"
     },
     "NOT_FOUND": {
@@ -1336,42 +1378,28 @@
         "TABLE_DESTINY_NOT_EXISTS": "El código de la nueva mesa no existe. Por favor intenta nuevamente.",
         "TABLE_DESTINY_NO_ACTIVE": "La mesa ingresada no esta activa para el servicio de iurest",
         "TABLE_DESTINY_NO_RESTAURANT": "El código de la mesa ingresada no pertenece al restaurante en el que te encuentras en este momento. Por favor intenta nuevamente.",
-        "PENDING_ORDERS": "Tienes ordenes pendientes por confirmar que afectan tu pago. Por favor revisa e intenta nuevamente.",
-        "ORDERS_PAY_PROCESS": "Tienes ordenes en proceso de pago. No es posible realizar hacer el cambio de mesa.",
         "WAITER_CALL_PENDING": "Se encuentran llamados al mesero pendientes por atender. Una vez se atienda el llamado puedes realizar el cambio de mesa.",
         "TABLE_DESTINY_STATUS_ERROR": "Se ha producido un error validando el estado de la nueva mesa. Por favor intenta nuevamente.",
         "GENERAL_ERROR": "Se ha producido un error cambiando la mesa. Por favor intenta nuevamente.",
         "SAME_TABLE_ERROR": "No es posible realizar la operacion con el código de mesa actual. Por favor revisa e intenta nuevamente."
     },
     "EXIT_TABLE": {
-        "RESTAURANT_EXIT": "Salida del Restaurante",
-        "RESTAURANT_EXIT_CONFIRM": "Seguro que deseas salir del restaurante?",
-        "LEAVE_RESTAURANT_MSG": "Has salido del Restaurante. Hasta Pronto!",
-        "ORDERS_REGISTERED": "Tienes Ordenes Registradas!",
-        "ORDERS_CANCEL_CONFIRM": "Si te vas del restaurante las ordenes se cancelan. Estas seguro de salir?",
-        "ORDERS_PENDING_CONFIRM": "Ordenes Pendientes por Confirmar!",
-        "ORDERS_MUST_BE_ATTENDED": "Las ordenes deben ser atendidas para salir del restaurante",
+        "RESTAURANT_EXIT": "Salida del establecimiento",
+        "RESTAURANT_EXIT_CONFIRM": "Seguro que deseas salir del establecimiento?",
+        "LEAVE_RESTAURANT_MSG": "Has salido del establecimiento. Hasta Pronto!",
+        "ORDERS_SELECTED": "Tienes Ordenes Seleccionadas!",
+        "ORDERS_CANCEL_CONFIRM": "Si te vas del establecimiento las ordenes se cancelan. Estas seguro de salir?",
         "PENDING_WAITER_CALL": "Llamados al Mesero Pendientes",
         "WAITER_CALLS_MSG": "Los llamados al mesero deben ser atendidos o los puedes cancelar para salir",
-        "PENDING_PAYMENTS": "Tienes Pagos Pendientes",
-        "PENDING_PAYMENTS_MSG": "Un mesero ya se acercará a tu mesa para recibir tus pagos y así poder salir",
-        "ORDERS_DELIVERED": "Tienes Ordenes Entregadas",
-        "ORDERS_DELIVERED_MSG": "Paga las órdenes que se te han entregado y así podrás salir del restaurante",
-        "INVALID_OPERATION": "Operación Inválida",
-        "CALL_WAITER_MSG": "El estado de tus ordenes no te permite salir del restaurante. Deseas Llamar a un mesero para gestionar tus ordenes?",
-        "WAITER_HAS_BEEN_CALLED": "El mesero ha sido llamado",
-        "WAITER_ON_THE_WAY": "Mesero En Camino",
-        "WAITER_ON_THE_WAY_CALL": "Un mesero ya recibió la solicitud y va para tu mesa",
-        "CALLED_CANCELED": "Llamado Cancelado",
-        "CANCEL_ORDERS_MSG": "Cancelará tus ordenes Entregadas o En Proceso",
-        "CANCEL_CALL": "Cancelar Llamada",
-        "OPTION_LEAVE_RESTAURANT": "Esta opción te permite salir del restaurante en el que te encuentras",
+        "OPTION_LEAVE_RESTAURANT": "Esta opción te permite salir del establecimiento en el que te encuentras",
         "EXIT_MSG": "Salir",
-        "THERE_IS_NOT_REST": "No te encuentras en un restaurante",
+        "THERE_IS_NOT_REST": "No te encuentras en un establecimiento",
         "THERE_IS_NOT_REST_MSG": "Ve a la opción de ordenes e ingresa el código",
         "GO_TO_ORDERS": "Ir a ordenes",
         "ACCEPT": "Aceptar",
-        "GENERAL_ERROR": "Se ha producido un error. Intenta nuevamente."
+        "GENERAL_ERROR": "Se ha producido un error. Intenta nuevamente.",
+        "ORDERS_CONFIRMED": "Tienes Ordenes Confirmadas!",
+        "ORDERS_CONFIRMED_MSG": "Informa a un mesero que saldras del establecimiento para que cancele tus órdenes"
     },
     "EXIT_TABLE_CONFIRM": {
         "CUSTOMER": "Cliente",
@@ -1540,10 +1568,28 @@
         "READ_MORE": "Leer más",
         "READ_LESS": "Leer menos"
     },
-    "AFTER_RESTAURANT_CREATION" : {
-        "A" : "Ingresa a la opción Administración/colaboradores, y crea los empleados del restaurante",
-        "B" : "Ve a la opción Administración/Mesas/Buscar mesas, para seleccionar e imprimir los Códigos QR de tus mesas",
-        "C" : "Carga la información de tu menú desde la opción Menú, así los usuarios podrán verlo desde sus dispositivos",
-        "NOT_SHOW" : "No volver a mostrar"
+    "REWARD": {
+        "THERE_NOT_ESTABLISHMENTS": "Aún no hay restaurantes registrados",
+        "MESSAGE": "Registra uno para habilitar esta opción",
+        "ESTABLISHMENT_REGISTER": "Registrar restaurante",
+        "MSG_INITIAL": "Implementa una manera ordenada y fácil de visualizar tu menú",
+        "CREATE_NEW_ITEM": "Crear nuevo item",
+        "TITLE": "Recompensas",
+        "SUBTITLE": "Crea las recompensas para tus clientes. Ingresa cuantos items otorgaras (cantidad), el item y los puntos necesarios para redimir la recompensa",
+        "QUANTITY": "Cantidad",
+        "ESTABLISHMENTS": "Selecciona los establecimientos donde se encontrara disponible la recompensa",
+        "NO_ESTABLISHMENTS_CREATED": "No se encuentran establecimientos creados",
+        "POINTS": "Puntos",
+        "NO_ESTABLISHMENTS": "No se encuentran establecimientos",
+        "MODIFY": "MODIFICAR",
+        "REMOVE": "REMOVER",
+        "SELECT_ITEM": "Selecciona un ítem",
+        "SELECT_POINTS": "Selecciona los puntos",
+        "REWARD_CREATED": "Recompensa creada",
+        "REMOVE_TITLE": "Remover Recompensa",
+        "REMOVE_MSG": "Deseas remover la recompensa?",
+        "REWARD_REMOVED": "Recompensa removida",
+        "EDIT_REWARD": "Edición de la Recompensa",
+        "REWARD_EDITED": "Recompensa Editada"
     }
 }
