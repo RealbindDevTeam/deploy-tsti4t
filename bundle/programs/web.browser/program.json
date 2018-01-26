@@ -2,22 +2,22 @@
   "format": "web-program-pre1",
   "manifest": [
     {
-      "path": "5fd284205821f8032011be5f4149b616d7b3a6a6.js",
+      "path": "99dcaa31d73c59b1cf3faa475c61b3ff1739ae5b.js",
       "where": "client",
       "type": "js",
       "cacheable": true,
-      "url": "/5fd284205821f8032011be5f4149b616d7b3a6a6.js?meteor_js_resource=true",
-      "size": 6825723,
-      "hash": "5fd284205821f8032011be5f4149b616d7b3a6a6"
+      "url": "/99dcaa31d73c59b1cf3faa475c61b3ff1739ae5b.js?meteor_js_resource=true",
+      "size": 6931789,
+      "hash": "99dcaa31d73c59b1cf3faa475c61b3ff1739ae5b"
     },
     {
-      "path": "5fd284205821f8032011be5f4149b616d7b3a6a6.stats.json",
+      "path": "99dcaa31d73c59b1cf3faa475c61b3ff1739ae5b.stats.json",
       "where": "client",
       "type": "json",
       "cacheable": true,
-      "url": "/5fd284205821f8032011be5f4149b616d7b3a6a6.stats.json?meteor_js_resource=true",
-      "size": 85297,
-      "hash": "9a6fac4ea1005f4bd530bd343d27b84820e2e400"
+      "url": "/99dcaa31d73c59b1cf3faa475c61b3ff1739ae5b.stats.json?meteor_js_resource=true",
+      "size": 87172,
+      "hash": "3040a3a7b434759a260fc1d6d45be6c92088d208"
     },
     {
       "path": "ac2b5c61e90724624208c136338c2f9dea4efa59.css",
@@ -124,8 +124,8 @@
       "type": "asset",
       "cacheable": false,
       "url": "/i18n/en.json",
-      "size": 76316,
-      "hash": "46db9bc0db6e69f45ce63c4bcf0c16fd85d75bcd"
+      "size": 82989,
+      "hash": "7218324ff88c77adac00c8b346b2a1c5f938f058"
     },
     {
       "path": "app/i18n/es.json",
@@ -133,8 +133,8 @@
       "type": "asset",
       "cacheable": false,
       "url": "/i18n/es.json",
-      "size": 81325,
-      "hash": "e7ed4406fff25fdf5a7ee4a5b7b4a1036828616b"
+      "size": 88355,
+      "hash": "14394d23ece54e829a98ec3d958f757797b684b3"
     },
     {
       "path": "app/images/404.png",
@@ -396,6 +396,15 @@
       "url": "/images/garnish-food.png",
       "size": 20760,
       "hash": "1e4e5ae5c230544dc7e58d8699a3883a5bd83625"
+    },
+    {
+      "path": "app/images/icons8-checked.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/icons8-checked.png",
+      "size": 2140,
+      "hash": "587fe9a2c58c26195e6691fa10cf7116b605907f"
     },
     {
       "path": "app/images/iphone.png",
@@ -932,13 +941,13 @@
       "path": "head.html",
       "where": "internal",
       "type": "head",
-      "hash": "96a409bebde6c4f355e0fd2b52ee95af9f39fe6c"
+      "hash": "06c5a0623af4b89401b0b658a98dacac2a9e6d19"
     },
     {
       "path": "body.html",
       "where": "internal",
       "type": "body",
-      "hash": "2632a0ab71ebcf7ffc623e81989df26d5e9521e2"
+      "hash": "99c09e5f8dcc427234ba8a95adc31dc7b9a354f2"
     }
   ]
 }
