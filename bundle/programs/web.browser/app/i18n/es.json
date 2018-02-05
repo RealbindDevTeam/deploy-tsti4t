@@ -348,8 +348,9 @@
     "RESTAURANT_REGISTER": {
         "SELECT_COUNTRY": "Selecciona país",
         "SELECT_CITY": "Selecciona ciudad",
-        "ADDRESS": "Dirección",
-        "PHONE": "Teléfono",
+        "NAME": "Nombre del restaurante",
+        "ADDRESS": "Dirección del restaurante",
+        "PHONE": "Teléfono de contacto",
         "WEBPAGE": "Página de Internet",
         "EMAIL": "Correo electrónico",
         "WEEKDAY": "Día de la semana",
@@ -390,7 +391,9 @@
         "MAX_TABLES": "máximo ",
         "TABLES_MSG": "En caso de necesitar más mesas para tu restaurante, en la opción Administración -> Restaurantes -> Configuración, podrás agregar las que necesites.",
         "CREATION_ERROR": "Se ha presentado un error creando el restaurante. Por favor intenta nuevamente.",
-        "RESTAURANT_CREATED": "Restaurante Creado"
+        "RESTAURANT_CREATED": "Restaurante Creado",
+        "POINTS_VALIDITY": "Selecciona la vigencia de los puntos de recompensa",
+        "DAYS": "Días"
     },
     "WEEK": {
         "MONDAY": "Lunes",
@@ -558,7 +561,8 @@
         "ADD_FACEBOOK_LINK": "Agrega el link de tu página en Facebook para que tus clientes puedan verla",
         "FACEBOOK_LINK": "Link de tu página en Facebook",
         "RESTAURANT_INACTIVE": "Restaurante inactivo",
-        "RESTAURANT_ACTIVE": "Restaurante activo"
+        "RESTAURANT_ACTIVE": "Restaurante activo",
+        "WAITERS_ERROR": "Hay restaurantes que no cuentan con meseros. Por favor verifica en la opción de colaboradores"
     },
     "TABLES": {
         "TABLES_CREATION": "Creación de mesas",
@@ -808,7 +812,8 @@
         "REWARD": "Recompensa",
         "POINTS": "puntos",
         "TOTAL_ITEM_POINTS": "Total",
-        "MENU": "Menú"
+        "MENU": "Menú",
+        "GET_POINTS": "Obtienes"
     },
     "ORDER_LIST": {
         "TABLE_ORDERS": "Ordenes de la mesa",
@@ -861,7 +866,14 @@
         "CANCEL_ORDER_MSG": "Orden cancelada",
         "REMOVE_REWARD": "Eliminar Recompensa",
         "REMOVE_REWARD_MSG": "Esta seguro de eliminar la recompensa de la orden?",
-        "REWARD_DELETED": "Recompensa eliminada de la orden"
+        "REWARD_DELETED": "Recompensa eliminada de la orden",
+        "ITEM": "Item Redimido",
+        "FREE": "Este es Gratis!",
+        "TOTAL_ORDER": "Total de tu orden",
+        "ORDER_LBL": "Orden",
+        "USR_ORDER_CONFIRMED": "Confirmaste tu orden! Un mesero la atendera!",
+        "NO_USR_ORDER_CONFIRMED": "Orden confirmada",
+        "WIN": "Ganas"
     },
     "PAYMENTS": {
         "THERE_IS_NOT_REST": "No te encuentras en un restaurante",
@@ -1328,95 +1340,6 @@
             "TOTAL": "Total"
         }
     },
-    "ADMIN_LANDING_PAGE": {
-        "HOME_CONTENT": {
-            "TITLE": "Fideliza de una manera fácil y rápida a tus clientes!",
-            "SUB_TITLE": "Te ofrecemos una aplicación para que le asignes puntos a tus platos y tus clientes ganen comiendo"
-        },
-        "ABOUT_CONTENT": {
-            "MSG_1": "Ingresa información detallada del menú, para que los clientes puedan verlo, y ordenar desde sus celulares, tablets o computadores",
-            "MSG_2": "Crea colaboradores y asignales un rol (mesero ó supervisor) para interactuar con el sistema",
-            "MSG_3": "Usa el servicio completo gratis por tiempo limitado, después paga de acuerdo a lo que necesites",
-            "REF": "Consulta nuestro plan de pagos"
-        },
-        "SLOGAN": "Registro de administrador",
-        "USERNAME": "Usuario",
-        "REQUIRED_USERNAME": "El nombre de usuario no puede estar vacío",
-        "MIN_LENGTH_USERNAME": "El nombre de usuario debe tener mínimo 6 caracteres",
-        "MAX_LENGTH_USERNAME": "El nombre de usuario debe tener máximo 20 caracteres",
-        "NO_SPACES": "No se permiten espacios",
-        "EMAIL": "Correo electrónico",
-        "REQUIRED_EMAIL": "Formato de correo electrónico incorrecto",
-        "MIN_LENGTH_EMAIL": "El correo electrónico debe tener mínimo 6 caracteres",
-        "MAX_LENGTH_EMAIL": "El nombre de usuario debe tener máximo 255 caracteres",
-        "PASSWORD": "Contraseña",
-        "REQUIRED_PASSWORD": "La contraseña no puede estar vacía",
-        "MIN_LENGTH_PASSWORD": "La contraseña debe tener mínimo 8 caracteres",
-        "MAX_LENGTH_PASSWORD": "La contraseña debe tener máximo 20 caracteres",
-        "CONFIRM_PASSWORD": "Confirmar contraseña",
-        "FIRSTNAME": "Nombres",
-        "REQUIRED_FIRSTNAME": "El nombre no puede estar vacío",
-        "MIN_LENGTH_FIRSTNAME": "",
-        "MAX_LENGTH_FIRSTNAME": "El nombre debe tener máximo 70 caracteres",
-        "LASTNAME": "Apellidos",
-        "REQUIRED_LASTNAME": "El apellido no puede estar vacío",
-        "MIN_LENGTH_LASTNAME": "",
-        "MAX_LENGTH_LASTNAME": "El apellido debe tener máximo 70 caracteres",
-        "RESTAURANT_NAME": "Restaurante",
-        "REQUIRED_RESTAURANT_NAME": "El nombre del restaurante no puede estar vacío",
-        "DNI_NUMBER": "Número de identificación",
-        "REQUIRED_DNI": "El número no puede estar vacío",
-        "MIN_LENGTH_DNI": "",
-        "MAX_LENGTH_DNI": "El número debe tener máximo 20 caracteres",
-        "CONTACT_PHONE": "Teléfono de contacto",
-        "REQUIRED_PHONE": "El teléfono no puede estar vacío",
-        "MIN_LENGTH_PHONE": "",
-        "MAX_LENGTH_PHONE": "El teléfono debe tener máximo 20 caracteres",
-        "ADDRESS": "Dirección",
-        "REQUIRED_ADDRESS": "La dirección no puede estar vacía",
-        "MIN_LENGTH_ADDRESS": "",
-        "MAX_LENGTH_ADDRESS": "La dirección debe tener máximo 150 caracteres",
-        "COUNTRY": "País",
-        "CITY": "Ciudad",
-        "WHICH_ONE": "Cúal?",
-        "REQUIRED_OTHER": "La ciudad no puede estar vacía",
-        "MIN_LENGTH_OTHER": "",
-        "MAX_LENGTH_OTHER": "La ciudad debe tener máximo 50 caracteres",
-        "PASSWORD_NOT_MATCH": "Las contraseñas no coinciden",
-        "SIGNUP": "Registrarse",
-        "ALREADY_ACCOUNT": "Ya tienes una cuenta?",
-        "SIGNIN": "Iniciar Sesión",
-        "LABEL_LEGAL": "Al dar clic en 'Registrarse', ",
-        "LABEL_LEGAL_END": "aceptas los términos y condiciones.",
-        "GENERAL_INFO": "Información personal",
-        "USER_PASSWD": "Usuario y contraseña",
-        "MSG": "Mensaje",
-        "REQUIRED_MSG": "El mensaje no puede estar vacío",
-        "SEND": "ENVIAR",
-        "PAYMENT_PLAN_INFO": {
-            "HOW_ITS_WORKS": "Como funciona?",
-            "FIRST_DAYS_TITLE": "Primeros días",
-            "FIRST_DAYS_CONTENT": "A partir del día en que registres tu restaurante, hasta el primer día del siguiente mes, podrás utilizar iurest completamente gratis.",
-            "FIRST_DAYS_SUGGEST": "Te recomendamos registrarte los primeros días del mes para disfrutar más del servicio.",
-            "ABOUT_MONTHLY_PAYMENT": "Respecto al cobro mensual",
-            "ABOUT_MONTHLY_PAYMENT_TEXT_1": "Del 1 al 5 de cada mes, después de configurar la cantidad de mesas que vas a usar por restaurante, tienes la posibilidad de realizar el pago correspondiente únicamente por los restaurantes y mesas que vayas a usar durante ese mes.",
-            "ABOUT_MONTHLY_PAYMENT_TEXT_2": "Ten en cuenta que al cambiar la configuración de tus restaurantes y cantidad de mesas el valor cambiará.",
-            "ABOUT_MONTHLY_PAYMENT_TEXT_3": "El valor cobrado se compone de:",
-            "ABOUT_MONTHLY_PAYMENT_TEXT_4": "El costo por restaurante",
-            "ABOUT_MONTHLY_PAYMENT_TEXT_5": "El costo de la mesa por la cantidad de mesas por restaurante",
-            "REACTIVATE_IUREST_SERVICE": "Reactivación del servicio iurest",
-            "REACTIVATE_IUREST_SERVICE_CONTENT": "Si no realizas el pago dentro del plazo establecido (1 a 5 de cada mes), tienes la posibilidad de reactivar tus restaurantes en los días restantes del mes, pero el cobro se realizará por el valor total del mes.",
-            "CALCULATOR": "Calcula el costo mensual apróximado",
-            "RESTAURANT_PRICE": "Precio por restaurante",
-            "TABLE_PRICE": "Precio por mesa",
-            "TOTAL": "Total"
-        }
-    },
-    "THANKS": {
-        "THANK_YOU": "Gracias!",
-        "TEXT": "Tu información ha sido registrada, estaremos en contacto contigo.",
-        "LINK": "Regresar"
-    },
     "ADMIN_DASHBOARD": {
         "TITLE": "Te damos la bienvenida a iurest",
         "CARD_CONTENT": "Tu mejor inversión. Disfruta una nueva experiencia con la herramienta que hará crecer tu negocio.",
@@ -1441,15 +1364,17 @@
         "RESTAURANT_REGISTER": "Registrar restaurante",
         "MESSAGE": "Regístra uno para habilitar esta opción"
     },
-    "CHART_DETAIL": {
+    "ITEM_UNIT_CHART": {
         "TODAY": "Hoy",
         "YESTERDAY": "Ayer",
         "THIS_WEEK": "Esta semana",
         "SEVEN_DAYS": "Últimos 7 días",
         "THIRTY_DAYS": "Últimos 30 días",
-        "FROM" : "De",
-        "TO" : "a",
-        "ITEMS_SOLD": "Items vendidos por día"
+        "FROM": "De",
+        "TO": "a",
+        "ITEMS_ORDERED": "Cantidad de items ordenados(pedidos) por rango de tiempo ",
+        "UNITS_LBL": "Unidades",
+        "ITEMS_LBL": "Items"
     },
     "ENABLE_DISABLED": {
         "TITLE_TOGGLE_MSG": "Habilitar/Inhabilitar Item",
@@ -1710,6 +1635,27 @@
         "REDEEM": "Redimir",
         "GET_POINTS": "Obtén puntos",
         "REWARD_AGGREGATED": "Recompensa agregada",
-        "ERROR": "Error agregando la recompensa. Intenta nuevamente"
+        "ERROR": "Error agregando la recompensa. Intenta nuevamente",
+        "ORDER_ERROR": "Puedes redimir máximo una recompensa por orden"
+    },
+    "CUSTOMER_POINTS": {
+        "NO_POINTS_MSG": "Aún no has acumulado puntos en ningún restaurante. Animate!",
+        "GO_TO_ORDERS": "Ir a ordenes",
+        "ADDRESS": "Dirección",
+        "ACCUMULATED_POINTS": "Puntos Acumulados",
+        "POINTS": "Puntos",
+        "YOU_HAVE": "Tienes",
+        "POINTS_FOR_EXPIRING": "puntos para vencer el día",
+        "DETAIL": "Detalle"
+    },
+    "POINTS_DETAIL": {
+        "TITLE": "Historial de ordenes y puntos",
+        "SUBTITLE": "Te presentamos las ordenes que has pedido en el restaurante, los puntos que has ganado y has redimido",
+        "ORDER": "Orden",
+        "YOU_EARNED": "Ganaste",
+        "POINTS": "Puntos",
+        "YOU_REDEEMED": "Redimiste",
+        "QUANT": "Cant. ",
+        "REWARD": "Recompensa"
     }
 }

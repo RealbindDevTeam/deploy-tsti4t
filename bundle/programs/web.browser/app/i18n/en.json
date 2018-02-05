@@ -348,8 +348,9 @@
     "RESTAURANT_REGISTER": {
         "SELECT_COUNTRY": "Select Country",
         "SELECT_CITY": "Select City",
-        "ADDRESS": "Address",
-        "PHONE": "Phone",
+        "NAME": "Restaurant name",
+        "ADDRESS": "Restaurant address",
+        "PHONE": "Phone contact",
         "WEBPAGE": "Web Page",
         "EMAIL": "Email",
         "WEEKDAY": "Weekday",
@@ -390,7 +391,9 @@
         "MAX_TABLES": "max ",
         "TABLES_MSG": "In case you need more tables for your restaurant, in the option Management -> Restaurants -> Configuration, you can add more.",
         "CREATION_ERROR": "An error has occurred creating the restaurant. Please try again.",
-        "RESTAURANT_CREATED": "Restaurant created"
+        "RESTAURANT_CREATED": "Restaurant created",
+        "POINTS_VALIDITY": "Select the validity of the reward points",
+        "DAYS": "Days"
     },
     "WEEK": {
         "MONDAY": "Monday",
@@ -558,7 +561,8 @@
         "ADD_FACEBOOK_LINK": "Add the link of your page to Facebook so your customers can see it",
         "FACEBOOK_LINK": "Link to your page on Facebook",
         "RESTAURANT_INACTIVE": "Inactive Restaurant",
-        "RESTAURANT_ACTIVE": "Active Restaurant"
+        "RESTAURANT_ACTIVE": "Active Restaurant",
+        "WAITERS_ERROR": "There are restaurants that don't have waiters/waitress. please check the collaborators option"
     },
     "TABLES": {
         "TABLES_CREATION": "Create tables",
@@ -808,7 +812,8 @@
         "REWARD": "Reward",
         "POINTS": "points",
         "TOTAL_ITEM_POINTS": "Total",
-        "MENU": "Menu"
+        "MENU": "Menu",
+        "GET_POINTS": "You get"
     },
     "ORDER_LIST": {
         "TABLE_ORDERS": "Table Orders",
@@ -861,7 +866,14 @@
         "CANCEL_ORDER_MSG": "Order canceled",
         "REMOVE_REWARD": "Delete Reward",
         "REMOVE_REWARD_MSG": "Do you want to delete this reward from the order?",
-        "REWARD_DELETED": "Reward deleted from order"
+        "REWARD_DELETED": "Reward deleted from order",
+        "ITEM": "Item Redeemed",
+        "FREE": "It's Free!",
+        "TOTAL_ORDER": "Total of your order",
+        "ORDER_LBL": "Order",
+        "USR_ORDER_CONFIRMED": "You confirmed your order! A waiter/waitress will attend it",
+        "NO_USR_ORDER_CONFIRMED": "Order confirmed",
+        "WIN": "You win"
     },
     "PAYMENTS": {
         "THERE_IS_NOT_REST": "You are not in any restaurant",
@@ -1328,95 +1340,6 @@
             "TOTAL": "Total"
         }
     },
-    "ADMIN_LANDING_PAGE": {
-        "HOME_CONTENT": {
-            "TITLE": "Loyalty in an easy and fast way to your customers!",
-            "SUB_TITLE": "We offer you a new app to assign points in your items and your consumers win out eating"
-        },
-        "ABOUT_CONTENT": {
-            "MSG_1": "Add the detailed information of the menu, in order to the clients can see it, and ordering from his phones, tablets or computers",
-            "MSG_2": "Creating collaborators and assign them a role (waiter/waitress or supervisor) to interact with the system",
-            "MSG_3": "You can use the complete free service by limited time, later you pay that you need",
-            "REF": "Pricing"
-        },
-        "SLOGAN": "Administrator register",
-        "USERNAME": "Username",
-        "REQUIRED_USERNAME": "You must include a username",
-        "MIN_LENGTH_USERNAME": "Your username must be at least 6 characters long",
-        "MAX_LENGTH_USERNAME": "Your username cannot exceed 20 characters",
-        "NO_SPACES": "White space is not allowed",
-        "EMAIL": "Email",
-        "REQUIRED_EMAIL": "Invalid email format",
-        "MIN_LENGTH_EMAIL": "Your email must be at least 6 characters long",
-        "MAX_LENGTH_EMAIL": "Your email cannot exceed 40 characters",
-        "PASSWORD": "Password",
-        "REQUIRED_PASSWORD": "You must include a password",
-        "MIN_LENGTH_PASSWORD": "Your password must be at least 8 characters long",
-        "MAX_LENGTH_PASSWORD": "Your password cannot exceed 20 characters long",
-        "CONFIRM_PASSWORD": "Confirm password",
-        "FIRSTNAME": "Firstname",
-        "REQUIRED_FIRSTNAME": "You must include a firstname",
-        "MIN_LENGTH_FIRSTNAME": "",
-        "MAX_LENGTH_FIRSTNAME": "Your firstame cannot exceed 70 characters long",
-        "LASTNAME": "Lastname",
-        "REQUIRED_LASTNAME": "You must include a lastname",
-        "MIN_LENGTH_LASTNAME": "",
-        "MAX_LENGTH_LASTNAME": "Your lastame cannot exceed 70 characters long",
-        "RESTAURANT_NAME": "Restaurant name",
-        "REQUIRED_RESTAURANT_NAME": "You must include a restaurant name",
-        "DNI_NUMBER": "Identification number",
-        "REQUIRED_DNI": "You must include an identification number",
-        "MIN_LENGTH_DNI": "",
-        "MAX_LENGTH_DNI": "Your id number cannot exceed 20 characters long",
-        "CONTACT_PHONE": "Contact Phone",
-        "REQUIRED_PHONE": "You must include a contact phone",
-        "MIN_LENGTH_PHONE": "",
-        "MAX_LENGTH_PHONE": "Your phone number cannot exceed 20 characters long",
-        "ADDRESS": "Address",
-        "REQUIRED_ADDRESS": "You must include an address",
-        "MIN_LENGTH_ADDRESS": "",
-        "MAX_LENGTH_ADDRESS": "Your address cannot exceed 150 characters long",
-        "COUNTRY": "Country",
-        "CITY": "City",
-        "WHICH_ONE": "Which one?",
-        "REQUIRED_OTHER": "You must include a city",
-        "MIN_LENGTH_OTHER": "",
-        "MAX_LENGTH_OTHER": "Your city cannot exceed 50 characters long",
-        "PASSWORD_NOT_MATCH": "Passwords doesn't match",
-        "SIGNUP": "Sign Up",
-        "ALREADY_ACCOUNT": "Already registered?",
-        "SIGNIN": "Sign In",
-        "LABEL_LEGAL": "By clicking on 'Register', ",
-        "LABEL_LEGAL_END": "you agree the terms and conditions.",
-        "GENERAL_INFO": "Personal information",
-        "USER_PASSWD": "User and password",
-        "MSG": "Message",
-        "REQUIRED_MSG": "You must include a message",
-        "SEND": "SEND",
-        "PAYMENT_PLAN_INFO": {
-            "HOW_ITS_WORKS": "How its works?",
-            "FIRST_DAYS_TITLE": "First days",
-            "FIRST_DAYS_CONTENT": "Starting from the restaurant register day to the first day of the next month. you can able to use iurest completely free.",
-            "FIRST_DAYS_SUGGEST": "We recommend that you register in the first days of the month in order to enjoy more the service.",
-            "ABOUT_MONTHLY_PAYMENT": "About monthly payment",
-            "ABOUT_MONTHLY_PAYMENT_TEXT_1": "Starting from 1 to 5 of each month, after you configure the number of tables that will be use by restaurant, you can able to pay just for the restaurants and tables that you are going to use in that month.",
-            "ABOUT_MONTHLY_PAYMENT_TEXT_2": "Keep in mind that changing the configuration of your restaurants and number of tables the value will change.",
-            "ABOUT_MONTHLY_PAYMENT_TEXT_3": "The charge is:",
-            "ABOUT_MONTHLY_PAYMENT_TEXT_4": "The price by restaurant",
-            "ABOUT_MONTHLY_PAYMENT_TEXT_5": "The unit price of table * number of tables by restaurant",
-            "REACTIVATE_IUREST_SERVICE": "Reactivate iurest service",
-            "REACTIVATE_IUREST_SERVICE_CONTENT": "If you can't able to pay in the normal payment period (1 to 5 of each month), you have the possibility to reactivate your restaurants in the remaining days of the month, the charge will be made for the total price of the month.",
-            "CALCULATOR": "Pricing calculator",
-            "RESTAURANT_PRICE": "Price by restaurant",
-            "TABLE_PRICE": "Unit price of table",
-            "TOTAL": "Total"
-        }
-    },
-    "THANKS": {
-        "THANK_YOU": "THANK YOU!",
-        "TEXT": "Your information has been registered, we will be in contact with you.",
-        "LINK": "Go to back"
-    },
     "ADMIN_DASHBOARD": {
         "TITLE": "Welcome to iurest",
         "CARD_CONTENT": "Your best investment. Enjoy a new experience with the platform that will grow your business.",
@@ -1441,15 +1364,15 @@
         "RESTAURANT_REGISTER": "Restaurant registration",
         "MESSAGE": "Register one to enable this option"
     },
-    "CHART_DETAIL": {
+    "ITEM_UNIT_CHART": {
         "TODAY": "Today",
         "YESTERDAY": "Yesterday",
-        "THIS_WEEK" : "This week",
+        "THIS_WEEK": "This week",
         "SEVEN_DAYS": "Last 7 days",
         "THIRTY_DAYS": "Last 30 days",
-        "FROM" : "From",
-        "TO" : "to",
-        "ITEMS_SOLD": "Items sold for day"
+        "FROM": "From",
+        "TO": "to",
+        "ITEMS_ORDERED": "Units of items ordered by time range"
     },
     "ENABLE_DISABLED": {
         "TITLE_TOGGLE_MSG": "Enable/disable Item",
@@ -1672,11 +1595,11 @@
         "READ_MORE": "Read more",
         "READ_LESS": "Read less"
     },
-    "AFTER_RESTAURANT_CREATION" : {
-        "A" : "Go to Administrator/collaborators option, and create the employees of the restaurant",
-        "B" : "Go to Administrator/Tables/Search tables, to select and print the QR code of the tables",
-        "C" : "Charge the information of your menu from the menu option, in order to the users can see it from their devices",
-        "NOT_SHOW" : "Do not show again"
+    "AFTER_RESTAURANT_CREATION": {
+        "A": "Go to Administrator/collaborators option, and create the employees of the restaurant",
+        "B": "Go to Administrator/Tables/Search tables, to select and print the QR code of the tables",
+        "C": "Charge the information of your menu from the menu option, in order to the users can see it from their devices",
+        "NOT_SHOW": "Do not show again"
     },
     "REWARD": {
         "THERE_NOT_ESTABLISHMENTS": "There are not establishment register yet",
@@ -1710,6 +1633,27 @@
         "REDEEM": "Redeem",
         "GET_POINTS": "Get points",
         "REWARD_AGGREGATED": "Reward aggregated",
-        "ERROR": "Error aggregating reward. Try again"
+        "ERROR": "Error aggregating reward. Try again",
+        "ORDER_ERROR": "You can redeem maximum one reward per order"
+    },
+    "CUSTOMER_POINTS": {
+        "NO_POINTS_MSG": "You have not accumulated points in any restaurant yet. Encourage!",
+        "GO_TO_ORDERS": "Go to orders",
+        "ADDRESS": "Address",
+        "ACCUMULATED_POINTS": "Accumulated points",
+        "POINTS": "Points",
+        "YOU_HAVE": "You have",
+        "POINTS_FOR_EXPIRING": "points for expiring the day",
+        "DETAIL": "Detail"
+    },
+    "POINTS_DETAIL": {
+        "TITLE": "Orders and points history",
+        "SUBTITLE": "We present the orders you have ordered in the restaurant, the points you have earned and redeemed",
+        "ORDER": "Order",
+        "YOU_EARNED": "You earned",
+        "POINTS": "Points",
+        "YOU_REDEEMED": "You redeemed",
+        "QUANT": "Quant. ",
+        "REWARD": "Reward"
     }
 }
