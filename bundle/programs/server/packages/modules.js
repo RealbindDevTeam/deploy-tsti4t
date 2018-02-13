@@ -141,6 +141,7 @@ install("html-tools");
 install("blaze-tools");
 install("spacebars-compiler");
 install("meteorhacks:ssr");
+install("reywood:publish-composite", "meteor/reywood:publish-composite/lib/publish_composite.js");
 install("livedata");
 install("dynamic-import", "meteor/dynamic-import/server.js");
 install("hot-code-push");

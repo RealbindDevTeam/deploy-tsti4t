@@ -290,6 +290,11 @@
       "path": "packages/meteorhacks_ssr.js"
     },
     {
+      "node_modules": "npm/node_modules/meteor/reywood_publish-composite/node_modules",
+      "sourceMap": "packages/reywood_publish-composite.js.map",
+      "path": "packages/reywood_publish-composite.js"
+    },
+    {
       "path": "packages/livedata.js"
     },
     {

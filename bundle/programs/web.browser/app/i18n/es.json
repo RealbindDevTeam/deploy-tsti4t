@@ -778,7 +778,8 @@
         "TABLE_CODE": "Número de la mesa",
         "INFORMATION": "Información",
         "SCHEDULE": "Horario",
-        "LOCATION": "Ubicación"
+        "LOCATION": "Ubicación",
+        "POINTS": "Puntos Disponibles"
     },
     "RESTAURANT_LOCATION_INFO": {
         "TITTLE": "Ubicación del establecimiento",
@@ -1111,7 +1112,8 @@
         "RECEIVE_ORDER": "Recibir orden",
         "RECEIVE_ORDER_CONFIRM": "Orden Recibida",
         "CANCEL_ORDER": "Cancelar Orden",
-        "CANCEL_ORDER_CONFIRM": "Orden Cancelada"
+        "CANCEL_ORDER_CONFIRM": "Orden Cancelada",
+        "ITEM_REDEEMED": "Item Redimido"
     },
     "PAYU_PAYMENT_FORM": {
         "TITLE": "Medio de pago",
@@ -1351,7 +1353,7 @@
         },
         "SALES": "Ventas ",
         "USERS": "Usuarios activos",
-        "ITEMS": "Items vendidos diariamente",
+        "ITEMS": "Items ordenados hoy",
         "SOLD": "Vendidos",
         "ADDITIONS": "Adiciones",
         "GARNISHFOOD": "Guarniciones",
@@ -1362,7 +1364,8 @@
         "BUSY": "Mesas Ocupadas",
         "THERE_NOT_RESTAURANTS": "Aún no hay restaurantes registrados",
         "RESTAURANT_REGISTER": "Registrar restaurante",
-        "MESSAGE": "Regístra uno para habilitar esta opción"
+        "MESSAGE": "Regístra uno para habilitar esta opción",
+        "REWARDS": "Recompensas redimidas hoy"
     },
     "ITEM_UNIT_CHART": {
         "TODAY": "Hoy",
@@ -1372,9 +1375,21 @@
         "THIRTY_DAYS": "Últimos 30 días",
         "FROM": "De",
         "TO": "a",
-        "ITEMS_ORDERED": "Cantidad de items ordenados(pedidos) por rango de tiempo ",
+        "CHART_TITLE": "Cantidad de items ordenados(pedidos) por rango de tiempo ",
         "UNITS_LBL": "Unidades",
-        "ITEMS_LBL": "Items"
+        "ITEMS_LBL": "Items",
+        "CHART_SUBTITLE": "Ordenados alfabéticamente"
+    },
+    "REWARD_UNIT_CHART": {
+        "TODAY": "Hoy",
+        "YESTERDAY": "Ayer",
+        "THIS_WEEK": "Esta semana",
+        "SEVEN_DAYS": "Últimos 7 días",
+        "THIRTY_DAYS": "Últimos 30 días",
+        "CHART_TITLE": "Cantidad de recompensas redimidas por rango de tiempo",
+        "UNITS_LBL": "Unidades",
+        "REWARDS_LBL": "Recompensas",
+        "CHART_SUBTITLE": "Ordenados alfabéticamente"
     },
     "ENABLE_DISABLED": {
         "TITLE_TOGGLE_MSG": "Habilitar/Inhabilitar Item",
@@ -1636,7 +1651,8 @@
         "GET_POINTS": "Obtén puntos",
         "REWARD_AGGREGATED": "Recompensa agregada",
         "ERROR": "Error agregando la recompensa. Intenta nuevamente",
-        "ORDER_ERROR": "Puedes redimir máximo una recompensa por orden"
+        "ORDER_ERROR": "Puedes redimir máximo una recompensa por orden",
+        "REWARDS_MSG": "Reclama una recompensa y el plato te sale gratis! Disfrutalo!"
     },
     "CUSTOMER_POINTS": {
         "NO_POINTS_MSG": "Aún no has acumulado puntos en ningún restaurante. Animate!",
