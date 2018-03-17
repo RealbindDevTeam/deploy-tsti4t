@@ -2,22 +2,22 @@
   "format": "web-program-pre1",
   "manifest": [
     {
-      "path": "d4c6f9b20c323d9cdee42b1fa1cf8de8536bf3ca.js",
+      "path": "fab548ca3841bb1a2d19ed5df9617b3f104942f9.js",
       "where": "client",
       "type": "js",
       "cacheable": true,
-      "url": "/d4c6f9b20c323d9cdee42b1fa1cf8de8536bf3ca.js?meteor_js_resource=true",
-      "size": 7171474,
-      "hash": "d4c6f9b20c323d9cdee42b1fa1cf8de8536bf3ca"
+      "url": "/fab548ca3841bb1a2d19ed5df9617b3f104942f9.js?meteor_js_resource=true",
+      "size": 7276663,
+      "hash": "fab548ca3841bb1a2d19ed5df9617b3f104942f9"
     },
     {
-      "path": "d4c6f9b20c323d9cdee42b1fa1cf8de8536bf3ca.stats.json",
+      "path": "fab548ca3841bb1a2d19ed5df9617b3f104942f9.stats.json",
       "where": "client",
       "type": "json",
       "cacheable": true,
-      "url": "/d4c6f9b20c323d9cdee42b1fa1cf8de8536bf3ca.stats.json?meteor_js_resource=true",
-      "size": 87587,
-      "hash": "b675c2f5a3733ab646b12aa10bea73b350d37da5"
+      "url": "/fab548ca3841bb1a2d19ed5df9617b3f104942f9.stats.json?meteor_js_resource=true",
+      "size": 89906,
+      "hash": "f048c2d0b768ab200c608cd7c7f574a950bc203a"
     },
     {
       "path": "ac2b5c61e90724624208c136338c2f9dea4efa59.css",
@@ -124,8 +124,8 @@
       "type": "asset",
       "cacheable": false,
       "url": "/i18n/en.json",
-      "size": 79895,
-      "hash": "3d2aac53d1006453b7d8ee3c61a549126d6b77d9"
+      "size": 85051,
+      "hash": "e7df70af230ec98ec7041f2be349810bfd9cdd5e"
     },
     {
       "path": "app/i18n/es.json",
@@ -133,8 +133,8 @@
       "type": "asset",
       "cacheable": false,
       "url": "/i18n/es.json",
-      "size": 85088,
-      "hash": "63888ce17cbc563c9a802de9b3e746a2f622c424"
+      "size": 90521,
+      "hash": "5b46c432621278916a33a74fe68ef774ba0cd516"
     },
     {
       "path": "app/images/404.png",
@@ -385,8 +385,8 @@
       "type": "asset",
       "cacheable": false,
       "url": "/images/favicon.png",
-      "size": 488,
-      "hash": "ef33cf28921d6067491dd24dadea07845393484f"
+      "size": 541,
+      "hash": "0392c01b2d757a5a7b025d119853984247790838"
     },
     {
       "path": "app/images/garnish-food.png",
@@ -475,8 +475,8 @@
       "type": "asset",
       "cacheable": false,
       "url": "/images/logo_iurest.png",
-      "size": 1790,
-      "hash": "4676d36286e0abf4dd92b3d30f81a36819b533d4"
+      "size": 2370,
+      "hash": "5a3e66fcf8b653e929f984d0b2b971454985a21d"
     },
     {
       "path": "app/images/logo_iurest_190_x_60.png",
@@ -484,8 +484,8 @@
       "type": "asset",
       "cacheable": false,
       "url": "/images/logo_iurest_190_x_60.png",
-      "size": 2803,
-      "hash": "991d659af460c4bc35d270adae23d3e924c5e68b"
+      "size": 3033,
+      "hash": "ce38653ad74b2fde0907764d5deb90061f5a3dc9"
     },
     {
       "path": "app/images/logo_iurest_white.png",
@@ -493,8 +493,8 @@
       "type": "asset",
       "cacheable": false,
       "url": "/images/logo_iurest_white.png",
-      "size": 2032,
-      "hash": "fbeab1aa92cd9fe8a51dae43a85dae710f217cb6"
+      "size": 1951,
+      "hash": "90da577111e57426c309c170e23948a0842c77cb"
     },
     {
       "path": "app/images/mastercard.png",
@@ -513,6 +513,15 @@
       "url": "/images/my-orders.png",
       "size": 8215,
       "hash": "964dcb84688bc9e358968469a6427a42532303a7"
+    },
+    {
+      "path": "app/images/obtener-aplicacion.jpg",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/obtener-aplicacion.jpg",
+      "size": 54696,
+      "hash": "8ebc0fdf188ec7747b393eb02b8330daa1c79e23"
     },
     {
       "path": "app/images/orders-detail.png",
@@ -641,6 +650,15 @@
       "hash": "57491fec5b89dfb9c1a8de2fbd20e1c9ae127852"
     },
     {
+      "path": "app/images/reward.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/reward.png",
+      "size": 17231,
+      "hash": "aa89483c4f98298b898321ef7f157ed5b3c8a645"
+    },
+    {
       "path": "app/images/sections.png",
       "where": "client",
       "type": "asset",
@@ -729,6 +747,15 @@
       "url": "/images/tables.png",
       "size": 19962,
       "hash": "b1732593125627f6674d5b1827eaababdb863611"
+    },
+    {
+      "path": "app/images/tienes-un-restaurante.jpg",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/tienes-un-restaurante.jpg",
+      "size": 77946,
+      "hash": "0bfe1904501a95ef24aff6a476329f706b769b07"
     },
     {
       "path": "app/images/trn_approved.png",
@@ -932,7 +959,7 @@
       "path": "head.html",
       "where": "internal",
       "type": "head",
-      "hash": "96a409bebde6c4f355e0fd2b52ee95af9f39fe6c"
+      "hash": "3d15bca33dec523bba4d8a4e7959f762b2979c05"
     },
     {
       "path": "body.html",
