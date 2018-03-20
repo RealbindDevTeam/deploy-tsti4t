@@ -2,22 +2,22 @@
   "format": "web-program-pre1",
   "manifest": [
     {
-      "path": "fab548ca3841bb1a2d19ed5df9617b3f104942f9.js",
+      "path": "d9fdebacbb0b2e1df5d59fa94d88f1f640656666.js",
       "where": "client",
       "type": "js",
       "cacheable": true,
-      "url": "/fab548ca3841bb1a2d19ed5df9617b3f104942f9.js?meteor_js_resource=true",
-      "size": 7276663,
-      "hash": "fab548ca3841bb1a2d19ed5df9617b3f104942f9"
+      "url": "/d9fdebacbb0b2e1df5d59fa94d88f1f640656666.js?meteor_js_resource=true",
+      "size": 7288639,
+      "hash": "d9fdebacbb0b2e1df5d59fa94d88f1f640656666"
     },
     {
-      "path": "fab548ca3841bb1a2d19ed5df9617b3f104942f9.stats.json",
+      "path": "d9fdebacbb0b2e1df5d59fa94d88f1f640656666.stats.json",
       "where": "client",
       "type": "json",
       "cacheable": true,
-      "url": "/fab548ca3841bb1a2d19ed5df9617b3f104942f9.stats.json?meteor_js_resource=true",
-      "size": 89906,
-      "hash": "f048c2d0b768ab200c608cd7c7f574a950bc203a"
+      "url": "/d9fdebacbb0b2e1df5d59fa94d88f1f640656666.stats.json?meteor_js_resource=true",
+      "size": 89998,
+      "hash": "116a8cc63eba564ee2cec4793a2f2c7881a8f802"
     },
     {
       "path": "ac2b5c61e90724624208c136338c2f9dea4efa59.css",
@@ -124,8 +124,8 @@
       "type": "asset",
       "cacheable": false,
       "url": "/i18n/en.json",
-      "size": 85051,
-      "hash": "e7df70af230ec98ec7041f2be349810bfd9cdd5e"
+      "size": 87322,
+      "hash": "3ba1b12f18b7381a4ad1d798226cd37d6af9b878"
     },
     {
       "path": "app/i18n/es.json",
@@ -133,8 +133,8 @@
       "type": "asset",
       "cacheable": false,
       "url": "/i18n/es.json",
-      "size": 90521,
-      "hash": "5b46c432621278916a33a74fe68ef774ba0cd516"
+      "size": 92921,
+      "hash": "9db78881117f1d2f88dfdef8f530941ac1538b18"
     },
     {
       "path": "app/images/404.png",
@@ -524,6 +524,15 @@
       "hash": "8ebc0fdf188ec7747b393eb02b8330daa1c79e23"
     },
     {
+      "path": "app/images/order-received.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/order-received.png",
+      "size": 42323,
+      "hash": "62243afd22c36cfc92b0bf3d493cc5907dbae20d"
+    },
+    {
       "path": "app/images/orders-detail.png",
       "where": "client",
       "type": "asset",
@@ -531,6 +540,15 @@
       "url": "/images/orders-detail.png",
       "size": 14361,
       "hash": "85a8f16fbfb23cf49845c1029720452b55413a27"
+    },
+    {
+      "path": "app/images/orders-today.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/orders-today.png",
+      "size": 34258,
+      "hash": "130208ca93d6d7217cd464c2214a51e6e56b9b5c"
     },
     {
       "path": "app/images/orders-transfer.png",
